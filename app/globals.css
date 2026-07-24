@@ -75,6 +75,63 @@ h1 {
   font-size: 1.05rem;
 }
 
+/* Hero: the SRD virtual tabletop — the primary call to action, above the
+   generator tools. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hero-sub {
+  max-width: 42rem;
+  font-size: 1.05rem;
+  opacity: 0.92;
+}
+
+.hero-cta {
+  margin-top: 0.6rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -106,7 +163,7 @@ h1 {
   border-style: dashed;
 }
 
-.card h2 {
+.card h3 {
   margin: 0;
   font-size: 1.25rem;
 }
@@ -137,4 +194,38 @@ h1 {
   text-align: center;
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+.back {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+}
+
+.back a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back a:hover {
+  color: var(--accent);
+}
+
+.soon-panel {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--panel);
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.soon-panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.soon-panel p {
+  margin: 0 auto;
+  max-width: 34rem;
+  color: var(--muted);
 }
