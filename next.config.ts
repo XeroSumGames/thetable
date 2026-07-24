@@ -18,7 +18,8 @@ const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
   { slug: "apegenerator", deployment: "https://apegenerator.vercel.app" },
   // Space: 1999 RPG (Modiphius 2d20)
   { slug: "space1999", deployment: "https://space1999generator.vercel.app" },
-  // 3rd generator: add its { slug, deployment } here once its Vercel project is live.
+  // Judge Dredd & the Worlds of 2000 AD (WOIN / N.E.W.)
+  { slug: "dredd-generator", deployment: "https://dredd-generator.vercel.app" },
 ];
 
 const nextConfig: NextConfig = {

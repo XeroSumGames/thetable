@@ -1,34 +1,50 @@
-type Generator = {
-  slug: string | null; // null = not wired yet (renders as "coming soon")
+type Property = {
+  key: string;
   name: string;
-  system: string;
-  blurb: string;
+  tagline: string;
+  href: string;
+  external: boolean;
 };
 
-// The free generators surfaced on this origin. A `slug` maps to a proxy rewrite
-// in next.config.ts (thetable.xerosumgames.com/<slug>). Set `slug` when a
-// generator's Vercel project is live and its rewrite is added.
+// The three Xero Sum Games properties. The Table is this site's own free SRD
+// tabletop; the other two are the sister VTTs on their own domains.
+const PROPERTIES: Property[] = [
+  {
+    key: "table",
+    name: "The Table",
+    tagline: "The free Xero Sum Games SRD, played online. Vanilla, any genre.",
+    href: "/table",
+    external: false,
+  },
+  {
+    key: "tapestry",
+    name: "The Tapestry",
+    tagline: "Distemper — the post-apocalyptic tabletop.",
+    href: "https://thetapestry.distemperverse.com",
+    external: true,
+  },
+  {
+    key: "tableau",
+    name: "The Tableau",
+    tagline: "Displaced — the science-fiction tabletop.",
+    href: "https://thetableau.xerosumgames.com",
+    external: true,
+  },
+];
+
+type Generator = {
+  slug: string;
+  label: string;
+  name: string;
+  system: string;
+};
+
+// Free character generators, surfaced on this origin via proxy rewrites
+// (see next.config.ts).
 const GENERATORS: Generator[] = [
-  {
-    slug: "apegenerator",
-    name: "Planet of the Apes",
-    system: "D6 Magnetic Variant",
-    blurb:
-      "Roll up a character for the POTA tabletop RPG — archetypes, skills, and gear.",
-  },
-  {
-    slug: "space1999",
-    name: "Space: 1999",
-    system: "Modiphius 2d20",
-    blurb:
-      "Build a Moonbase Alpha crew member — department, skills, focuses, and talents.",
-  },
-  {
-    slug: null,
-    name: "Coming soon",
-    system: "",
-    blurb: "A third generator is on the way.",
-  },
+  { slug: "apegenerator", label: "Apes", name: "Planet of the Apes", system: "D6 Magnetic" },
+  { slug: "space1999", label: "1999", name: "Space: 1999", system: "Modiphius 2d20" },
+  { slug: "dredd-generator", label: "Dredd", name: "Judge Dredd", system: "WOIN / N.E.W." },
 ];
 
 export default function Home() {
@@ -36,47 +52,37 @@ export default function Home() {
     <main className="wrap">
       <header className="masthead">
         <p className="kicker">Xero Sum Games</p>
-        <h1>The Table</h1>
         <p className="tagline">
-          A free, always-open table. Play the Xero Sum Games SRD, or grab a
-          character generator. No account. No cost.
+          Three tabletops and a shelf of free character generators. Pick a table.
         </p>
       </header>
 
-      {/* Hero: the vanilla-SRD virtual tabletop — the equivalent of Distemper
-          (TheTapestry) and Displaced (TheTableau), free and genre-neutral. */}
-      <a className="hero" href="/table">
-        <span className="hero-kicker">Virtual Tabletop</span>
-        <span className="hero-title">The Table</span>
-        <span className="hero-sub">
-          The Xero Sum Games SRD, played online — the free, vanilla engine behind
-          Distemper and Displaced, open to any genre.
-        </span>
-        <span className="hero-cta">Enter The Table →</span>
-      </a>
+      <nav className="properties" aria-label="Games">
+        {PROPERTIES.map((p) => (
+          <a
+            key={p.key}
+            className={`prop prop--${p.key}`}
+            href={p.href}
+            {...(p.external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            <span className="prop-name">{p.name}</span>
+            <span className="prop-tagline">{p.tagline}</span>
+          </a>
+        ))}
+      </nav>
 
       <section className="gens" aria-label="Character generators">
-        <h2 className="section-label">Character generators</h2>
-        <div className="grid">
-          {GENERATORS.map((g) => {
-            const card = (
-              <>
-                <h3>{g.name}</h3>
-                {g.system && <p className="system">{g.system}</p>}
-                <p className="blurb">{g.blurb}</p>
-                {g.slug && <span className="cta">Open generator →</span>}
-              </>
-            );
-            return g.slug ? (
-              <a key={g.name} className="card" href={`/${g.slug}`}>
-                {card}
-              </a>
-            ) : (
-              <div key={g.name} className="card card--soon" aria-disabled="true">
-                {card}
-              </div>
-            );
-          })}
+        <h2 className="section-label">Free character generators</h2>
+        <div className="gens-row">
+          {GENERATORS.map((g) => (
+            <a key={g.slug} className="gen" href={`/${g.slug}`}>
+              <span className="gen-label">{g.label}</span>
+              <span className="gen-name">{g.name}</span>
+              <span className="gen-system">{g.system}</span>
+            </a>
+          ))}
         </div>
       </section>
 
