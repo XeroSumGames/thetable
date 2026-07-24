@@ -1,3 +1,5 @@
+import VisitBeacon from "../components/VisitBeacon";
+
 type Property = {
   key: string;
   name: string;
@@ -49,6 +51,7 @@ const GENERATORS: Generator[] = [
 export default function Home() {
   return (
     <main className="wrap">
+      <VisitBeacon page="/thetable-home" />
       <header className="masthead">
         <p className="kicker">Xero Sum Games</p>
         <p className="tagline">
