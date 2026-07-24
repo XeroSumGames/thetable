@@ -53,13 +53,15 @@ export default function Home() {
     <main className="wrap">
       <VisitBeacon page="/thetable-home" />
       <header className="masthead">
-        <img
-          className="logo"
-          src="/xsg-logo.png"
-          alt="Xero Sum Games"
-          width={1400}
-          height={230}
-        />
+        <span className="logo-plate">
+          <img
+            className="logo"
+            src="/xsg-logo.png"
+            alt="Xero Sum Games"
+            width={1400}
+            height={230}
+          />
+        </span>
         <p className="tagline">
           Three virtual tabletops (VTTs) and a collection of character generators for games I play. Pick a table.
         </p>
