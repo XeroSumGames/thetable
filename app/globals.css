@@ -70,6 +70,14 @@ body {
   margin: 0 0 0.6rem;
 }
 
+.logo {
+  display: block;
+  margin: 0 auto 1rem;
+  width: min(440px, 82%);
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
+}
+
 .masthead h1 {
   font-size: clamp(2.25rem, 7vw, 3.25rem);
   line-height: 1.05;
