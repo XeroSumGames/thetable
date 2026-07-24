@@ -176,20 +176,15 @@ body {
   border-color: var(--accent);
 }
 
-.gen-label {
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.gen-name {
-  font-size: 0.82rem;
-  color: var(--ink);
+.gen-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .gen-system {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--accent);
 }
@@ -236,8 +231,8 @@ body {
   color: var(--muted);
 }
 
-@media (max-width: 460px) {
-  .gen-name {
-    display: none;
+@media (max-width: 520px) {
+  .gens-row {
+    grid-template-columns: 1fr;
   }
 }

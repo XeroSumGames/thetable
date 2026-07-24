@@ -34,17 +34,16 @@ const PROPERTIES: Property[] = [
 
 type Generator = {
   slug: string;
-  label: string;
-  name: string;
+  title: string;
   system: string;
 };
 
 // Free character generators, surfaced on this origin via proxy rewrites
 // (see next.config.ts).
 const GENERATORS: Generator[] = [
-  { slug: "apegenerator", label: "Apes", name: "Planet of the Apes", system: "D6 Magnetic" },
-  { slug: "space1999", label: "1999", name: "Space: 1999", system: "Modiphius 2d20" },
-  { slug: "dredd-generator", label: "Dredd", name: "Judge Dredd", system: "WOIN / N.E.W." },
+  { slug: "apegenerator", title: "Planet of the Apes RPG", system: "D6 Magnetic" },
+  { slug: "space1999", title: "Space 1999 RPG", system: "Modiphius 2d20" },
+  { slug: "dredd-generator", title: "Judge Dredd (Worlds of 2000AD) RPG", system: "WOIN / N.E.W." },
 ];
 
 export default function Home() {
@@ -78,8 +77,7 @@ export default function Home() {
         <div className="gens-row">
           {GENERATORS.map((g) => (
             <a key={g.slug} className="gen" href={`/${g.slug}`}>
-              <span className="gen-label">{g.label}</span>
-              <span className="gen-name">{g.name}</span>
+              <span className="gen-title">{g.title}</span>
               <span className="gen-system">{g.system}</span>
             </a>
           ))}
