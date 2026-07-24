@@ -1,0 +1,33 @@
+import type { NextConfig } from "next";
+
+// TheTable is the always-free home for Xero Sum Games' standalone character
+// generators. Each generator lives in its OWN repo and its OWN Vercel project
+// (kept out of any commercial app repo, per those repos' AGENTS.md rules). We
+// surface them under thetable.xerosumgames.com via proxy rewrites so the public
+// URL sits on THIS origin while the code stays where it is.
+//
+// The generators' visit beacons post an absolute URL to the shared log-visit
+// edge function with a hardcoded page tag (page='/apegenerator', '/space1999'),
+// so analytics keep flowing to the existing /ape-log dashboard from this origin
+// unchanged. (The log-visit function must allow this origin via CORS.)
+//
+// Use each generator's STABLE production alias (never the per-build hashed URL,
+// which is behind Vercel's auth wall and changes every deploy).
+const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
+  // Planet of the Apes RPG (D6 Magnetic Variant)
+  { slug: "apegenerator", deployment: "https://apegenerator.vercel.app" },
+  // Space: 1999 RPG (Modiphius 2d20)
+  { slug: "space1999", deployment: "https://space1999generator.vercel.app" },
+  // 3rd generator: add its { slug, deployment } here once its Vercel project is live.
+];
+
+const nextConfig: NextConfig = {
+  async rewrites() {
+    return GENERATOR_REWRITES.flatMap(({ slug, deployment }) => [
+      { source: `/${slug}`, destination: deployment },
+      { source: `/${slug}/:path*`, destination: `${deployment}/:path*` },
+    ]);
+  },
+};
+
+export default nextConfig;
