@@ -14,21 +14,21 @@ const PROPERTIES: Property[] = [
   {
     key: "table",
     name: "The Table",
-    tagline: "The free Xero Sum Games SRD, played online. Vanilla, any genre.",
+    tagline: "Utilizig the Xero Sum Games SRD, The Table supports most genres but works best for gritty, hardboiled stories. Always free.",
     href: "/table",
     external: false,
   },
   {
     key: "tapestry",
     name: "The Tapestry",
-    tagline: "Distemper — the post-apocalyptic tabletop.",
+    tagline: "For Distemper — the post-apocalyptic tabletop roleplaying game.",
     href: "https://thetapestry.distemperverse.com",
     external: true,
   },
   {
     key: "tableau",
     name: "The Tableau",
-    tagline: "Displaced — the science-fiction tabletop.",
+    tagline: "For Displaced — the hard science-fiction tabletop roleplaying game.",
     href: "https://thetableau.xerosumgames.com",
     external: true,
   },
@@ -43,9 +43,9 @@ type Generator = {
 // Free character generators, surfaced on this origin via proxy rewrites
 // (see next.config.ts).
 const GENERATORS: Generator[] = [
-  { slug: "apegenerator", title: "Planet of the Apes RPG", system: "D6 Magnetic" },
-  { slug: "space1999", title: "Space 1999 RPG", system: "Modiphius 2d20" },
-  { slug: "dredd-generator", title: "Judge Dredd (Worlds of 2000AD) RPG", system: "WOIN / N.E.W." },
+  { slug: "apegenerator", title: "Planet of the Apes RPG", system: "Published by D6 Magnetic" },
+  { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius 2d20" },
+  { slug: "dredd-generator", title: "Judge Dredd (Worlds of 2000AD) RPG", system: "Published by WOIN / N.E.W." },
 ];
 
 export default function Home() {
@@ -55,7 +55,7 @@ export default function Home() {
       <header className="masthead">
         <p className="kicker">Xero Sum Games</p>
         <p className="tagline">
-          Three tabletops and a shelf of free character generators. Pick a table.
+          Three virtual tabletops (VTTs) and a collection of character generators for games I play. Pick a table.
         </p>
       </header>
 
@@ -88,7 +88,7 @@ export default function Home() {
       </section>
 
       <footer className="foot">
-        <p>Always free. Built by Xero Sum Games.</p>
+        <p>The Table is always free. Built by Xero Sum Games.</p>
       </footer>
     </main>
   );
