@@ -15,7 +15,10 @@ import type { NextConfig } from "next";
 // which is behind Vercel's auth wall and changes every deploy).
 const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
   // Planet of the Apes RPG (D6 Magnetic Variant)
-  { slug: "apegenerator", deployment: "https://apegenerator.vercel.app" },
+  // Served from 'potagenerator' (a fresh Vercel project). The original
+  // 'apegenerator' project's builds hang in an UNKNOWN state; repoint here until
+  // that project is fixed/reconnected in the Vercel dashboard.
+  { slug: "apegenerator", deployment: "https://potagenerator.vercel.app" },
   // Space: 1999 RPG (Modiphius 2d20)
   { slug: "space1999", deployment: "https://space1999generator.vercel.app" },
   // Judge Dredd & the Worlds of 2000 AD (WOIN / N.E.W.)
