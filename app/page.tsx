@@ -66,7 +66,9 @@ export default function Home() {
           <a className="auth-btn" href="/table">Create account / Log in</a>
         </div>
         <p className="tagline">
-          Three virtual tabletops (VTTs) and a collection of character generators for games I play. Pick a table.
+          Three virtual tabletops (VTTs) and a collection of character generators for games I play.
+          <br />
+          Pick a table.
         </p>
       </header>
 
