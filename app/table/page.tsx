@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LaunchSignup from "../../components/LaunchSignup";
 
 export const metadata: Metadata = {
   title: "The Table — Xero Sum Games SRD virtual tabletop",
@@ -27,12 +28,13 @@ export default function TablePage() {
         <p>
           This is where the free SRD tabletop opens — characters, campaigns, and
           the shared table. It is being built as the next layer on top of the
-          generator hub. Check back soon.
+          generator hub.
         </p>
+        <LaunchSignup />
       </section>
 
       <footer className="foot">
-        <p>Always free. Built by Xero Sum Games.</p>
+        <p>The Table is always free. Built by Xero Sum Games.</p>
       </footer>
     </main>
   );

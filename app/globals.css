@@ -248,6 +248,77 @@ body {
   color: var(--muted);
 }
 
+/* Launch email capture on /table */
+.signup {
+  margin-top: 1.75rem;
+}
+
+.signup-label {
+  display: block;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.65rem;
+}
+
+.signup-row {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.signup input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.signup input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.signup button {
+  padding: 0.65rem 1.15rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.signup button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.signup-error {
+  margin: 0.65rem 0 0;
+  color: #d0563f;
+  font-size: 0.92rem;
+}
+
+.signup-done {
+  margin: 1.75rem auto 0;
+  max-width: 28rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@media (max-width: 460px) {
+  .signup-row {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 520px) {
   .gens-row {
     grid-template-columns: 1fr;
