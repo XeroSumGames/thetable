@@ -1,5 +1,18 @@
+import fs from "fs";
+import path from "path";
 import VisitBeacon from "../components/VisitBeacon";
-import GenThumb from "../components/GenThumb";
+
+// A generator button shows a picture only if one exists at
+// public/gen-<slug>.(png|jpg|jpeg|webp). Missing -> no thumbnail, so the button
+// looks exactly like the text-only version. Drop an image in and redeploy.
+function genImage(slug: string): string | null {
+  for (const ext of ["png", "jpg", "jpeg", "webp"]) {
+    if (fs.existsSync(path.join(process.cwd(), "public", `gen-${slug}.${ext}`))) {
+      return `/gen-${slug}.${ext}`;
+    }
+  }
+  return null;
+}
 
 type Property = {
   key: string;
@@ -92,13 +105,19 @@ export default function Home() {
       <section className="gens" aria-label="Character generators">
         <h2 className="section-label">Free character generators</h2>
         <div className="gens-row">
-          {GENERATORS.map((g) => (
-            <a key={g.slug} className="gen" href={`/${g.slug}`}>
-              <GenThumb slug={g.slug} alt={g.title} />
-              <span className="gen-title">{g.title}</span>
-              <span className="gen-system">{g.system}</span>
-            </a>
-          ))}
+          {GENERATORS.map((g) => {
+            const img = genImage(g.slug);
+            return (
+              <a key={g.slug} className="gen" href={`/${g.slug}`}>
+                {img ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img className="gen-thumb" src={img} alt={g.title} />
+                ) : null}
+                <span className="gen-title">{g.title}</span>
+                <span className="gen-system">{g.system}</span>
+              </a>
+            );
+          })}
         </div>
       </section>
 
