@@ -1,7 +1,9 @@
 :root {
-  /* Forced dark theme (not system-dependent) - a deep near-black. */
+  /* Forced dark theme (not system-dependent) - a deep near-black.
+     --bg matches the Space: 1999 generator's dark base (#0a0d12) so moving
+     between the hub and the proxied generators is seamless. */
   color-scheme: dark;
-  --bg: #0b0b0d;
+  --bg: #0a0d12;
   --panel: #16161a;
   --ink: #f2efe6;
   --muted: #98958c;
@@ -78,7 +80,7 @@ body {
 .tagline {
   max-width: 48rem;
   margin: 0 auto;
-  color: var(--muted);
+  color: #fff;
   font-size: 1.05rem;
 }
 
@@ -190,7 +192,7 @@ body {
 .foot {
   margin-top: 3rem;
   text-align: center;
-  color: var(--muted);
+  color: #fff;
   font-size: 0.85rem;
 }
 
