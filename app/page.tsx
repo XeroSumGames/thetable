@@ -56,10 +56,10 @@ export default function Home() {
         <span className="logo-plate">
           <img
             className="logo"
-            src="/xsg-logo.png"
+            src="/xsg-logo-border.png"
             alt="Xero Sum Games"
             width={1400}
-            height={230}
+            height={232}
           />
         </span>
         <p className="tagline">
