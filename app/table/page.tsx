@@ -18,17 +18,16 @@ export default function TablePage() {
         <p className="kicker">Virtual Tabletop</p>
         <h1>The Table</h1>
         <p className="tagline">
-          The Xero Sum Games SRD, played online — the free, vanilla engine behind
-          Distemper and Displaced, open to any genre.
+          Utilizing the Xero Sum Games SRD, The Table supports most genres but
+          works best for gritty, hardboiled stories. Always free.
         </p>
       </header>
 
       <section className="soon-panel">
         <h2>Coming soon</h2>
         <p>
-          This is where the free SRD tabletop opens — characters, campaigns, and
-          the shared table. It is being built as the next layer on top of the
-          generator hub.
+          Built on the Xero Sum Games SRD, the Table offers character creation,
+          tactical maps, and campaign options. All yours, all the time.
         </p>
         <LaunchSignup />
       </section>

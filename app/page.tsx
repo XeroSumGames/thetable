@@ -14,7 +14,7 @@ const PROPERTIES: Property[] = [
   {
     key: "table",
     name: "The Table",
-    tagline: "Utilizig the Xero Sum Games SRD, The Table supports most genres but works best for gritty, hardboiled stories. Always free.",
+    tagline: "Utilizing the Xero Sum Games SRD, The Table supports most genres but works best for gritty, hardboiled stories. Always free.",
     href: "/table",
     external: false,
   },
@@ -62,6 +62,9 @@ export default function Home() {
             height={232}
           />
         </span>
+        <div className="auth-cta">
+          <a className="auth-btn" href="/table">Create account / Log in</a>
+        </div>
         <p className="tagline">
           Three virtual tabletops (VTTs) and a collection of character generators for games I play. Pick a table.
         </p>

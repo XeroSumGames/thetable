@@ -1,34 +1,19 @@
 :root {
-  --bg: #f7f6f2;
-  --panel: #ffffff;
-  --ink: #1c1b19;
-  --muted: #6b6862;
-  --line: #e4e1d9;
-  --accent: #7a5c3e;
-  --accent-ink: #ffffff;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.06);
+  /* Forced dark theme (not system-dependent) - a deep near-black. */
+  color-scheme: dark;
+  --bg: #0b0b0d;
+  --panel: #16161a;
+  --ink: #f2efe6;
+  --muted: #98958c;
+  --line: #262630;
+  --accent: #c8a06a;
+  --accent-ink: #14130f;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 12px 34px rgba(0, 0, 0, 0.55);
 
   /* Per-property accents */
-  --pc-table: #b8873f;
-  --pc-tapestry: #c1663a;
-  --pc-tableau: #3f9fb0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #16150f;
-    --panel: #201e17;
-    --ink: #f2efe6;
-    --muted: #a8a498;
-    --line: #34301f;
-    --accent: #c8a06a;
-    --accent-ink: #1c1b19;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
-
-    --pc-table: #d0a256;
-    --pc-tapestry: #db7a4c;
-    --pc-tableau: #58b9c9;
-  }
+  --pc-table: #d0a256;
+  --pc-tapestry: #db7a4c;
+  --pc-tableau: #58b9c9;
 }
 
 * {
@@ -211,6 +196,127 @@ body {
   text-align: center;
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+/* Create account / Log in CTA under the logo */
+.auth-cta {
+  margin: 0.25rem 0 1.1rem;
+}
+
+.auth-btn {
+  display: inline-block;
+  padding: 0.55rem 1.3rem;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  color: var(--accent);
+  background: transparent;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.98rem;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.auth-btn:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* /mailinglist */
+.ml-gate {
+  max-width: 26rem;
+  margin: 1.5rem auto 0;
+}
+
+.ml-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.ml-gate-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ml-gate input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.ml-gate button,
+.ml-csv {
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ml-error {
+  color: #d0563f;
+  margin-top: 0.6rem;
+}
+
+.ml {
+  margin-top: 1.5rem;
+}
+
+.ml-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+}
+
+.ml-table {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ml-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+  align-items: center;
+}
+
+.ml-row:last-child {
+  border-bottom: none;
+}
+
+.ml-row--head {
+  background: var(--panel);
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+
+.ml-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 1.5rem;
 }
 
 /* ---- /table VTT entry page ---- */
