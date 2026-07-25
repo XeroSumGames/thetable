@@ -176,6 +176,18 @@ body {
   border-color: var(--accent);
 }
 
+/* Optional game picture at the top of a generator button. Hidden until an
+   image exists at /public/gen-<slug>.png (see GenThumb). */
+.gen-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
 .gen-title {
   font-size: 0.98rem;
   font-weight: 700;

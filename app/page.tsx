@@ -1,4 +1,5 @@
 import VisitBeacon from "../components/VisitBeacon";
+import GenThumb from "../components/GenThumb";
 
 type Property = {
   key: string;
@@ -93,6 +94,7 @@ export default function Home() {
         <div className="gens-row">
           {GENERATORS.map((g) => (
             <a key={g.slug} className="gen" href={`/${g.slug}`}>
+              <GenThumb slug={g.slug} alt={g.title} />
               <span className="gen-title">{g.title}</span>
               <span className="gen-system">{g.system}</span>
             </a>
