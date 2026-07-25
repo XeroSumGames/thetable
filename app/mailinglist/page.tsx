@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LaunchList from "../../components/LaunchList";
+import MailingListAdmin from "../../components/MailingListAdmin";
 
 export const metadata: Metadata = {
   title: "Mailing list — The Table",
@@ -21,7 +21,7 @@ export default function MailingListPage() {
         </p>
       </header>
 
-      <LaunchList />
+      <MailingListAdmin />
     </main>
   );
 }

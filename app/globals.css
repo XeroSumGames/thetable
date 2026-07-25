@@ -231,6 +231,89 @@ body {
   color: var(--accent-ink);
 }
 
+/* "Pick a table." on its own line with a gap above it */
+.tagline--pick {
+  margin-top: 0.7rem;
+}
+
+/* Auth forms (login / signup) */
+.auth-form {
+  max-width: 22rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-align: left;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.auth-form input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.auth-form input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.auth-form button {
+  margin-top: 0.3rem;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-error {
+  color: #d0563f;
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.auth-alt {
+  text-align: center;
+  margin-top: 1.25rem;
+  color: var(--muted);
+}
+
+.auth-alt a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ml-signout {
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 /* /mailinglist */
 .ml-gate {
   max-width: 26rem;

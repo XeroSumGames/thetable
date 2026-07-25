@@ -77,13 +77,12 @@ export default function Home() {
           />
         </span>
         <div className="auth-cta">
-          <a className="auth-btn" href="/table">Create account / Log in</a>
+          <a className="auth-btn" href="/login">Create account / Log in</a>
         </div>
         <p className="tagline">
           Three virtual tabletops (VTTs) and a collection of character generators for games I play.
-          <br />
-          Pick a table.
         </p>
+        <p className="tagline tagline--pick">Pick a table.</p>
       </header>
 
       <nav className="properties" aria-label="Games">
