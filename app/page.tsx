@@ -58,8 +58,8 @@ type Generator = {
 // Free character generators, surfaced on this origin via proxy rewrites
 // (see next.config.ts).
 const GENERATORS: Generator[] = [
-  { slug: "apegenerator", title: "Planet of the Apes RPG", system: "Published by D6 Magnetic" },
-  { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius 2d20" },
+  { slug: "apegenerator", title: "Planet of the Apes RPG", system: "Published by Magnetic Press" },
+  { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius" },
   { slug: "dredd-generator", title: "Judge Dredd (WOIN) RPG", system: "Published by EN Publishing" },
   { slug: "walkingdead-rpg", title: "The Walking Dead RPG", system: "Published by Free League" },
 ];
