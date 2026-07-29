@@ -23,6 +23,8 @@ const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
   { slug: "space1999", deployment: "https://space1999generator.vercel.app" },
   // Judge Dredd & the Worlds of 2000 AD (WOIN / N.E.W.)
   { slug: "dredd-generator", deployment: "https://dredd-generator.vercel.app" },
+  // The Walking Dead Universe RPG (Free League / Year Zero Engine)
+  { slug: "walkingdead-rpg", deployment: "https://walkingdead-rpg.vercel.app" },
 ];
 
 const nextConfig: NextConfig = {

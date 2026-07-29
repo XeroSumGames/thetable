@@ -60,6 +60,7 @@ const GENERATORS: Generator[] = [
   { slug: "apegenerator", title: "Planet of the Apes RPG", system: "Published by D6 Magnetic" },
   { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius 2d20" },
   { slug: "dredd-generator", title: "Judge Dredd (WOIN) RPG", system: "Published by EN Publishing" },
+  { slug: "walkingdead-rpg", title: "The Walking Dead Universe RPG", system: "Published by Free League" },
 ];
 
 export default function Home() {
