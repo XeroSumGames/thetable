@@ -59,7 +59,7 @@ type Generator = {
 const GENERATORS: Generator[] = [
   { slug: "apegenerator", title: "Planet of the Apes RPG", system: "Published by D6 Magnetic" },
   { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius 2d20" },
-  { slug: "dredd-generator", title: "Judge Dredd (Worlds of 2000AD) RPG", system: "Published by WOIN / N.E.W." },
+  { slug: "dredd-generator", title: "Judge Dredd (WOIN) RPG", system: "Published by EN Publishing" },
 ];
 
 export default function Home() {
@@ -102,7 +102,7 @@ export default function Home() {
       </nav>
 
       <section className="gens" aria-label="Character generators">
-        <h2 className="section-label">Free character generators</h2>
+        <h2 className="section-label">Character generators</h2>
         <div className="gens-row">
           {GENERATORS.map((g) => {
             const img = genImage(g.slug);
