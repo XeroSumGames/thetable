@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import VisitBeacon from "../components/VisitBeacon";
+import LaunchSignup from "../components/LaunchSignup";
 
 // A generator button shows a picture only if one exists at
 // public/gen-<slug>.(png|jpg|jpeg|webp). Missing -> no thumbnail, so the button
@@ -119,6 +120,14 @@ export default function Home() {
             );
           })}
         </div>
+      </section>
+
+      <section className="home-signup" aria-label="Update notifications">
+        <LaunchSignup
+          label="Sign up to be notified of updates to these tools"
+          source="/thetable-home"
+          doneMessage="You're on the list. We'll email you about updates to these tools."
+        />
       </section>
 
       <footer className="foot">

@@ -208,6 +208,15 @@ body {
   font-size: 0.85rem;
 }
 
+/* "Notified of updates" signup on the landing page, just above the footer */
+.home-signup {
+  margin-top: 3rem;
+  text-align: center;
+}
+.home-signup .signup {
+  margin-top: 0;
+}
+
 /* Create account / Log in CTA under the logo */
 .auth-cta {
   margin: 0.25rem 0 1.1rem;

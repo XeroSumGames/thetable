@@ -6,7 +6,17 @@ import { useState } from 'react'
 // launch-signup edge function (same backend everything else uses).
 const ENDPOINT = 'https://jbudzglgtxeoaufpejrv.supabase.co/functions/v1/launch-signup'
 
-export default function LaunchSignup() {
+type Props = {
+  label?: string
+  source?: string
+  doneMessage?: string
+}
+
+export default function LaunchSignup({
+  label = 'Sign up to be notified on launch',
+  source = '/table',
+  doneMessage = "You're on the list. We'll email you when The Table opens.",
+}: Props = {}) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
   const [message, setMessage] = useState('')
@@ -20,7 +30,7 @@ export default function LaunchSignup() {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: value, site: 'table', source: '/table' }),
+        body: JSON.stringify({ email: value, site: 'table', source }),
       })
       const data = await res.json().catch(() => null)
       if (res.ok && data?.ok) {
@@ -28,7 +38,7 @@ export default function LaunchSignup() {
         setMessage(
           data.already
             ? "You're already on the list — thanks!"
-            : "You're on the list. We'll email you when The Table opens."
+            : doneMessage
         )
       } else if (data?.error === 'invalid_email') {
         setStatus('error')
@@ -50,7 +60,7 @@ export default function LaunchSignup() {
   return (
     <form className="signup" onSubmit={onSubmit} noValidate>
       <label className="signup-label" htmlFor="signup-email">
-        Sign up to be notified on launch
+        {label}
       </label>
       <div className="signup-row">
         <input
