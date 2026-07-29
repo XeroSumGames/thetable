@@ -180,7 +180,7 @@ body {
    image exists at /public/gen-<slug>.png (see GenThumb). */
 .gen-thumb {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 3 / 4; /* portrait, to fit game cover art */
   object-fit: cover;
   border-radius: 9px;
   border: 1px solid var(--line);
