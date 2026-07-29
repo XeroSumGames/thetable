@@ -124,7 +124,7 @@ export default function Home() {
 
       <section className="home-signup" aria-label="Update notifications">
         <LaunchSignup
-          label="Sign up to be notified of updates to these tools"
+          label="Notify me of updates to these tools"
           source="/thetable-home"
           doneMessage="You're on the list. We'll email you about updates to these tools."
         />
