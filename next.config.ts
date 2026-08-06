@@ -29,10 +29,17 @@ const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
 
 const nextConfig: NextConfig = {
   async rewrites() {
-    return GENERATOR_REWRITES.flatMap(({ slug, deployment }) => [
-      { source: `/${slug}`, destination: deployment },
-      { source: `/${slug}/:path*`, destination: `${deployment}/:path*` },
-    ]);
+    return [
+      // The A24 Viewing Ledger is a self-contained static page (public/a24/
+      // index.html) served at the clean /a24 path. It gates itself behind the
+      // shared Supabase login and is locked to the Thriver admin account via
+      // RLS (sql/add-a24-state on TheTapestry). Not linked from anywhere.
+      { source: "/a24", destination: "/a24/index.html" },
+      ...GENERATOR_REWRITES.flatMap(({ slug, deployment }) => [
+        { source: `/${slug}`, destination: deployment },
+        { source: `/${slug}/:path*`, destination: `${deployment}/:path*` },
+      ]),
+    ];
   },
 };
 
