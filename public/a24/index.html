@@ -58,9 +58,9 @@
   /* ---------- PROGRESS REEL ---------- */
   .reelbar-shell{margin:30px 0 6px}
   .reelbar-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:9px;gap:16px}
-  .reelbar-top .lead{font-family:var(--f-mono);font-size:12px;color:var(--bone-dim);letter-spacing:.06em}
+  .reelbar-top .lead{font-family:var(--f-mono);font-size:17px;color:var(--bone-dim);letter-spacing:.06em}
   .reelbar-top .lead b{color:var(--bone);font-weight:500}
-  .reelbar-top .stat{font-family:var(--f-mono);font-size:12px;color:var(--bone-dim);white-space:nowrap}
+  .reelbar-top .stat{font-family:var(--f-mono);font-size:17px;color:var(--bone-dim);white-space:nowrap}
   .reelbar-top .stat .g{color:var(--gold)}
   .reelbar{
     position:relative;height:40px;border:1px solid var(--line);border-radius:3px;
@@ -266,7 +266,7 @@
 
   <div class="reelbar-shell">
     <div class="reelbar-top">
-      <div class="lead"><b id="seenCount">0</b> seen of <b id="totalCount">0</b></div>
+      <div class="lead"><b id="seenCount">0</b> seen of <b id="totalCount">0</b> &nbsp;·&nbsp; <b id="seenPct">0%</b></div>
       <div class="stat"><span id="ratedCount">0</span> rated &nbsp;·&nbsp; avg <span class="g" id="avgRating">–</span></div>
     </div>
     <div class="reelbar"><div class="fill" id="fill"></div><div class="ticks"></div></div>
@@ -486,6 +486,7 @@ function updateStats(){
   document.getElementById('avgRating').textContent = avg ? avg.toFixed(1)+'★' : '–';
   const pct = TOTAL ? Math.round(seen/TOTAL*1000)/10 : 0;
   document.getElementById('fill').style.width = pct+'%';
+  document.getElementById('seenPct').textContent = (TOTAL ? Math.round(seen/TOTAL*100) : 0)+'%';
 }
 
 function paintStars(starsEl, level){
