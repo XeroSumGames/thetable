@@ -655,8 +655,27 @@ if(signoutBtn) signoutBtn.addEventListener('click', async ()=>{ if(sb) await sb.
 
 async function applySession(session){
   if(session && session.user){
+    // Private to the Xero Sum Games admin (Thriver). ANY shared XSG account can
+    // authenticate against this Supabase project, so gating on "is logged in" is
+    // not enough — verify the role and hold everyone else at the gate. (The
+    // a24_state RLS already blocks non-Thrivers at the data layer; this stops the
+    // page from ever opening for them.)
+    let isThriver=false;
+    try{
+      const { data:prof } = await sb.from('profiles').select('role').eq('id', session.user.id).maybeSingle();
+      isThriver = !!prof && String(prof.role||'').toLowerCase()==='thriver';
+    }catch(e){ isThriver=false; }
+    if(!isThriver){
+      user=null;
+      gate.classList.remove('hidden');
+      const ar=document.getElementById('acctRow'); if(ar) ar.style.display='none';
+      gateErr.textContent='This ledger is private to the Xero Sum Games admin account.';
+      state={seen:{},ratings:{}}; updateStats(); render();  // never show a populated ledger behind the gate
+      return;
+    }
     user=session.user;
     gate.classList.add('hidden');
+    gateErr.textContent='';
     const ae=document.getElementById('acct'); if(ae) ae.textContent=user.email;
     const ar=document.getElementById('acctRow'); if(ar) ar.style.display='flex';
     updateStats(); render();     // paint from local cache first
