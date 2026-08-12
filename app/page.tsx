@@ -62,6 +62,7 @@ const GENERATORS: Generator[] = [
   { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius" },
   { slug: "dredd-generator", title: "Judge Dredd (WOIN) RPG", system: "Published by EN Publishing" },
   { slug: "walkingdead-rpg", title: "The Walking Dead RPG", system: "Published by Free League" },
+  { slug: "traveller-generator", title: "Traveller RPG", system: "Published by Mongoose Publishing" },
 ];
 
 export default function Home() {
