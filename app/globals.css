@@ -125,8 +125,8 @@ body {
 /* With a logo dropped in at public/prop-<key>.*, the wordmark REPLACES the text
    name (each logo already spells the property out) and sits on the left, with
    the tagline to its right. Without one the button keeps the plain text layout
-   above. --prop-logo-h is shared by both sides so the text can never make the
-   button taller than the logo it sits beside. */
+   above. --prop-logo-h caps the logo so it never stretches to match a long
+   tagline; the button itself grows to fit the text rather than clipping it. */
 .prop--logo {
   --prop-logo-h: clamp(56px, 10vw, 92px);
   flex-direction: row;
@@ -143,14 +143,8 @@ body {
   max-width: 44%;
 }
 
-.prop--logo .prop-text {
-  max-height: var(--prop-logo-h);
-  overflow: hidden;
-}
-
-/* Too narrow for a side-by-side: the logo shrinks to ~30px and the height cap
-   swallows most of the tagline (measured: The Table needs 168px, gets 56). Stack
-   and release the cap instead of silently clipping the sentence. */
+/* Too narrow for a side-by-side: the logo shrinks to ~30px and the tagline is
+   left in a ~150px gutter. Stack instead. */
 @media (max-width: 620px) {
   .prop--logo {
     flex-direction: column;
@@ -159,10 +153,6 @@ body {
   }
   .prop-logo {
     max-width: 78%;
-  }
-  .prop--logo .prop-text {
-    max-height: none;
-    overflow: visible;
   }
 }
 
@@ -194,7 +184,7 @@ body {
 }
 
 .prop-tagline {
-  color: var(--muted);
+  color: var(--ink);
   font-size: 1rem;
 }
 

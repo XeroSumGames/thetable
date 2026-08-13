@@ -32,21 +32,21 @@ const PROPERTIES: Property[] = [
   {
     key: "table",
     name: "The Table",
-    tagline: "Utilizing the Xero Sum Games SRD, The Table supports most genres but works best for gritty, hardboiled stories. Always free.",
+    tagline: "Using the Xero Sum Games SRD, The Table supports most genres but works best for gritty, hardboiled stories. Always free.",
     href: "/table",
     external: false,
   },
   {
     key: "tapestry",
     name: "The Tapestry",
-    tagline: "For Distemper — the post-apocalyptic tabletop roleplaying game.",
+    tagline: "Designed to support Distemper, a post-apocalyptic tabletop roleplaying game set in a world where 90% of humanity have died out in less than a year.",
     href: "https://thetapestry.distemperverse.com",
     external: true,
   },
   {
     key: "tableau",
     name: "The Tableau",
-    tagline: "For Displaced — the hard science-fiction tabletop roleplaying game.",
+    tagline: "Designed to support Displaced, a hard science-fiction tabletop roleplaying game set 130 years in the future as mankind starts to colonize other planets.",
     href: "https://thetableau.xerosumgames.com",
     external: true,
   },
@@ -89,7 +89,6 @@ export default function Home() {
         <p className="tagline">
           Three virtual tabletops (VTTs) and a collection of character generators for games I play.
         </p>
-        <p className="tagline tagline--pick">Pick a table.</p>
       </header>
 
       <nav className="properties" aria-label="Games">
