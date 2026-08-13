@@ -3,17 +3,20 @@ import path from "path";
 import VisitBeacon from "../components/VisitBeacon";
 import LaunchSignup from "../components/LaunchSignup";
 
-// A generator button shows a picture only if one exists at
-// public/gen-<slug>.(png|jpg|jpeg|webp). Missing -> no thumbnail, so the button
-// looks exactly like the text-only version. Drop an image in and redeploy.
-function genImage(slug: string): string | null {
-  for (const ext of ["png", "jpg", "jpeg", "webp"]) {
-    if (fs.existsSync(path.join(process.cwd(), "public", `gen-${slug}.${ext}`))) {
-      return `/gen-${slug}.${ext}`;
+// Buttons show a picture only if one exists in public/. Missing -> no image, so
+// the button looks exactly like the text-only version. Drop a file in and
+// redeploy. Generators use gen-<slug>.*, properties use prop-<key>.*.
+function assetImage(prefix: string, key: string): string | null {
+  for (const ext of ["svg", "png", "webp", "jpg", "jpeg"]) {
+    if (fs.existsSync(path.join(process.cwd(), "public", `${prefix}-${key}.${ext}`))) {
+      return `/${prefix}-${key}.${ext}`;
     }
   }
   return null;
 }
+
+const genImage = (slug: string) => assetImage("gen", slug);
+const propLogo = (key: string) => assetImage("prop", key);
 
 type Property = {
   key: string;
@@ -90,19 +93,32 @@ export default function Home() {
       </header>
 
       <nav className="properties" aria-label="Games">
-        {PROPERTIES.map((p) => (
-          <a
-            key={p.key}
-            className={`prop prop--${p.key}`}
-            href={p.href}
-            {...(p.external
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-          >
-            <span className="prop-name">{p.name}</span>
-            <span className="prop-tagline">{p.tagline}</span>
-          </a>
-        ))}
+        {PROPERTIES.map((p) => {
+          const logo = propLogo(p.key);
+          return (
+            <a
+              key={p.key}
+              className={`prop prop--${p.key}${logo ? " prop--logo" : ""}`}
+              href={p.href}
+              {...(p.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+            >
+              {logo ? (
+                <span className="prop-plate">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="prop-logo" src={logo} alt={p.name} />
+                </span>
+              ) : null}
+              <span className="prop-text">
+                <span className={`prop-name${logo ? " prop-name--hidden" : ""}`}>
+                  {p.name}
+                </span>
+                <span className="prop-tagline">{p.tagline}</span>
+              </span>
+            </a>
+          );
+        })}
       </nav>
 
       <section className="gens" aria-label="Character generators">

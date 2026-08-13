@@ -122,6 +122,53 @@ body {
   --pc: var(--pc-tableau);
 }
 
+/* With a logo dropped in at public/prop-<key>.*, the wordmark REPLACES the text
+   name (each logo already spells the property out) and the tagline sits under
+   it. Without one the button keeps the plain text layout above.
+   The plate is not decoration: all three wordmarks are dark artwork drawn for
+   light backgrounds - straight onto --bg the black one is invisible and the
+   navy one is ~1.6:1. The light plate is what makes them legible here. */
+.prop--logo {
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.prop-plate {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  background: #f4f1ea;
+}
+
+.prop-logo {
+  display: block;
+  width: auto;
+  height: clamp(46px, 9vw, 74px);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.prop-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+/* The logo carries the name visually; keep the text for screen readers. */
+.prop-name--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .prop-name {
   font-size: clamp(1.7rem, 5.5vw, 2.4rem);
   font-weight: 800;
