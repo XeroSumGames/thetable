@@ -45,7 +45,9 @@ body {
 
 .masthead {
   text-align: center;
-  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  /* Tight to the first wordmark - .prop already contributes its own top
+     padding, so this only needs to top the gap up, not carry it. */
+  margin-bottom: clamp(0.4rem, 1.2vw, 1rem);
 }
 
 .kicker {
