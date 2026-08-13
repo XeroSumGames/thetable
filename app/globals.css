@@ -61,9 +61,19 @@ body {
 
 /* Fixed light plate so the two-tone (black/white) block logo shows fully on
    both light and dark themes instead of half-blending into the page. */
+/* Logo and the account button share a row, centred as a pair. Wraps to two
+   lines when the pair no longer fits. */
+.masthead-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin-bottom: 1rem;
+}
+
 .logo-plate {
   display: inline-block;
-  margin: 0 auto 1rem;
 }
 
 .logo {
@@ -257,7 +267,7 @@ body {
 
 /* Create account / Log in CTA under the logo */
 .auth-cta {
-  margin: 0.25rem 0 1.1rem;
+  margin: 0;
 }
 
 .auth-btn {
