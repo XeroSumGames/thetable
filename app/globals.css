@@ -118,39 +118,24 @@ body {
 }
 
 /* With a logo dropped in at public/prop-<key>.*, the wordmark REPLACES the text
-   name (each logo already spells the property out) and sits on the left, with
-   the tagline to its right. Without one the button keeps the plain text layout
-   above. --prop-logo-h caps the logo so it never stretches to match a long
-   tagline; the button itself grows to fit the text rather than clipping it. */
+   name (each logo already spells the property out): it runs the full column
+   width with the tagline centred beneath it. Sizing by width rather than height
+   means the three share a left and right edge; their heights differ because
+   their aspect ratios do (7.28 / 4.95 / 3.70). */
 .prop--logo {
-  /* Three lines of tagline: 3 x (1rem x 1.5 line-height). Every wordmark is set
-     to exactly this height so the three line up, whatever their aspect. */
-  --prop-logo-h: calc(3 * 1.5rem);
-  flex-direction: row;
   align-items: center;
-  gap: clamp(0.9rem, 3vw, 1.5rem);
+  gap: 0.35rem;
 }
 
 .prop-logo {
   display: block;
-  flex: 0 0 auto;
-  width: auto;
-  height: var(--prop-logo-h);
+  width: 100%;
+  height: auto;
 }
 
-/* Too narrow for a side-by-side: the logo shrinks to ~30px and the tagline is
-   left in a ~150px gutter. Stack instead. */
-@media (max-width: 620px) {
-  .prop--logo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-  .prop-logo {
-    height: auto;
-    max-height: var(--prop-logo-h);
-    max-width: 78%;
-  }
+.prop--logo .prop-text {
+  align-items: center;
+  text-align: center;
 }
 
 .prop-text {
