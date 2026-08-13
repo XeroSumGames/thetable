@@ -123,7 +123,9 @@ body {
    above. --prop-logo-h caps the logo so it never stretches to match a long
    tagline; the button itself grows to fit the text rather than clipping it. */
 .prop--logo {
-  --prop-logo-h: clamp(56px, 10vw, 92px);
+  /* Three lines of tagline: 3 x (1rem x 1.5 line-height). Every wordmark is set
+     to exactly this height so the three line up, whatever their aspect. */
+  --prop-logo-h: calc(3 * 1.5rem);
   flex-direction: row;
   align-items: center;
   gap: clamp(0.9rem, 3vw, 1.5rem);
@@ -133,9 +135,7 @@ body {
   display: block;
   flex: 0 0 auto;
   width: auto;
-  height: auto;
-  max-height: var(--prop-logo-h);
-  max-width: 44%;
+  height: var(--prop-logo-h);
 }
 
 /* Too narrow for a side-by-side: the logo shrinks to ~30px and the tagline is
@@ -147,6 +147,8 @@ body {
     gap: 0.6rem;
   }
   .prop-logo {
+    height: auto;
+    max-height: var(--prop-logo-h);
     max-width: 78%;
   }
 }
