@@ -27,6 +27,8 @@ const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
   { slug: "walkingdead-rpg", deployment: "https://walkingdead-rpg.vercel.app" },
   // Traveller (Mongoose 2nd Edition)
   { slug: "traveller-generator", deployment: "https://traveller-generator.vercel.app" },
+  // 2300AD (Mongoose Traveller setting)
+  { slug: "2300ad-generator", deployment: "https://2300ad-generator.vercel.app" },
 ];
 
 const nextConfig: NextConfig = {
