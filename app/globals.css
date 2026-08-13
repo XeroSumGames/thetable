@@ -123,30 +123,47 @@ body {
 }
 
 /* With a logo dropped in at public/prop-<key>.*, the wordmark REPLACES the text
-   name (each logo already spells the property out) and the tagline sits under
-   it. Without one the button keeps the plain text layout above.
-   The plate is not decoration: all three wordmarks are dark artwork drawn for
-   light backgrounds - straight onto --bg the black one is invisible and the
-   navy one is ~1.6:1. The light plate is what makes them legible here. */
+   name (each logo already spells the property out) and sits on the left, with
+   the tagline to its right. Without one the button keeps the plain text layout
+   above. --prop-logo-h is shared by both sides so the text can never make the
+   button taller than the logo it sits beside. */
 .prop--logo {
-  align-items: flex-start;
-  gap: 0.8rem;
-}
-
-.prop-plate {
-  display: inline-flex;
-  max-width: 100%;
-  padding: 0.6rem 0.9rem;
-  border-radius: 12px;
-  background: #f4f1ea;
+  --prop-logo-h: clamp(56px, 10vw, 92px);
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(0.9rem, 3vw, 1.5rem);
 }
 
 .prop-logo {
   display: block;
+  flex: 0 0 auto;
   width: auto;
-  height: clamp(46px, 9vw, 74px);
-  max-width: 100%;
-  object-fit: contain;
+  height: auto;
+  max-height: var(--prop-logo-h);
+  max-width: 44%;
+}
+
+.prop--logo .prop-text {
+  max-height: var(--prop-logo-h);
+  overflow: hidden;
+}
+
+/* Too narrow for a side-by-side: the logo shrinks to ~30px and the height cap
+   swallows most of the tagline (measured: The Table needs 168px, gets 56). Stack
+   and release the cap instead of silently clipping the sentence. */
+@media (max-width: 620px) {
+  .prop--logo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .prop-logo {
+    max-width: 78%;
+  }
+  .prop--logo .prop-text {
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 .prop-text {

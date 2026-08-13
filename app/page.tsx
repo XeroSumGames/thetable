@@ -105,10 +105,8 @@ export default function Home() {
                 : {})}
             >
               {logo ? (
-                <span className="prop-plate">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="prop-logo" src={logo} alt={p.name} />
-                </span>
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className="prop-logo" src={logo} alt={p.name} />
               ) : null}
               <span className="prop-text">
                 <span className={`prop-name${logo ? " prop-name--hidden" : ""}`}>
