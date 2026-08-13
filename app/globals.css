@@ -182,6 +182,15 @@ body {
   font-size: 1rem;
 }
 
+/* Each tagline on a single line. The two longest run 1066px at 16px, so 11px is
+   what clears the 740px column. Only once the column is at full width - below
+   that one line would need ~5px, so they wrap at the readable size instead. */
+@media (min-width: 820px) {
+  .prop-tagline {
+    font-size: 11px;
+  }
+}
+
 /* Free generators — three smaller buttons on one line. */
 .gens {
   margin-top: clamp(2rem, 5vw, 3rem);
