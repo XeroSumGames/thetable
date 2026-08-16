@@ -60,13 +60,18 @@ type Generator = {
 
 // Free character generators, surfaced on this origin via proxy rewrites
 // (see next.config.ts).
+// Order is Xero's, set 2026-08-16, and the grid fills row by row:
+//   apes / twilight 2000 / walking dead
+//   space 1999 / traveller / 2300AD
+//   judge dredd
 const GENERATORS: Generator[] = [
   { slug: "apegenerator", title: "Planet of the Apes RPG", system: "Published by Magnetic Press" },
-  { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius" },
-  { slug: "dredd-generator", title: "Judge Dredd (WOIN) RPG", system: "Published by EN Publishing" },
+  { slug: "twilight2000-generator", title: "Twilight 2000 RPG", system: "Published by Free League" },
   { slug: "walkingdead-rpg", title: "The Walking Dead RPG", system: "Published by Free League" },
+  { slug: "space1999", title: "Space 1999 RPG", system: "Published by Modiphius" },
   { slug: "traveller-generator", title: "Traveller RPG", system: "Published by Mongoose Publishing" },
   { slug: "2300ad-generator", title: "2300AD RPG", system: "Published by Mongoose Publishing" },
+  { slug: "dredd-generator", title: "Judge Dredd (WOIN) RPG", system: "Published by EN Publishing" },
 ];
 
 export default function Home() {

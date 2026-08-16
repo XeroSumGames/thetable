@@ -13,6 +13,7 @@ const GENERATOR_SLUGS = [
   "walkingdead-rpg",
   "traveller-generator",
   "2300ad-generator",
+  "twilight2000-generator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
