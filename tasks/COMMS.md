@@ -28,7 +28,17 @@ Adding the Comms worktree (done today) is a natural moment to give HP its own.
 - (b) Not yet - accept the risk while the project is quiet, revisit if HP and
   Puffer Fish start editing at the same time.
 
-Owning lane: Puffer Fish (would create it). Comms: put this to Xero.
+HP asked 2026-09-11: no objection, ../TheTable-hp is fine by HP. Decision is
+Xero's. Owning lane: Puffer Fish (would create it). Comms: put this to Xero.
+
+### 2. Add TheTable origin to Supabase redirect URLs (added 2026-09-11, HP -> Puffer Fish)
+
+Xero-only dashboard action, verified and ready to put to him as-is. In the shared
+Supabase project: Auth -> URL Configuration -> Redirect URLs, add
+https://thetable.xerosumgames.com. One click. Only affects NEW-signup
+confirmation emails; existing-account login already works.
+
+Owning lane: Puffer Fish (infra). Comms: put this to Xero.
 
 ## ANSWERED
 
