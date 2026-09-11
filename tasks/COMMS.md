@@ -15,6 +15,10 @@ Route with mcp__ccd_session_mgmt__send_message; Xero does not relay.
 
 ### 1. Give Table | HP its own worktree? (added 2026-09-11 by Puffer Fish)
 
+*Verified 2026-09-11 by Comms: `git worktree list` shows only TheTable (main)
+and TheTable-comms (lane/comms). No HP worktree. Claim confirmed.
+Put to Xero 2026-09-11.*
+
 TheTable runs Puffer Fish and Hunt & Peck out of the SAME single checkout
 (D:\Coding\VTTs\TheTable, branch main). Two sessions editing one working tree
 means the last save silently wins. This has already cost rework on Tapestry
