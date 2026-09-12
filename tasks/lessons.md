@@ -26,9 +26,14 @@ than the UI was asserted on.
   original before the next run saves it - the hub and the VTT, works). Having
   NEITHER double-records. Having BOTH records nothing. The failure here was a
   cleanup added later, correctly by React's contract, on top of a guard that
-  had become redundant the moment it landed. **TheTableau still carries this**
-  (`components/Recorder.tsx`, guard at line 34 and a cleanup at 164) - dev-only
-  there too, since production never double-invokes.
+  had become redundant the moment it landed. **TheTableau carried this too and
+  is now FIXED** at its `610a50ec` on `phase-b-deck-combat`, on Xero's say-so
+  2026-09-12 - committed there but deliberately NOT pushed, since that branch
+  is 44 commits ahead of upstream with other sessions' work. Dev-only there as
+  well, since production never double-invokes, and not verified by running that
+  app: its tree held another session's uncommitted changes and its own atlas
+  notes record test runs damaging Xero's live save, which is not a risk worth
+  taking for a two-line deletion already proven behaviourally here.
   **Correction, 2026-09-12: I first wrote that TheTapestry carried it as well,
   and it does not.** It has the same `initRef` guard but ZERO
   `removeEventListener` calls - no cleanup function at all - so its listeners

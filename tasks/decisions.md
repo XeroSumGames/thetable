@@ -16,10 +16,10 @@ dump instead of a description.
 with no shared package; a port is what the lineage already does. The cost is
 that a fix has to be walked along the chain by hand - which is exactly what
 happened on day one, when the inert-listener bug was found on the VTT and had
-to be fixed in the hub too. **TheTableau still carries it; TheTapestry does
-NOT** - it has the same guard but no cleanup at all, so its listeners install
-once and stay. (First recorded here as both, wrong, corrected same day - see
-lessons.md.) If
+to be fixed in the hub too, and then walked out to TheTableau (its `610a50ec`,
+committed not pushed). **TheTapestry never had it** - same guard but no cleanup
+at all, so its listeners install once and stay. (First recorded here as both
+carrying it, which was wrong, corrected the same day - see lessons.md.) If
 this chain grows a fourth or fifth consumer, that cost stops being worth it and
 the answer becomes a small published package.
 
