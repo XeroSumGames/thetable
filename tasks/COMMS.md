@@ -44,9 +44,8 @@ Implementation for Character Generators (their files, their curation):
   Preacher and Sparks - the overlap is fine in isolation but three shared
   entries out of 25 would read as copy-paste if the pools grow toward each other.
 
-**Blocked on Xero, not on the lane:** Character Generators has paused all build
-work on his own instruction, so this cannot start until he unpauses it. Routed
-2026-09-11.
+**UNBLOCKED 2026-09-11:** Xero unpaused Character Generators the same day. The
+lane may resume build work and pick this up. Routed 2026-09-11.
 
 ### 2026-09-11 - Fold Mothership/Space:1999 name pools into the shared pool? -> NO, KEEP BESPOKE (a)
 
