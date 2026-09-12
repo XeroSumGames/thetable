@@ -15,37 +15,38 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 5. Mothership callsigns are dead data - use them or delete them? (added 2026-09-11, Character Generators)
-
-LOW priority, cosmetic, nothing blocked. The generator is shipped and live.
-
-mothership-generator's src/data/names.json defines 25 crew callsigns (Rat,
-Preacher, Doc, Sparks, Tin, Gutter, Mouse, Ripcord, Static, Bandit, Cinder,
-Halfway, Pilgrim, Shivers, Crow, Deadbolt, Ozone, Patch, Grit, Hollow, Nailer,
-Ash, Quiet, Boxcar, Vesper) that nothing reads. That is worse than having none,
-because the next lane will assume they are wired up.
-
-  (a) use them - append as a nickname, e.g. Vasquez "Gutter", or drop into the
-      sheet's Notes. A hauler crew handing each other names fits the fiction.
-  (b) delete them - the generator loses nothing it currently does.
-  (c) something else he names.
-
-*Verified by Comms 2026-09-11:* `callsign` appears exactly once in the whole
-generator - the data definition itself - and zero times in src/app.js and
-src/engine.js. app.js:503 builds the random name as
-`pick(N.given) + ' ' + pick(N.family)`; pronouns are used at 507; callsigns are
-never touched. Genuinely dead.
-
-*The Twilight 2000 precedent in option (a) is real and already working:* that
-generator has a `nicknames` pool, picks from it, renders it as an editable
-Nickname field and prints it as Name "Nickname" on the sheet. Option (a) is
-copying a pattern that exists, not inventing one.
-
-Owning lane: Character Generators. Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Mothership callsigns: use or delete? -> USE THEM (a), AND EXPAND TO 50
+
+Asked by Character Generators. Comms verified first: `callsign` appeared exactly
+once in the whole generator - the data definition itself - and zero times in
+src/app.js and src/engine.js. app.js:503 built the random name as
+`pick(N.given) + ' ' + pick(N.family)`, so the 25 callsigns were genuinely dead
+data.
+
+**Xero: (a) use them, and expand the pool from 25 to 50.**
+
+Implementation for Character Generators (their files, their curation):
+
+- Wire the callsigns into the random-name button and render them the way
+  twilight2000-generator already does - it has a `nicknames` pool, picks from
+  it, exposes an editable Nickname field and prints `Name "Nickname"` on the
+  sheet. Copy that working pattern rather than inventing one.
+- Grow the pool to 50 entries. The 25 new ones are the lane's curation call, not
+  Xero's and not Comms'. Hold the tone the file's own `_note` already sets:
+  blue-collar, multinational, unglamorous, the sort of name a hauler crew hands
+  out. Avoid colliding with Twilight 2000's list, which already contains Doc,
+  Preacher and Sparks - the overlap is fine in isolation but three shared
+  entries out of 25 would read as copy-paste if the pools grow toward each other.
+
+**Blocked on Xero, not on the lane:** Character Generators has paused all build
+work on his own instruction, so this cannot start until he unpauses it. Routed
+2026-09-11.
 
 ### 2026-09-11 - Fold Mothership/Space:1999 name pools into the shared pool? -> NO, KEEP BESPOKE (a)
 
