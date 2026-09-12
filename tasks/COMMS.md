@@ -55,6 +55,16 @@ in. Options for Xero:
 
 One-line change either way. No rush - it has sat six weeks.
 
+*Verified by Comms 2026-09-11 at walkingdead-rpg HEAD a37e9d6 (not relayed on
+the lane's word): index.html:2716 does read left:78%;top:82%;width:18%;height:14%
+and the comment on 2715 does say the description box, so the two disagree; the
+description text itself prints at 42.0%, 9.7% (index.html:2671), nowhere near
+78/82. NOT independently confirmed: that the covered box is specifically TINY
+ITEMS - the box labels live in the SHEET_P1 background image (index.html:2665),
+not in code, so that part is taken on the lane's word. No generated text prints
+in that region, so what the portrait covers is sheet artwork, not other output.
+Put to Xero 2026-09-11.*
+
 Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
