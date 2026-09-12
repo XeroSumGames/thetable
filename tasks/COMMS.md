@@ -23,20 +23,36 @@ The floor has only ever reached the four src/-based generators, because it was
 applied during the Traveller and T2K redesigns. The other half of the catalogue
 was never touched.
 
-*Measured independently by Comms on the live bytes 2026-09-11. Two of the four
-counts match the lane exactly; two do not, and the lane's numbers come from
-computed style on the rendered page, which is the better measure of what a user
-actually sees:*
+**CORRECTION 2026-09-11.** Comms originally told Xero the lane's 40/52/35/16
+came from computed style on rendered pages and were therefore the better number.
+They did not - the lane confirmed they were a static scan with a crude
+"@media print" split, the same method as Comms'. The two sets disagree only
+about where the print block ends. Neither had the authority Comms gave them.
 
-| generator | lane (rendered) | Comms (static scan) |
-| --- | --- | --- |
-| apegenerator | 40 | 43 |
-| space1999generator | 52 | 52 |
-| dredd-generator | 35 | 53 |
-| walkingdead-rpg | 16 | 16 |
+The lane then took the real rendered measurement, start screen only at 1280x900,
+sweeping computed style over every element owning a text node. Treat as a floor,
+not a total - deeper screens add more.
 
-Either way the finding is real and large: roughly 140-160 sub-14px on-screen
-rules still live across four generators. The src/-based four are clean.
+| generator | static declarations (Comms) | static (lane) | rendered: selector+size combos / elements (lane) |
+| --- | --- | --- | --- |
+| apegenerator | 43 | 40 | 15 / 164 |
+| space1999generator | 52 | 52 | 16 / 68 |
+| dredd-generator | 53 | 35 | 9 / 20 |
+| walkingdead-rpg | 16 | 16 | 11 / 63 |
+
+The three sets differ because they answer different questions, and that is worth
+keeping: the static count is how many declarations you would EDIT, the rendered
+count is how much a user SEES, and neither converts into the other.
+
+**The headline number overstates the job.** The same shared chrome is undersized
+in all four. *Verified at source by Comms 2026-09-11:* `.tt-btn`, `.hdr-sub` and
+`.hdr-rand` are 12px in all four; `.step-item` and `.step-num` are 12px in three,
+absent from walkingdead-rpg, which uses different stepper markup for the same
+thing. One correction to the lane's list: `.seo-intro` has no font-size
+declaration anywhere - it appears once per file as a class with no CSS rule, so
+its size is inherited, not declared. So a large share of the work is one small
+set of shared classes repeated across four files, with a per-generator tail of
+content rules - a far more tractable job than 143 suggests.
 
 This is a genuinely different job from the pass just done. These are hand-built
 single index.html files with rules, state and DOM interleaved and no src/, so
@@ -51,30 +67,23 @@ and is not asking to.
 No Comms recommendation: this is a question about how much of the back catalogue
 is worth reworking, which is his call on effort, not a technical one.
 
-### 11. Twilight 2000's printed sheet spills to a second page (added 2026-09-11, Character Generators)
-
-Pre-existing defect, not introduced by any of today's work. Xero's printed
-sheets are meant to be one page.
-
-Heavy characters tip the sheet onto page 2 - reproduced at a sheet weight around
-1400 characters (a 9-term character with a full specialty list). The lane proved
-it is not its own change: it printed the IDENTICAL captured sheet HTML through
-both the old and the new build and got 2 pages, 1563 characters, identical from
-both. Note #152 had hinted at this; it is now a reproducible spill.
-
-*NOT independently reproduced by Comms - printing is the one thing here Comms
-cannot measure from served bytes. Everything else in the lane's report was
-checked and held.*
-
-  (a) fix it next, before the lane starts anything else
-  (b) queue it behind the life-path redesign already in flight
-  (c) leave it - heavy characters are rare enough to live with
-
-Owning lane: Character Generators. Comms: put both to Xero.
-
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Twilight 2000's printed sheet spills to two pages -> QUEUE IT (b)
+
+Filed by Character Generators. Pre-existing defect, not introduced by any of the
+day's work: heavy characters tip the printed sheet onto page 2, reproduced at a
+sheet weight around 1400 characters (a 9-term character with a full specialty
+list). The lane proved it was not its own change by printing identical captured
+sheet HTML through both the old and the new build and getting 2 pages from each.
+Comms did NOT independently reproduce this - printing is the one thing Comms
+cannot measure from served bytes.
+
+**Xero: (b) queue it behind the life-path redesign already in flight.** Not
+dropped and not next; it waits its turn. Routed to Character Generators
+2026-09-11.
 
 ### 2026-09-11 - Does the 2300AD floor pass also clear the 12px footers? -> YES (a)
 
