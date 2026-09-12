@@ -194,8 +194,27 @@ An **A record**, not a CNAME - matching `thetable.xerosumgames.com`, which
 already resolves to 76.76.21.21 on this same Wix-hosted domain. The handoff's
 `CNAME -> cname.vercel-dns.com` would have been wrong.
 
-**All that remains is the Wix record**, which Comms cannot do: no API access
-and entering his credentials is prohibited. Everything else is complete.
+**Q2 COMPLETE 2026-09-12. https://mothership.xerosumgames.com is LIVE.**
+
+Sequence, for whoever does the next one: Comms added the domain with the authed
+CLI; `vercel domains inspect` gave the record (A -> 76.76.21.21, not a CNAME);
+Xero added it in Wix - the only step he could not be spared; DNS then resolved on
+both 8.8.8.8 and 1.1.1.1 within minutes and HTTP served 200.
+
+**The certificate did NOT issue on its own.** After ~25 minutes HTTPS still
+failed the handshake with no peer certificate, and `vercel certs ls` showed
+certs for thetableau, thetapestry and thetable but none for mothership. Fixed
+with an explicit request:
+
+    vercel certs issue mothership.xerosumgames.com --scope xerosumgames-projects
+
+which succeeded in 9s, and HTTPS answered 200 on the next attempt. Do not wait
+indefinitely on automatic issuance - check `vercel certs ls` and issue it.
+
+*Verified by Comms: https://mothership.xerosumgames.com serves the real app -
+the Mothership sign-in card with Email, Password, Sign in, "Create an account"
+and the "The Table" link back to the hub, driven in a browser rather than
+inferred from a status code.*
 
 **Direct URL, resolved by Comms 2026-09-12 via `vercel teams ls`:**
 `https://vercel.com/xerosumgames-projects/mothership-vtt/settings/domains`
