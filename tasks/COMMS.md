@@ -21,6 +21,24 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 *(dated log, newest first)*
 
+### 2026-09-11 - Give Table | Character Generators its own worktree? -> YES
+
+Never formally filed - Puffer Fish flagged it as a question it was about to put
+to Xero directly, Comms pulled it back into the channel, and Xero answered
+before it was written up.
+
+**Xero: yes.** Create the worktree. Mirrors the HP call earlier the same day and
+the MeSuite pattern; Character Generators does edit this repo (it pushed e27b1d1
+to tasks/) even though the generator source lives in
+D:\Coding\RPG Character Generators\, so it is a real collision risk on the
+shared main checkout.
+
+Comms recorded the name as ../TheTable-chargen on branch lane/chargen to match
+the MeSuite role-based convention; Puffer Fish owns creation and may change it.
+Same caveat as HP: a session's cwd is fixed at launch, so the running
+Table | Character Generators session must be re-opened in the new worktree to
+actually use it. Routed to Puffer Fish (owning lane) 2026-09-11.
+
 ### 2026-09-11 - Portrait on the printed Walking Dead sheet? -> DROP IT (d)
 
 Asked by Character Generators. Comms verified the code at walkingdead-rpg HEAD
