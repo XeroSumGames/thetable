@@ -31,6 +31,35 @@ move anything on the page. Implementation follows from that - one set of CSS
 custom properties covering --bg/--panel/--ink/--ink-dim/--line/--line-width/
 --accent/--font-display/--font-body/--texture/--case, swapped as a block.
 
+**LAYOUT LOCK - the rules that make two identities safe.** Xero's constraint:
+"the boxes/lines/positioning should be as close to identical as possible",
+accepting only glyph-width variance. The first pass FAILED this - hand-writing
+two files let real drift in (tiles 95px vs 97px tall, name 40px vs 42px, sheet
+sections 4px out). Four rules fixed it, verified by measuring every element in
+both modes:
+
+1. **Generate both modes from one skeleton.** The mockups are built by a script
+   from a single geometry block, so the layout CSS is byte-identical and only a
+   token block differs. Care is not a mechanism; generation is.
+2. **`line-height` must be explicit on the root.** This was the root cause of a
+   cascade that shifted 129 elements. `line-height: normal` resolves
+   DIFFERENTLY PER TYPEFACE (JetBrains Mono ~1.3, Work Sans ~1.17), so the
+   inherited strut differed by 1px and pushed everything below it. Never leave
+   line-height unset anywhere in this app.
+3. **Borders must not carry layout.** `--bw` is 1px dark / 2.5px light; on an
+   auto-height box a real border adds real height. Draw every border as
+   `box-shadow: inset 0 0 0 var(--bw)` (or `outline` for dashed) - visually
+   identical, zero layout cost. Keeps the Zine's heavy rules for free.
+4. **Reserve space for variable-length text.** Work Sans wraps the trauma
+   paragraph to an extra line where JetBrains Mono does not (+20px, cascading
+   4px into everything below). Any box holding prose gets a min-height sized
+   for the worst case.
+
+**Verified result:** 0 vertical position differences, 0 height differences, 0
+container x differences across all 142 elements; both sheets 1900px tall;
+106/142 pixel-perfect on all four dimensions. Remaining variance is confined to
+glyph widths inside text runs, which is the agreed-acceptable part.
+
 **What would make us revisit:** if maintaining two identities starts slowing
 feature work, collapse to a shared type/border system and keep only the color
 swap - the layout is already mode-independent, so that retreat is cheap.
