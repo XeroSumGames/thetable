@@ -10,7 +10,9 @@ Verify a thing is actually reachable before asking him to test it.
 Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 - Table | Puffer Fish (hub)        local_373a5c5c-ee39-47ef-92a9-0bf3ef94544d
 - Table | HP (features)            local_4aca6765-6aab-4c0e-961d-be4b5c01da3c
-- Table | Character Generators     local_1fa2c241-d7af-4e86-86dd-319b6f2df3bd
+- Table | Character Generators     local_eb161fa5-d93d-4048-aa94-6a27856de9d2
+  (restarted 2026-09-11; the old session local_1fa2c241-d7af-4e86-86dd-319b6f2df3bd
+  is stopped - do not route to it)
 - Table | Comms (this lane)        local_894fe581-b1be-4366-ae60-d38ce452c53c
 
 ## OPEN
