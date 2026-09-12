@@ -17,59 +17,57 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 12. apegenerator's floor pass would push parked work live (added 2026-09-11, Character Generators)
-
-*Verified by Comms 2026-09-11:* apegenerator is 1 ahead of origin on b5f49d3,
-"print the official Planet of the Apes character sheet, filled in" - Xero's own
-commit from 2026-08-16, which replaces the CSS dossier print output with the
-publisher sheet. The live site does not have it. So any floor-pass push to this
-repo takes that sheet live with it. The push-all-four ruling covered mothership,
-2300ad, twilight2000 and traveller only; apegenerator was never cleared.
-
-This is the parked work Xero called ugly, with visual fixes listed in atlas note
-#121. Comms verified the commit and its unpushed state; Comms did NOT verify the
-note's contents.
-
-  (a) clear b5f49d3 to ship - the floor pass pushes normally and the sheet goes
-      live as-is
-  (b) the lane does the POTA sheet fixes from note #121 first, then both ship
-      together - the lane's recommendation if he still wants the official sheet
-  (c) do the floor pass but leave apegenerator unpushed - live Ape keeps breaking
-      the 14px rule, which is the opposite of why he said fix it now
-
-Must not default to (c) by silence. Owning lane: Character Generators.
-
-### 13. Dredd: fold the floor pass into its redesign, or do it standalone? (added 2026-09-11, Comms)
-
-The lane proposes folding Dredd's floor pass into its life-path redesign, on the
-grounds that the redesign rewrites that generator's UI markup wholesale, so
-flooring first is work thrown away - and worse, the redesign could quietly
-reintroduce sub-14px rules after the floor pass had signed it off. That
-reasoning is sound.
-
-**Raised only because it is the exact option Xero already rejected once.** On
-2300AD, offered "fold it into the queued lifepath redesign" versus "fix it now,
-standalone", he chose standalone, so the live site would stop breaking the rule
-sooner. Dredd is the same shape. The lane may not know it is proposing the
-rejected option.
-
-  (a) fold it into the Dredd redesign, as the lane proposes - one job, no
-      throwaway work, and no window where the redesign can silently undo it
-  (b) standalone first, consistent with the 2300AD ruling - Dredd's live site
-      stops breaking the rule sooner, at the cost of redoing it in the redesign
-
-No Comms recommendation: the two rulings pull in opposite directions and which
-matters more is his call.
-
-*Related risk the lane raised and Comms is recording rather than asking about:
-2300AD's floor pass is ALREADY shipped, so its redesign could undo it unnoticed.
-The lane is treating "nothing on screen below 14px" as an acceptance criterion of
-both redesigns, verified by computed style before either ships, rather than
-re-auditing afterwards. That is the right handling and needs no ruling.*
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Dredd: fold the floor pass into its redesign? -> YES, FOLD IT (a)
+
+Filed by Comms rather than the lane, because the lane was proposing the option
+Xero had rejected once and may not have known it.
+
+**Xero: (a) fold Dredd's 14px floor pass into its life-path redesign.** One job.
+
+This deliberately differs from his 2300AD ruling the same day, where the same
+choice was offered and he chose standalone. The difference that justifies it:
+2300AD's redesign was queued but its floor pass could ship immediately and
+independently, whereas Dredd's redesign rewrites that generator's UI markup
+wholesale - so flooring first is work thrown away, and worse, the redesign could
+quietly reintroduce sub-14px rules after the floor pass had signed them off.
+
+**Consequence to hold onto:** Dredd's live site keeps breaking the 14px rule
+until the redesign ships. That is accepted, not overlooked.
+
+**Same hazard in reverse on 2300AD, already handled by the lane and needing no
+ruling:** its floor pass is ALREADY shipped, so its redesign could undo it
+unnoticed. The lane is treating "nothing on screen below 14px prose" as an
+acceptance criterion of both redesigns, verified by computed style before either
+ships, rather than re-auditing afterwards. Routed to Character Generators
+2026-09-11.
+
+### 2026-09-11 - apegenerator's floor pass would push parked work live -> FIX THE SHEET FIRST (b)
+
+Filed by Character Generators. *Verified by Comms:* apegenerator was 1 ahead of
+origin on b5f49d3, "print the official Planet of the Apes character sheet,
+filled in" - Xero's own commit from 2026-08-16, replacing the CSS dossier print
+output with the publisher sheet. The live site does not have it, so any
+floor-pass push would have taken it live. The push-all-four ruling covered
+mothership, 2300ad, twilight2000 and traveller only.
+
+**Xero: (b) do the POTA sheet fixes from atlas note #121 first, then ship both
+together.** So he does still want the official sheet; it is not being abandoned
+and it is not shipping as-is.
+
+This makes apegenerator the LARGEST of the four hand-built jobs rather than the
+smallest: sheet fixes plus floor pass plus the print and probe verification each
+needs, in one push. It is correctly last in the lane's sequence.
+
+*Comms verified the commit and its unpushed state; Comms did NOT verify atlas
+note #121's contents - the lane owns reading that.* Note also that apegenerator
+carries a modified .gitignore alongside, which the lane had attributed to
+dredd-generator only. Routed to Character Generators 2026-09-11.
 
 ### 2026-09-11 - Does the 14px floor cover glyphs inside fixed-size UI shapes? -> PROSE ONLY (a)
 
