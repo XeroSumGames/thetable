@@ -17,59 +17,52 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 10. Does the 14px floor apply to the four hand-built generators? (added 2026-09-11, Character Generators)
+*(nothing open)*
 
-The floor has only ever reached the four src/-based generators, because it was
-applied during the Traveller and T2K redesigns. The other half of the catalogue
-was never touched.
+## ANSWERED
 
-**CORRECTION 2026-09-11.** Comms originally told Xero the lane's 40/52/35/16
-came from computed style on rendered pages and were therefore the better number.
-They did not - the lane confirmed they were a static scan with a crude
-"@media print" split, the same method as Comms'. The two sets disagree only
-about where the print block ends. Neither had the authority Comms gave them.
+*(dated log, newest first)*
 
-The lane then took the real rendered measurement, start screen only at 1280x900,
-sweeping computed style over every element owning a text node. Treat as a floor,
-not a total - deeper screens add more.
+### 2026-09-11 - Does the 14px floor apply to the four hand-built generators? -> YES (a)
 
-| generator | static declarations (Comms) | static (lane) | rendered: selector+size combos / elements (lane) |
+Filed by Character Generators after it found that the floor had only ever
+reached the four src/-based generators, because it rode along on the Traveller
+and T2K redesigns. So "no known 14px violation anywhere" was not true when Comms
+reported it.
+
+**Xero: (a) yes, apply the floor to all four** - apegenerator, space1999generator,
+dredd-generator, walkingdead-rpg. As separate passes, one generator at a time,
+each with its own print and probe verification. These are hand-built single
+index.html files with rules, state and DOM interleaved and no src/, so this is a
+genuinely different job from the three-repo pass that preceded it.
+
+**Scope, and why the headline number overstates it.** *Verified at source by
+Comms 2026-09-11:* `.tt-btn`, `.hdr-sub` and `.hdr-rand` are 12px in all four;
+`.step-item` and `.step-num` are 12px in three and absent from walkingdead-rpg,
+which uses different stepper markup for the same thing. A large share of the job
+is therefore one small set of shared classes repeated across four files, with a
+per-generator tail of content rules. `.seo-intro` is NOT one of them - it has no
+font-size declaration in any of the four, appearing once per file as a class on
+a <p> with no CSS rule, so its size is inherited rather than declared.
+
+**Three measurements, all different, all recorded, because they answer different
+questions** - the static count is how many declarations you would EDIT, the
+rendered count is how much a user SEES, and neither converts into the other:
+
+| generator | static (Comms) | static (lane) | rendered combos / elements (lane) |
 | --- | --- | --- | --- |
 | apegenerator | 43 | 40 | 15 / 164 |
 | space1999generator | 52 | 52 | 16 / 68 |
 | dredd-generator | 53 | 35 | 9 / 20 |
 | walkingdead-rpg | 16 | 16 | 11 / 63 |
 
-The three sets differ because they answer different questions, and that is worth
-keeping: the static count is how many declarations you would EDIT, the rendered
-count is how much a user SEES, and neither converts into the other.
+Rendered figures are start-screen only at 1280x900 - a floor, not a total.
 
-**The headline number overstates the job.** The same shared chrome is undersized
-in all four. *Verified at source by Comms 2026-09-11:* `.tt-btn`, `.hdr-sub` and
-`.hdr-rand` are 12px in all four; `.step-item` and `.step-num` are 12px in three,
-absent from walkingdead-rpg, which uses different stepper markup for the same
-thing. One correction to the lane's list: `.seo-intro` has no font-size
-declaration anywhere - it appears once per file as a class with no CSS rule, so
-its size is inherited, not declared. So a large share of the work is one small
-set of shared classes repeated across four files, with a per-generator tail of
-content rules - a far more tractable job than 143 suggests.
-
-This is a genuinely different job from the pass just done. These are hand-built
-single index.html files with rules, state and DOM interleaved and no src/, so
-each needs its own print and probe verification. The lane has NOT touched them
-and is not asking to.
-
-  (a) yes, apply the floor - as four separate passes, one generator at a time
-  (b) yes, but only some - he names which
-  (c) no - the floor applies to the src/-based generators only, and these stay
-      as built
-
-No Comms recommendation: this is a question about how much of the back catalogue
-is worth reworking, which is his call on effort, not a technical one.
-
-## ANSWERED
-
-*(dated log, newest first)*
+*Comms error corrected in the same breath, for the record: Comms told Xero the
+lane's static numbers were computed-style measurements and therefore
+authoritative. They were not; the lane said so itself. Ordering note: this lands
+behind the life-path redesign and the T2K print spill only if Xero says so - he
+has not sequenced it against those.* Routed to Character Generators 2026-09-11.
 
 ### 2026-09-11 - Twilight 2000's printed sheet spills to two pages -> QUEUE IT (b)
 
