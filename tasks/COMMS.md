@@ -27,6 +27,40 @@ wrong model has already happened twice (2026-09-11, 2026-09-12):
   set_session_model by Puffer Fish the same day)
 - Table | Comms (this lane)  local_894fe581-b1be-4366-ae60-d38ce452c53c  [Opus 5]
 
+## Give Xero FULL PATHS (his instruction, 2026-09-12)
+
+"instructions like 'the worksheet in The Table Smoke Testing.xlsx' are useless
+without a folder structure. look how many folders there are."
+
+D:\Coding\VTTs holds ~25 sibling folders, including four worktrees of THIS repo
+that each carry their own copy of every tracked file. Naming a file without its
+folder is not an instruction.
+
+**Every file Xero is asked to open gets its full absolute path, every time.** No
+bare filenames, no "the workbook", no "tasks/COMMS.md" on its own.
+
+**The copy he opens is always the one in the Comms worktree**, because Comms
+owns these files and commits from there:
+
+| What | Exact path |
+| --- | --- |
+| Test workbook | `D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx` |
+| This file | `D:\Coding\VTTs\TheTable-comms	asks\COMMS.md` |
+| Decisions | `D:\Coding\VTTs\TheTable-comms	asks\decisions.md` |
+| Lessons | `D:\Coding\VTTs\TheTable-comms	asks\lessons.md` |
+| Backlog | `D:\Coding\VTTs\TheTable-comms	asks	odo.md` |
+| Deploy runbook | `D:\Coding\VTTs\TheTable-comms	asks\deploy-runbook.md` |
+| Hub handoff | `D:\Coding\VTTs\TheTable-comms	asks\HANDOFF-puffer-fish-2026-09-12.md` |
+| Mothership VTT spec | `D:\Coding\VTTs\TheTable-comms	asks\mothership-vtt-architecture.md` |
+
+**This is not pedantry - the other copies go stale.** Checked 2026-09-12: the
+workbook in TheTable-chargen and TheTable-hp was a day behind and did not contain
+the Mothership test tab at all. If he opens the wrong one he sees the wrong file
+and neither of us finds out.
+
+Files OUTSIDE this repo still get their full path, e.g.
+`D:\Coding\RPG Character Generators\CHARGEN-LANE-HANDOFF.md`.
+
 ## Question numbering (Xero's instruction, 2026-09-12)
 
 Every question put to Xero carries a sequential number - Q1, Q2, Q3 - and the
