@@ -63,6 +63,21 @@ Files OUTSIDE this repo still get their full path, e.g.
 
 ## Worksheet formatting rules (Xero's instruction, 2026-09-12)
 
+**These rules now live in a machine-wide SKILL, not just here.** Xero ruled
+2026-09-12 that the smoke-test standard applies to TheTapestry, TheTable,
+TheTableau and all their sub-projects, so it was lifted out of this repo:
+
+- `C:\Users\tony_\.claude\skills\smoke-test-workbook\SKILL.md` - the standard
+- `C:\Users\tony_\.claude\skills\smoke-test-workbook\build_test_sheet.py` -
+  the builder every lane should call instead of hand-rolling openpyxl
+- `C:\Users\tony_\.claude\CLAUDE.md` carries a pointer, so a session finds it
+  even if skill discovery does not fire
+
+Deliberately NOT an atlas note: atlas notes are per-project, recency-ordered and
+built to be dropped, so a cross-property standard would have to be duplicated
+into three projects and would scroll away. The section below is this project's
+local copy; if the two ever disagree, the skill wins.
+
 "having all that text put in column b is impossible to read." He is right, and
 the cause was a formatting bug: the intro prose was written into column B while
 column B was 5 characters wide, so every sentence rendered as a one-character
