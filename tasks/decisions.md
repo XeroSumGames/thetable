@@ -4,6 +4,20 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - Table | Character Generators gets its own worktree
+
+**What:** Created worktree ../TheTable-chargen on branch
+lane/character-generators. Xero approved.
+
+**Why:** It was the third session on the shared main checkout (with Puffer Fish
+and HP). Same collision reason as HP.
+
+**Still to do (Xero):** re-home the running Table | Character Generators session
+into D:\Coding\VTTs\TheTable-chargen at its next natural break - NOT mid-T2K,
+since re-homing starts a fresh session and loses in-progress context. Until then
+it still edits the main checkout; it commits TheTable edits promptly and
+coordinates via Comms.
+
 ## 2026-09-11 - Table | HP gets its own worktree
 
 **What:** Created worktree ../TheTable-hp on branch lane/hunt-peck. Xero
@@ -16,9 +30,8 @@ working tree means the last save silently wins - this has cost rework on Tapestr
 **Still to do (Xero):** the running Table | HP session is still homed in the main
 checkout; a session's cwd is fixed at launch, so HP must be re-opened as a new
 session in D:\Coding\VTTs\TheTable-hp to actually use the worktree. Until then the
-worktree exists but HP is still on main. Table | Character Generators is also
-still on the shared main checkout - its own worktree is an open question (see
-COMMS if it gets filed).
+worktree exists but HP is still on main. (Table | Character Generators now has
+its own worktree too - see the entry above.)
 
 ## 2026-09-11 - Stood up a Comms channel (4th session)
 
