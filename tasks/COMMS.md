@@ -17,7 +17,29 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 9. Does the 2300AD floor pass also clear the 12px footers? (added 2026-09-11, Comms)
+
+Small, follows directly from the (b) ruling on 2300AD. One word answers it.
+
+*Measured by Comms on the LIVE bytes 2026-09-11, after the push:* the 14px floor
+pass worked - live twilight2000's 8-at-12px and 4-at-13px are gone. What remains
+across the generators is a page footer at 12px: twilight2000 1, traveller 1,
+2300ad 9. All are `class="footer no-print"`, so it is on-screen prose, not print
+styling, and it breaks the 14px floor.
+
+*Correction to the lane's report, which called the residue a single `.opt-box`
+11px rule:* the opt-box is real and is a tick glyph inside a 16x16 checkbox
+rather than prose, so leaving it is defensible. But it is not the only residue -
+the 12px footer sits alongside it on both twilight2000 and traveller.
+
+  (a) yes - fold the footers into the 2300AD standalone pass and do the same one
+      line on traveller and twilight2000 while it is open. RECOMMENDED, it is the
+      same edit and leaves no known floor violation anywhere
+  (b) no - 2300AD only, leave the footers at 12px on all three
+  (c) leave footers out of the floor entirely - he may simply not count a footer
+      as on-screen prose, in which case say so and Comms will stop flagging it
+
+Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
 
@@ -47,6 +69,15 @@ mothership-generator 6f1a9ba (1 unpushed, callsigns), 2300ad-generator ad640ff
 (1, VTT export), twilight2000-generator d1f2043 (5 - export plus 4 parked, of
 which two cancel out, so 2 substantive), traveller-generator e857f57 (4 - export
 plus 3 parked).
+
+**PUSHED AND INDEPENDENTLY VERIFIED by Comms 2026-09-11.** All four repos are
+level with origin (mothership 6f1a9ba, 2300ad ad640ff, twilight2000 d1f2043,
+traveller e857f57). All EIGHT endpoints - four Vercel aliases and four
+thetable.xerosumgames.com proxy routes - return 200 and hash byte-identical to
+each repo's HEAD:index.html blob (b782ef07, e6d54cc2, eb991d57, 0592420c).
+Verified by hashing the served bytes with git hash-object, not by status code.
+`exportCharacter` present in all four; `callsign` in Mothership only. The
+slashed proxy form 308s to the unslashed canonical, as the lane reported.
 
 **Xero: (a) push all four.** This explicitly takes his parked redesigns live -
 the Travellers Aid Society redesign on Traveller and the NATO
