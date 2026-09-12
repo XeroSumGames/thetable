@@ -17,9 +17,28 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
+*(nothing open)*
+
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - 2300AD is under the 14px floor: fix when? -> NOW, STANDALONE (b)
+
+Asked by Character Generators, which recommended folding it into 2300AD's
+queued Life Foundation lifepath redesign. Comms verified the defect: 2300AD
+carries 16 sub-14px rules (7 at 11px, 9 at 12px) against Traveller's and
+Twilight 2000's 2 each, and those two are a small centred element and the page
+footer. Pre-existing, not introduced by the export work.
+
+**Xero: (b) fix it now, as its own pass.** Do not wait for the lifepath
+redesign - the live site should stop breaking the 14px rule sooner rather than
+being bundled into a larger job.
+
+Ordering that follows from the push ruling the same day: all four repos are
+being pushed, so 2300AD ships its VTT export first and this floor pass is a
+follow-up commit and push, not part of it. Routed to Character Generators
+2026-09-11.
 
 ### 2026-09-11 - What ships now, across four repos? -> PUSH ALL FOUR (a)
 
