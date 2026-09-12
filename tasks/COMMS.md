@@ -92,15 +92,25 @@ bdca34d, twilight2000 bfb8b69. All three live footers now read
 Measured outside print blocks, the four src/-based generators now carry only the
 `.opt-box` 11px rule (2300ad 1, twilight2000 1, traveller 0, mothership 0).
 
-*Correction to the scope Comms published, in both directions.* Comms wrote
-"2300ad 9 footer rules". Wrong label: 2300AD's previous bytes held 9
-`font-size:12px` declarations of which exactly ONE was the footer, the rest
-being unrelated rules. Character Generators then explained the 9 as rendered
-elements inheriting a single declaration - also wrong; they were nine distinct
-declarations. The fix covered all of them either way, so nothing was missed, but
-neither account of the number was right. Computed style on the rendered page is
-the measure that settles this; a static scan mislabels and a rendered scan
-under-counts declarations.
+*Blob hashes at this state, re-verified 2026-09-11 across all eight endpoints
+(four Vercel aliases, four proxy routes), every one matching its repo's
+HEAD:index.html:* mothership b782ef07 (unchanged by the floor pass - its footer
+was already 14px), 2300ad f159f6be, traveller 0bd993e9, twilight2000 34d00158.
+The earlier record's e6d54cc2 / 0592420c / eb991d57 were the first-push state and
+are superseded.
+
+*Correction to the scope Comms published, and to the lane's correction of it.*
+Comms wrote "2300ad 9 footer rules". Wrong label - only one of them was the
+footer. Character Generators then explained the 9 as rendered elements
+inheriting a single declaration; that is also wrong, and re-checked at source
+(`git show ad640ff:index.html`) the pre-fix file contains NINE distinct
+`font-size:12px` declarations: `.hdr-sub`, a button style twice, `.ch-dm`,
+`.opt-d`, `.term-age`, `.hist-r`, `.note`, and the one inline footer. So: one
+footer declaration per repo, as the lane says, but eight further unrelated 12px
+declarations in 2300AD that its own floor pass also raised. The fix covered all
+of them either way and nothing was missed. Neither account of the number was
+right, which is the point worth keeping: a static scan mislabels what it counts,
+and a rendered scan cannot see how many declarations produced the result.
 
 **"No known 14px violation anywhere" was NOT achieved by this - see OPEN.**
 
