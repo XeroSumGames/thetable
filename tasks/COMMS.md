@@ -174,6 +174,25 @@ NOT resolve - see item 2.
 **2. The Wix DNS record (Q2).** Not blocking; the app works on the .vercel.app
 alias, which is why the worksheet points there.
 
+**DONE BY COMMS 2026-09-12 - the Vercel half is finished.** The domain was
+added to the project with the authed CLI rather than handed to Xero as
+dashboard steps:
+
+    vercel domains add mothership.xerosumgames.com mothership-vtt --scope xerosumgames-projects
+    -> {"status":"success","reason":"domain_added"}
+
+`vercel domains inspect` then gave the record Vercel actually wants, which
+settles the handoff's CNAME claim for good:
+
+    A    mothership.xerosumgames.com    76.76.21.21     [Vercel's word, recommended]
+
+An **A record**, not a CNAME - matching `thetable.xerosumgames.com`, which
+already resolves to 76.76.21.21 on this same Wix-hosted domain. The handoff's
+`CNAME -> cname.vercel-dns.com` would have been wrong.
+
+**All that remains is the Wix record**, which Comms cannot do: no API access
+and entering his credentials is prohibited. Everything else is complete.
+
 **Direct URL, resolved by Comms 2026-09-12 via `vercel teams ls`:**
 `https://vercel.com/xerosumgames-projects/mothership-vtt/settings/domains`
 
