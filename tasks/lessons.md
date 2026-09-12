@@ -2,6 +2,36 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## Flooring a hand-built generator: where sizes hide (2026-09-11, Character Generators + Comms)
+
+From the space1999generator pass, the first of the four hand-built four. All of
+these would have produced a false "clean" result.
+
+- **Sizes live in THREE places, not one:** CSS rules, inline `style=` inside JS
+  string literals, and print-sheet rules. On Space 1999 an inline size sat on a
+  span that also had a `.ph-note` rule, so the inline overrode the raised rule
+  straight back to 12px. A stylesheet scan would have called the file clean
+  while it still rendered small.
+- **Do not exclude the print sheet by unit.** 2300AD's printed dossier is sized
+  in pt, so a px-only raise skipped it for free. Space 1999's is sized in PX, so
+  the same approach would have quietly rewritten the printed dossier. Exclude by
+  selector (`.ps*`), and check which unit the generator actually uses first.
+- **Cache-bust after editing on a reused port.** A server reusing an earlier
+  port served a cached index.html; the sweep reported every old size and looked
+  like the edit had not applied, while disk and curl showed the new one. The
+  same trap can sign off a change that never applied.
+- **Raising a size can break layout, so re-measure the phone viewport.** At 14px
+  Space 1999's stat labels no longer fit three to a row and `.stat-grid` spilled
+  38px past a 390px viewport - a 1fr column cannot shrink below its content and
+  single uppercase words cannot wrap. Fixed with a two-column breakpoint below
+  440px, and proved to be a new regression by serving the pre-change build and
+  measuring the same screen.
+- **"Zero sub-14px" claims keep needing a second pass.** Three times in one day
+  a sweep was reported clean and was not: the T2K footer, the `.seo-intro`
+  inheritance, and Space 1999's `.sel-badge` and `.pk-box`. None were sloppy work
+  - each time the residue was a different KIND of thing than the sweep was
+  looking for. Have someone else measure before saying zero.
+
 ## Running four parallel lanes: what actually broke (2026-09-11, Comms)
 
 A full day of four-session work on TheTable. None of these cost anything in the

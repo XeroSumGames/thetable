@@ -17,6 +17,37 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
+### 14. Does the 14px floor cover glyphs inside fixed-size UI shapes? (added 2026-09-11, Comms)
+
+One ruling that prevents the same question recurring on every remaining
+generator.
+
+Xero has already allowed ONE such case: `.opt-box`, an 11px tick glyph inside a
+16x16 checkbox, which he left alone as not-prose. Nobody has ruled on the
+category, so each new one has to be asked about individually.
+
+*Found by Comms in the SERVED space1999generator bytes 2026-09-11, after the
+lane reported zero sub-14px screen rules:* two remain outside the print
+selectors, and both are the same shape as `.opt-box`.
+
+- `.sel-badge` - 20x20 circle, `border-radius:50%`, content is `&#10003;`, a
+  checkmark. 12px.
+- `.pk-box` - 17x17 rounded square checkbox, same construction as `.opt-box`.
+  12px.
+
+The lane's substantive position is right; only "zero" was imprecise. But the
+same shape will appear in walkingdead-rpg, dredd-generator and apegenerator.
+
+  (a) the floor covers PROSE only - a glyph inside a fixed-size box or badge is
+      exempt, as `.opt-box` already is. RECOMMENDED: it matches the one ruling
+      he has already made, and raising a 12px tick inside a 17px box would
+      overflow the box
+  (b) the floor covers everything on screen - these get raised too, and the
+      containers grow to fit
+  (c) case by case - he rules on each one as it is found
+
+Owning lane: Character Generators. Comms: put this to Xero.
+
 ### 12. apegenerator's floor pass would push parked work live (added 2026-09-11, Character Generators)
 
 *Verified by Comms 2026-09-11:* apegenerator is 1 ahead of origin on b5f49d3,
