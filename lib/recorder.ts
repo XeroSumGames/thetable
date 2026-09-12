@@ -266,6 +266,9 @@ function defaultSnapshot(): Record<string, unknown> {
   if (typeof window === 'undefined') return {}
   const r = ensureRecorder()
   return {
+    // The ORIGIN, not just the path - a dump that only says "/" cannot tell
+    // localhost from the live site, which wasted a round trip once already.
+    origin: window.location.origin,
     pathname: window.location.pathname,
     search: window.location.search,
     signed_in: !!r.userId,
@@ -368,6 +371,7 @@ export function downloadDump(): void {
     user_email: r.userEmail,
     user_agent: navigator.userAgent,
     viewport: { w: window.innerWidth, h: window.innerHeight },
+    origin: window.location.origin,
     pathname: window.location.pathname,
     event_count: r.buffer.length,
     app_version: APP_VERSION,
