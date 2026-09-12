@@ -65,6 +65,27 @@ not in code, so that part is taken on the lane's word. No generated text prints
 in that region, so what the portrait covers is sheet artwork, not other output.
 Put to Xero 2026-09-11.*
 
+**Measured on the actual sheet art by Comms 2026-09-11** (SHEET_P1 decoded from
+index.html:2321, 1041x1345, candidate rects composited over it):
+
+- Current 78/82/18/14 does NOT sit cleanly in TINY ITEMS. It starts above the
+  TINY ITEMS header and clips the bottom GEAR bonus row as well, so it damages
+  two boxes, not one.
+- The comment's own intent (right end of the Description box, ~78/8.5) is WORSE
+  at this size: 14% tall overflows the Description box downward into the Drive
+  row and its checkbox. The comment describes a placement that does not fit.
+- The sheet has no spare space. Every box is either artwork or in play. TINY
+  ITEMS is the only portrait-shaped hole on the page, which is very likely why
+  someone moved it there.
+- TINY ITEMS box measures approx x 65.6-96.3%, y 84.5-96.5%. A portrait at
+  left:79%; top:85.5%; width:17%; height:10.5% sits fully inside it and stops
+  the GEAR clipping.
+
+Comms recommendation (recommendation only - the call is Xero's): keep the
+bottom-right corner and resize to the measured TINY ITEMS fit above. It costs
+the cheapest box on the sheet, nothing is generated into it, and it is the only
+placement that does not squash the portrait's aspect.
+
 Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
