@@ -41,8 +41,9 @@ wins, which has already cost rework on Tapestry.
 Compare your model against the table above (`get_session` with `"self"`). A new
 or restarted session inherits the app default, NOT its lane's assignment, so
 drift is the normal case and not the exception - it has already happened three
-times (2026-09-11, and two lanes at once on 2026-09-12, caught by Xero and not
-by us).
+times (2026-09-11, and two lanes at once on 2026-09-12). Every time it was
+caught by another lane running `get_session`, never by the drifted session
+noticing. Do not assume someone else is watching: check yourself.
 
 **A session cannot change its own model.** If yours is wrong, say so in your
 first reply and ask Xero to set it in the model menu; do not quietly carry on.
