@@ -147,17 +147,34 @@ monorepo consolidation, nothing else. And the /a24 precedent only ever READ
 existing thriver accounts - it has never created a player account in the
 shared pool, so it was never precedent for putting players there.
 
-## 5. Phase 0 gate (before any code)
+## 5. Phase 0 gate - CLEARED 2026-09-11
 
-Per Xero: a visual mockup + font/color decision happens before implementation
-starts, independent of the two questions above (the character-sheet screen
-exists in every scope tier). Sent directly in chat as a design-canvas
-Artifact with a few direction options grounded in Mothership's actual
-zine/horror-sci-fi print identity, not a generic app look.
+Xero's rule was: visual mockup + font/color settled before any implementation.
+Three directions were put up (Terminal / Zine / Signal); he reframed them
+rather than picking one - **Terminal and Zine are the dark and light modes of
+one design**, Signal is dropped. Full call and the token contract that follows
+from it are in decisions.md; mockup canvas:
+https://claude.ai/code/artifact/3d4ccdc6-380f-420a-b690-0f9a5e67aeb7
+
+The build constraint that falls out of it: structure and field positions are
+identical in both modes, only the token layer swaps, and toggling must never
+move anything on the page. Design every new component against the token names,
+never against a literal color or font.
 
 ## 6. Status
 
-Planning only. No code, no repo, no Supabase project created. Waiting on:
-(a) COMMS answers to the two architecture questions above, (b) Xero's pick
-from the mockup, (c) Character Generators finishing its current work
-(Mothership generator + whatever's queued after) before build starts.
+**Not started - no repo, no Vercel project, no Supabase project, no code.**
+
+Cleared: topology + auth (subdomain, own Supabase, full accounts), visual
+direction (dark Terminal / light Zine), the character-import contract
+(section 7, and the Mothership generator already emits conforming JSON).
+
+Remaining before Tier 1 can start, in order:
+1. Stand up the infra: repo, Vercel project, Supabase project, DNS record for
+   mothership.xerosumgames.com.
+2. Build the two-mode token layer FIRST, before any component - it is the
+   thing every later screen depends on.
+3. Tier 1 character sheet + dice roller against those tokens.
+
+No dependency on Character Generators any more - Mothership generator shipped
+2026-09-11 and its JSON export is live, so the import target exists.

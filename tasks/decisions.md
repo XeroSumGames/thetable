@@ -4,6 +4,39 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - Mothership VTT visual direction: one design, two modes (dark Terminal / light Zine)
+
+**What:** Xero picked from three mockup directions and reframed them - Terminal
+and Zine are not competing options, they are the DARK and LIGHT modes of one
+design. Signal (the clean modern treatment) is dropped.
+
+- **Dark = Terminal.** Amber phosphor (#ffb400) on near-black (#07080a),
+  JetBrains Mono throughout, 1px hairline rules, scanline texture, ALL CAPS
+  labels. This is the DEFAULT - The Table's hub is forced-dark, so the VTT
+  opens dark and matches.
+- **Light = Zine.** Warm paper (#e9e3d3), near-black warm ink (#181410),
+  Archivo Black display + Work Sans body, 2.5px hard rules, halftone dots,
+  stamp red (#a8241c) as the single accent. Mirrors the actual printed
+  rulebooks.
+
+**This is a full IDENTITY swap, not a palette swap** - fonts, border weight,
+texture and letter case all change with the mode, not just colors. That is
+deliberate (each mode is faithful to a different real artifact: a ship
+terminal and a printed zine) but it has a standing cost: every new component
+has to be designed twice, for the life of the project. Accepted knowingly.
+
+**The constraint that keeps it affordable:** structure and field positions are
+IDENTICAL across both modes. Only the token layer changes. Toggling must never
+move anything on the page. Implementation follows from that - one set of CSS
+custom properties covering --bg/--panel/--ink/--ink-dim/--line/--line-width/
+--accent/--font-display/--font-body/--texture/--case, swapped as a block.
+
+**What would make us revisit:** if maintaining two identities starts slowing
+feature work, collapse to a shared type/border system and keep only the color
+swap - the layout is already mode-independent, so that retreat is cheap.
+
+Mockup: https://claude.ai/code/artifact/3d4ccdc6-380f-420a-b690-0f9a5e67aeb7
+
 ## 2026-09-11 - Third-party VTTs get their own subdomain; generators keep the proxied subpath
 
 **What:** a standing rule for how apps reach users on this property, not a
