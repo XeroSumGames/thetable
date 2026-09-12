@@ -17,7 +17,60 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 10. Does the 14px floor apply to the four hand-built generators? (added 2026-09-11, Character Generators)
+
+The floor has only ever reached the four src/-based generators, because it was
+applied during the Traveller and T2K redesigns. The other half of the catalogue
+was never touched.
+
+*Measured independently by Comms on the live bytes 2026-09-11. Two of the four
+counts match the lane exactly; two do not, and the lane's numbers come from
+computed style on the rendered page, which is the better measure of what a user
+actually sees:*
+
+| generator | lane (rendered) | Comms (static scan) |
+| --- | --- | --- |
+| apegenerator | 40 | 43 |
+| space1999generator | 52 | 52 |
+| dredd-generator | 35 | 53 |
+| walkingdead-rpg | 16 | 16 |
+
+Either way the finding is real and large: roughly 140-160 sub-14px on-screen
+rules still live across four generators. The src/-based four are clean.
+
+This is a genuinely different job from the pass just done. These are hand-built
+single index.html files with rules, state and DOM interleaved and no src/, so
+each needs its own print and probe verification. The lane has NOT touched them
+and is not asking to.
+
+  (a) yes, apply the floor - as four separate passes, one generator at a time
+  (b) yes, but only some - he names which
+  (c) no - the floor applies to the src/-based generators only, and these stay
+      as built
+
+No Comms recommendation: this is a question about how much of the back catalogue
+is worth reworking, which is his call on effort, not a technical one.
+
+### 11. Twilight 2000's printed sheet spills to a second page (added 2026-09-11, Character Generators)
+
+Pre-existing defect, not introduced by any of today's work. Xero's printed
+sheets are meant to be one page.
+
+Heavy characters tip the sheet onto page 2 - reproduced at a sheet weight around
+1400 characters (a 9-term character with a full specialty list). The lane proved
+it is not its own change: it printed the IDENTICAL captured sheet HTML through
+both the old and the new build and got 2 pages, 1563 characters, identical from
+both. Note #152 had hinted at this; it is now a reproducible spill.
+
+*NOT independently reproduced by Comms - printing is the one thing here Comms
+cannot measure from served bytes. Everything else in the lane's report was
+checked and held.*
+
+  (a) fix it next, before the lane starts anything else
+  (b) queue it behind the life-path redesign already in flight
+  (c) leave it - heavy characters are rare enough to live with
+
+Owning lane: Character Generators. Comms: put both to Xero.
 
 ## ANSWERED
 
@@ -31,8 +84,25 @@ footer at 12px remains: twilight2000 1, traveller 1, 2300ad 9. All are
 `class="footer no-print"`, so it is on-screen prose, not print styling.
 
 **Xero: (a) yes.** Fold the footers into the 2300AD standalone floor pass and do
-the same edit on traveller and twilight2000 while it is open. After this there
-should be no known 14px violation anywhere.
+the same edit on traveller and twilight2000 while it is open.
+
+**SHIPPED AND VERIFIED LIVE by Comms 2026-09-11:** 2300ad 76e0dad, traveller
+bdca34d, twilight2000 bfb8b69. All three live footers now read
+`font-size:14px`; zero occurrences of `font-size:12px` remain in any of them.
+Measured outside print blocks, the four src/-based generators now carry only the
+`.opt-box` 11px rule (2300ad 1, twilight2000 1, traveller 0, mothership 0).
+
+*Correction to the scope Comms published, in both directions.* Comms wrote
+"2300ad 9 footer rules". Wrong label: 2300AD's previous bytes held 9
+`font-size:12px` declarations of which exactly ONE was the footer, the rest
+being unrelated rules. Character Generators then explained the 9 as rendered
+elements inheriting a single declaration - also wrong; they were nine distinct
+declarations. The fix covered all of them either way, so nothing was missed, but
+neither account of the number was right. Computed style on the rendered page is
+the measure that settles this; a static scan mislabels and a rendered scan
+under-counts declarations.
+
+**"No known 14px violation anywhere" was NOT achieved by this - see OPEN.**
 
 Explicitly still allowed to stay: the `.opt-box` 11px rule. It sizes a tick
 glyph inside a 16x16 checkbox, not prose, and it predates the floor pass in
