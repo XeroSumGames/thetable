@@ -27,11 +27,33 @@ attention on an unverified claim.
       and the code covers sheet content.
       STATUS: reproduced, Xero-ready. Raised as COMMS.md OPEN #2 - it is a design
       call, not a bug fix. One-line change once he picks a position.
-- [ ] Mothership (#8, Mothership 1e) inbound - Char-Gen building it now (data
-      layer committed in its lane). On ship it needs the usual TheTable surface
-      change: GENERATOR_REWRITES + a GENERATORS tile + app/sitemap.ts. No cover
-      art yet (no public/gen-mothership-generator.jpg) so the tile is text-only
-      unless Xero supplies one. Char-Gen commits + pings Puffer Fish on landing.
+- [ ] Mothership (#8, Mothership 1e) - BUILT + VERIFIED 2026-09-11 (Char-Gen):
+      node fuzz 2000 characters/153535 checks/0 failures, full coverage; browser
+      probe 59/59 both themes; printed profile one page at typical and ceiling
+      layouts. Cover art exists and fits the band (gen-mothership-generator.jpg,
+      900x1236, aspect 0.728). DEPLOY ORDER (Char-Gen's, confirmed correct):
+      repo + Vercel + alias first, verify the generator answers on its own
+      domain, THEN the TheTable surface (GENERATOR_REWRITES + GENERATORS tile +
+      app/sitemap.ts) - doing the tile first would 404 against a project that
+      doesn't exist yet. OWNERSHIP: Char-Gen does the TheTable surface change
+      too (settled 2026-09-11 - they have done this 7 times, cover art is
+      already in their worktree). Lands on lane/character-generators; Puffer
+      Fish reviews the diff and merges to main (see decisions.md).
+- [ ] mothership-generator-log dashboard on TheTapestry - does not exist yet
+      (every other generator has one: app/<gen>-log/page.tsx +
+      lib/data/<gen>-log.ts). NOT a blocker - the beacon already posts
+      page='/mothership-generator' so data collects from day one regardless.
+      Follow-up, same pattern as the other 7. Owner: Character Generators.
+- [ ] Character JSON export from the generators - Char-Gen's finding
+      2026-09-11: only 4/8 generators (Traveller, 2300AD, Twilight 2000,
+      Mothership) separate engine (src/engine.js, pure state, fuzz-testable
+      headless) from UI, so only those 4 can cheaply emit structured character
+      data for the VTT to import. The other 4 (apegenerator, space1999,
+      dredd-generator, walkingdead-rpg) interleave rules/state/DOM in one
+      index.html - getting structured output from those needs real surgery,
+      not a quick add. Envelope/transport/versioning decided in
+      mothership-vtt-architecture.md section 7. Char-Gen adding the export to
+      Mothership before it ships, as the reference implementation.
 
 ## Landing page
 
