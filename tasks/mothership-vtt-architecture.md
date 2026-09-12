@@ -83,6 +83,41 @@ Read Player's Survival Guide v1.2 (44p) and Warden's Operations Manual v1.2a
 Each tier is independently shippable and useful on its own - this is not an
 all-or-nothing build.
 
+## 7. Character data export from the generators (2026-09-11)
+
+Char-Gen's finding, feeding directly into Tier 1: the generators are the
+natural character SOURCE for the VTT, but only 4 of 8 (Traveller, 2300AD,
+Twilight 2000, Mothership) separate an `src/engine.js` (pure rules, no DOM,
+plain state object, fuzz-testable headless) from UI - a character in those
+four is already close to a serializable object. The other 4 (apegenerator,
+space1999, dredd-generator, walkingdead-rpg) interleave rules/state/DOM in one
+index.html; getting structured output from those is real surgery, not a quick
+add. Do not assume all eight behave alike in any later plan.
+
+Decided (architecture calls, mine to make - not routed to Xero):
+
+- **Shape:** one shared OUTER envelope, per-game payload underneath - not a
+  single universal inner schema. The games genuinely differ (Mothership: 4
+  Stats + 3 Saves; Traveller: 6 characteristics + career history), forcing
+  them into one shape would be the wrong kind of generic. Envelope:
+  `{schemaVersion, system, generator, generatedAt, character: {...game-shaped}}`.
+  The VTT parses the envelope and dispatches on `system` to a per-system
+  sheet renderer/importer.
+- **Transport:** a plain "Download character JSON" button, no live coupling.
+  Ruled out a fetch URL or postMessage handshake - both imply the VTT
+  iframes or reaches into the generator, which conflicts with the existing
+  proxy-rewrite architecture (generators are served same-origin via rewrite,
+  not embedded). The VTT gets a matching "Import character" file upload -
+  the exact pattern /a24 already ships (Import backup), reused rather than
+  invented.
+- **Versioning:** `schemaVersion` from day one (start at 1), so a future VTT
+  reading an old export can tell.
+
+Char-Gen is adding the export to Mothership before it ships, as the reference
+implementation the other 3 engine-based generators follow. Not holding up the
+Mothership deploy for this - it is additive to an already-verified generator,
+not a redesign.
+
 ## 4. Open architecture questions
 
 Two genuine forks that change the shape of everything downstream. Full

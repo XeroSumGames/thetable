@@ -4,6 +4,29 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - How lane branches reach main (shared/hot files only)
+
+**What:** For files every lane reads and a mistake in breaks the whole site -
+next.config.ts (GENERATOR_REWRITES), app/page.tsx (GENERATORS tiles),
+app/sitemap.ts - a lane commits to its own branch and pushes it, then messages
+Puffer Fish (hub) the SHA. Puffer Fish reads the diff and merges to main
+itself. No GitHub PR - this repo has never used PRs, and a 3-line rewrite/tile
+diff doesn't warrant that overhead. A lane's OWN files (its generator repo, a
+gen-*.jpg it owns) still self-ship straight to main exactly as before - this
+gate is specifically for the small set of shared/hot files, mirroring
+Tapestry's graduated-gate principle (lane-protocol.md) without importing its
+full PR machinery, which this repo doesn't have.
+
+**Why:** next.config.ts is one array read by every rewrite; app/page.tsx's
+GENERATORS array is read by the whole landing page. A syntax error or bad
+entry there doesn't just break the new generator's tile, it can break every
+existing one. Cheap for the hub to eyeball before it lands given how small
+these diffs are.
+
+**Ownership of the change itself stays with whichever lane is landing a
+generator** (Character Generators, as established) - this decision only
+governs how it reaches main, not who writes it.
+
 ## 2026-09-11 - Table | Character Generators gets its own worktree
 
 **What:** Created worktree ../TheTable-chargen on branch
