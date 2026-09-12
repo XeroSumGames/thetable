@@ -27,6 +27,11 @@ attention on an unverified claim.
       and the code covers sheet content.
       STATUS: reproduced, Xero-ready. Raised as COMMS.md OPEN #2 - it is a design
       call, not a bug fix. One-line change once he picks a position.
+- [ ] Mothership (#8, Mothership 1e) inbound - Char-Gen building it now (data
+      layer committed in its lane). On ship it needs the usual TheTable surface
+      change: GENERATOR_REWRITES + a GENERATORS tile + app/sitemap.ts. No cover
+      art yet (no public/gen-mothership-generator.jpg) so the tile is text-only
+      unless Xero supplies one. Char-Gen commits + pings Puffer Fish on landing.
 
 ## Landing page
 
@@ -38,9 +43,12 @@ attention on an unverified claim.
 
 ## Repo hygiene (Puffer Fish)
 
-- [ ] public/TASLogo.png - untracked, unreferenced orphan asset in the shared
-      main checkout. No code points at it, so no prod 404. Confirm with Xero
-      whether it is wanted; delete or commit accordingly.
+- [x] public/TASLogo.png - NOT a stray (corrected 2026-09-11 by Character
+      Generators). Source art Xero gave Char-Gen 2026-08-16 for the Traveller
+      generator's Travellers' Aid Society masthead; embedded as base64 in
+      traveller-generator (src/tas-logo.b64 is generated from this PNG), which is
+      why it looks unreferenced from inside TheTable. It is the original - do NOT
+      delete. COMMITTED to public/ 2026-09-11 (Puffer Fish).
 - [ ] tasks/puffer-handoff-2026-07-29.md - untracked and badly stale (C:\thetable
       paths, "four generators", deploy listed as vercel --prod when it is git
       push). Superseded by decisions.md + atlas notes. Offer Xero to delete.
