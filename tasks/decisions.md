@@ -4,6 +4,55 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-12 - Session recorder: on the hub and the VTT, ported not shared
+
+**What:** both TheTable's hub and mothership-vtt carry their own copy of the
+session recorder (`lib/recorder.ts` + `components/Recorder.tsx`), ported from
+TheTableau's, which came from TheTapestry's `playtest-recorder`. Xero asked for
+the capture function the other two properties have, so a playtest arrives as a
+dump instead of a description.
+
+**Copied, not shared, and that is deliberate.** Four properties in four repos
+with no shared package; a port is what the lineage already does. The cost is
+that a fix has to be walked along the chain by hand - which is exactly what
+happened on day one, when the inert-listener bug was found on the VTT and had
+to be fixed in the hub too. **TheTableau and TheTapestry still carry it.** If
+this chain grows a fourth or fifth consumer, that cost stops being worth it and
+the answer becomes a small published package.
+
+**Arming differs per property, on purpose:**
+- **Hub: hidden until armed** with `?rec=1` (sticky per browser, `?rec=0`
+  disarms). It is a public unauthenticated marketing site and a Record button
+  sitting on it for every visitor is wrong.
+- **VTT: always visible.** It is an unlisted fan tool behind an auth wall, and
+  the expensive failure there is finishing a ten-step walkthrough having
+  forgotten to arm the recorder. A recording never leaves the browser until it
+  is downloaded, so a stray visitor seeing the button costs nothing.
+
+Hotkeys work regardless on both: Ctrl+Shift+R start/stop, Ctrl+Shift+L dump,
+Ctrl+Shift+M mark, Ctrl+Shift+P peek.
+
+**COVERAGE, the thing to understand before reading a hub dump:** the hub
+recorder sees its five React pages only. The 8 generators are proxy rewrites to
+other Vercel projects and `/a24` is a static file, so they are separate
+documents that hub JS never runs in, whatever the address bar says. Every hub
+dump states this in its own `meta.coverage`, so an empty recording is not
+misread as a broken recorder. Covering the generators would need a second
+vanilla-JS build injected into eight hand-built `index.html` files owned by the
+Character Generators lane - **not done, and not to be assumed.**
+
+**What never goes in a dump:** field VALUES. The `input` event kind records
+field identity and value length only, because these forms hold emails and
+passwords. Keys matching password / token / cookie / authorization are redacted,
+strings clip at 500 chars, object walks cap at depth 3, and network capture
+records method / path / status / duration and error codes but never request or
+response bodies. The VTT additionally withholds the concealed Death Save roll
+until it is revealed - see `lessons.md`.
+
+**What would make us revisit:** if the generators genuinely need coverage, or
+if a third consumer appears, replace the port chain with a package rather than
+copying a fourth time.
+
 ## 2026-09-11 - Mothership VTT visual direction: one design, two modes (dark Terminal / light Zine)
 
 **What:** Xero picked from three mockup directions and reframed them - Terminal

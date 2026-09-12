@@ -2,6 +2,41 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## Instrumentation that looks like it works (2026-09-12, Puffer Fish)
+
+From porting the session recorder into the hub and the Mothership VTT. Both
+bugs below were invisible from the UI and obvious the moment something other
+than the UI was asserted on.
+
+- **An "init once" ref guard plus a cleanup that unsubscribes equals nothing
+  installed.** React strict mode runs the mount effect, runs the cleanup, then
+  runs the effect again - and the guard turns that third step into a no-op, so
+  the listeners the cleanup just removed are never restored. The Record button
+  still lit up and the event counter still ticked, because those are React
+  state; capture was dead. `addEventListener` is idempotent for a given
+  function reference and every effect run pairs with its own cleanup, so the
+  guard was protecting against nothing. **TheTableau and TheTapestry both still
+  carry this in their own recorders** - dev-only in all three cases, since
+  production never double-invokes.
+- **Assert on the mechanism, not the indicator.** The way this was caught was
+  checking whether `console.error` had actually been replaced
+  (`String(console.error).includes('patchedErr')`), not whether the button
+  looked active. Same family as the cached-DOM-node and fixed-width-mockup
+  entries elsewhere in this file: the measurement was the thing that was broken.
+- **Dice inside a `setC` updater get rolled twice.** React double-invokes state
+  updaters in dev to check purity. `takeDamage` and `doPanic` in the VTT
+  resolved `applyDamage` / `rollPanic` inside one, so every Wound d10 and every
+  Panic d20 was rolled twice, the second set won, and the log printed both.
+  This was pre-existing and only surfaced because a trace call placed beside it
+  fired twice per click. If a function needs fresh state, mirror it in a ref -
+  do not use an updater as a state reader.
+- **A recorder must not record what the rules conceal.** The Mothership Death
+  Save is rolled in secret (PSG p29.2) and the code hides it deliberately. A
+  dump carrying the hidden value would undo that rule for anyone who opened the
+  file, so the snapshot records only that a save is pending, and the roll only
+  once revealed. Worth asking of any new event: does this leak something the
+  game is deliberately withholding?
+
 ## A generator tool must match the file's own conventions (2026-09-11, Character Generators)
 
 From building the name-pool sync script. The pool sync itself was trivial; all
