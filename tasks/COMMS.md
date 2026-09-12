@@ -15,7 +15,33 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 5. Mothership callsigns are dead data - use them or delete them? (added 2026-09-11, Character Generators)
+
+LOW priority, cosmetic, nothing blocked. The generator is shipped and live.
+
+mothership-generator's src/data/names.json defines 25 crew callsigns (Rat,
+Preacher, Doc, Sparks, Tin, Gutter, Mouse, Ripcord, Static, Bandit, Cinder,
+Halfway, Pilgrim, Shivers, Crow, Deadbolt, Ozone, Patch, Grit, Hollow, Nailer,
+Ash, Quiet, Boxcar, Vesper) that nothing reads. That is worse than having none,
+because the next lane will assume they are wired up.
+
+  (a) use them - append as a nickname, e.g. Vasquez "Gutter", or drop into the
+      sheet's Notes. A hauler crew handing each other names fits the fiction.
+  (b) delete them - the generator loses nothing it currently does.
+  (c) something else he names.
+
+*Verified by Comms 2026-09-11:* `callsign` appears exactly once in the whole
+generator - the data definition itself - and zero times in src/app.js and
+src/engine.js. app.js:503 builds the random name as
+`pick(N.given) + ' ' + pick(N.family)`; pronouns are used at 507; callsigns are
+never touched. Genuinely dead.
+
+*The Twilight 2000 precedent in option (a) is real and already working:* that
+generator has a `nicknames` pool, picks from it, renders it as an editable
+Nickname field and prints it as Name "Nickname" on the sheet. Option (a) is
+copying a pattern that exists, not inventing one.
+
+Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
 
