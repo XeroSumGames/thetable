@@ -31,6 +31,32 @@ that is why existing-account login is unaffected. Put to Xero 2026-09-11.*
 
 Owning lane: Puffer Fish (infra). Comms: put this to Xero.
 
+### 2. Where should the portrait sit on the printed Walking Dead sheet? (added 2026-09-11, Character Generators)
+
+Reproduced and ready to put to Xero; needs a decision, not a test.
+
+The portrait upload works end to end (verified live at walkingdead-rpg HEAD
+a37e9d6). The problem is where it lands on the printed sheet: bottom-right,
+on top of the TINY ITEMS grid, covering it.
+
+index.html:2716 places it at left:78%;top:82%;width:18%;height:14%. The comment
+directly above, on line 2715, says "portrait -> top-left corner of description
+box". Code and comment disagree, so one of them was changed without the other.
+
+This is a design call rather than a bug fix: the official sheet has no dedicated
+portrait box, and the description box the comment names is space players write
+in. Options for Xero:
+
+  (a) leave it where it is, over TINY ITEMS
+  (b) move it to the description box, as the comment intends - costs some
+      writing space
+  (c) somewhere else he names
+  (d) drop it from the printed sheet entirely and keep the portrait on screen
+
+One-line change either way. No rush - it has sat six weeks.
+
+Owning lane: Character Generators. Comms: put this to Xero.
+
 ## ANSWERED
 
 *(dated log, newest first)*
