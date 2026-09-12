@@ -17,7 +17,34 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+*(nothing open for Xero)*
+
+### ROUTING - awaiting Puffer Fish, not Xero
+
+**Merge 4e1d92a from lane/character-generators into main.** Raised by Character
+Generators 2026-09-11; routed to Puffer Fish the same day; delivery FAILED, so
+this line is the copy that survives. Nothing here needs Xero.
+
+Adds two new directories to the hub repo: `shared/name-pool.json` (the one
+canonical copy of the 1000-name pool) and `tools/sync-name-pool.py` (writes it
+outward; `--check` reports drift and exits non-zero without writing). Not
+next.config-adjacent, so not under the merge gate - it goes to Puffer Fish
+because the canonical file has to live in the hub.
+
+*Verified by Comms at source before routing:* the canonical pool holds 1000
+names at sha1 0198a83a7e4a over the parsed array - the exact hash Comms derived
+independently from the three duplicated consumers earlier the same day, so it is
+genuinely the same pool and not a re-transcription. Consumers are the three that
+were duplicated: 2300ad-generator, traveller-generator, walkingdead-rpg. The
+file records Xero's bespoke-pools ruling in its own `_not_consumers` field
+rather than only in a commit message. walkingdead-rpg e3f132a is live and
+verified on the proxy, blob 84e8bf2b, and its entire diff is TWO inserted marker
+lines with the 1000-name array byte-identical - checked, not taken on report.
+
+Property not to break if anyone later tidies the writer: syncing an
+already-correct file must produce a BYTE-IDENTICAL result. The first version
+used a 2-space JSON indent where the consumers use one, turning a one-name edit
+into 1005 changed lines.
 
 ## ANSWERED
 
