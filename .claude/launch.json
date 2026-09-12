@@ -2,9 +2,33 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "thetable-dev",
+      "name": "mothership-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8796", "--directory", "D:/Coding/RPG Character Generators/mothership-generator"],
+      "port": 8796
+    },
+    {
+      "name": "traveller-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8791", "--directory", "D:/Coding/RPG Character Generators/traveller-generator"],
+      "port": 8791
+    },
+    {
+      "name": "twilight2000-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8792", "--directory", "D:/Coding/RPG Character Generators/twilight2000-generator"],
+      "port": 8792
+    },
+    {
+      "name": "2300ad-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8793", "--directory", "D:/Coding/RPG Character Generators/2300ad-generator"],
+      "port": 8793
+    },
+    {
+      "name": "thetable-chargen-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "3005"],
+      "runtimeArgs": ["run", "dev", "--", "-p", "3005"],
       "port": 3005
     }
   ]
