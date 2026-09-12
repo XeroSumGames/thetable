@@ -17,7 +17,33 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open for Xero)*
+### 17. Two things owed by Xero, carried over from the Puffer Fish handoff (added 2026-09-12, Comms)
+
+Both recorded in tasks/HANDOFF-puffer-fish-2026-09-12.md and neither is blocking.
+
+**1. Walk the Mothership VTT authenticated path.** A TEST, not a question - it
+is now a worksheet, "Mothership VTT auth 2026-09-12", in tasks/The Table Smoke
+Testing.xlsx. Ten steps. Only he can run it: it needs a real account, and
+creating accounts and entering passwords is outside what the sessions do.
+
+*Verified by Comms 2026-09-12 before asking, per protocol:*
+https://mothership-vtt.vercel.app returns 200, the sign-in card renders with
+Email, Password and Sign in, and "Create an account" switches it to Create
+account with the link reading "I already have an account". The auth wall is
+exactly where verification has to stop. https://mothership.xerosumgames.com does
+NOT resolve - see item 2.
+
+**2. The Wix DNS record.** `mothership` CNAME -> `cname.vercel-dns.com`. Not
+blocking; the app works on the .vercel.app alias, which is why the worksheet
+points there. His own A24 notes warn Wix is finicky about subdomain CNAMEs; the
+recorded fallback is hosting under distemperverse.com.
+
+**3. Also asked twice and never answered, so asking a third time in one line:**
+delete tasks/puffer-handoff-2026-07-29.md? It is untracked and badly stale - old
+C:	hetable paths, says deploy is `vercel --prod` when it is a git push - and
+two handoffs now warn people not to trust it.
+
+Owning lane: none, these are Xero's own. Comms: put all three to him.
 
 ### ROUTING - awaiting Puffer Fish, not Xero
 
