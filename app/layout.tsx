@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Recorder from "../components/Recorder";
 
 export const metadata: Metadata = {
   title: "The Table — character generators by Xero Sum Games",
@@ -12,7 +13,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Session recorder. Renders nothing until armed with ?rec=1 -
+            see components/Recorder.tsx and lib/recorder.ts. */}
+        <Recorder />
+      </body>
     </html>
   );
 }
