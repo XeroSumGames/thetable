@@ -17,7 +17,53 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 6. Push the VTT JSON export - and do the parked redesigns go live with it? (added 2026-09-11, Character Generators)
+
+VTT character JSON export is committed and verified on three generators, NOT
+pushed. Pushing two of the three would also take parked redesign work live.
+
+*Verified by Comms 2026-09-11, all counts and SHAs confirmed at source:*
+
+- *2300ad ad640ff - 1 unpushed, the lane's work only. Ships alone, safely.*
+- *traveller e857f57 - 4 unpushed: the export plus 3 parked (Travellers Aid
+  Society redesign, a merged opening step, a token lightening).*
+- *twilight2000 d1f2043 - 5 unpushed: the export plus 4 parked. CORRECTION to
+  the filing: two of those four cancel out (25e2f02 lightens a token, 073965e
+  reverts it), so it is really 2 substantive parked changes, not 4 - the NATO
+  intelligence-report redesign and a 14px floor pass.*
+
+**Finding that changes this question.** The lane framed the 14px issue as
+2300AD-only. On LIVE sites that is wrong: live twilight2000 measures 8 rules at
+12px, 4 at 13px and 1 at 11px - it is under Xero's 14px floor RIGHT NOW. The fix
+(3a5bf5c, "put a 14px floor under every piece of on-screen text") is one of the
+parked commits sitting unpushed. So holding Twilight 2000 keeps a known,
+already-fixed floor violation live. Local T2K measures clean.
+
+  (a) push all three - export ships everywhere, and both parked redesigns go
+      live along with the T2K floor fix
+  (b) push 2300AD only - safest, but leaves the T2K floor violation live
+  (c) push 2300AD and Twilight 2000, hold Traveller - clears the live floor
+      violation, keeps the TAS redesign parked
+  (d) hold everything
+
+Comms has no recommendation between them: whether the parked redesigns ship is a
+product call, not a technical one. The only thing Comms adds is that (b) and (d)
+carry a cost Xero did not know about when the question was written.
+
+### 7. 2300AD is under the 14px floor - fix now or with the lifepath redesign? (added 2026-09-11, Character Generators)
+
+Pre-existing, not introduced by the export work. Nothing broken, not urgent.
+
+*Verified by Comms 2026-09-11:* 2300AD carries 16 sub-14px rules (7 at 11px,
+9 at 12px) against Traveller's and Twilight 2000's 2 each, and those two are a
+small centred element and the page footer. The claim that 2300AD never got the
+floor pass the others did holds.
+
+  (a) fold it into 2300AD's Life Foundation lifepath redesign, already queue
+      item 2 - RECOMMENDED by the lane, and nothing argues against it
+  (b) fix it now as a standalone pass
+
+Owning lane: Character Generators. Comms: put both to Xero.
 
 ## ANSWERED
 
