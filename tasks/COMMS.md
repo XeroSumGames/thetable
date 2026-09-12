@@ -88,6 +88,29 @@ questions, both need an answer before any code:
 
 Owning lane: Puffer Fish. Comms: put this to Xero.
 
+### 4. Name pools - fold Mothership/Space:1999 into the shared 1000-name pool, or keep bespoke? (added 2026-09-11, Puffer Fish)
+
+Full findings in todo.md. Confirmed real bug (3-way duplicate of a 1000-name
+pool, currently in sync, no mechanism to stay that way) is being fixed
+regardless - not what this question is about.
+
+This is the one genuine content call: mothership-generator (given 40/family 30)
+and space1999generator (given 36/surname 28) both hand-curate a SMALL name list
+fitted to their fiction's tone - Mothership's own file literally says why
+("ordinary working names rather than heroic ones... blue-collar, multinational
+and unglamorous"); Space:1999's includes actual show-canon surnames. Twilight
+2000, Ape, and Dredd stay separate regardless (period/nationality-locked,
+non-human canon names, and satirical wordplay respectively - not in question).
+
+  (a) keep them bespoke, as curated - RECOMMENDED. The small lists read as
+      deliberate genre-fit, not filler; folding in the generic 1000-pool would
+      dilute that on every random roll.
+  (b) widen them to also draw from the shared 1000-pool (more variety, less
+      curated flavor)
+  (c) something else he names
+
+Owning lane: Character Generators (their files). Comms: put this to Xero.
+
 ## ANSWERED
 
 *(dated log, newest first)*

@@ -63,6 +63,39 @@ attention on an unverified claim.
       tile, tile reorder). STATUS: low priority. Consider a landing-render smoke
       worksheet once someone re-verifies visually. Owner: HP / Comms.
 
+## Name pools across the generators (investigated 2026-09-11, Puffer Fish)
+
+Full findings below. One confirmed real problem (do the fix); one genuine
+content call filed to COMMS (see OPEN #4); the rest are correctly bespoke and
+should NOT be merged.
+
+| Generator | Mechanism | Structure | Size | Genre-locked? |
+|---|---|---|---|---|
+| walkingdead-rpg | `NAME_POOL` inline (index.html) | flat list | 1000 | No - deliberately generic/modern/diverse |
+| traveller-generator | `src/data/names.json` | flat list | 1000 | No - byte-identical COPY of walkingdead's pool |
+| 2300ad-generator | `src/data/names.json` | flat list | 1000 | No - byte-identical COPY of walkingdead's pool |
+| twilight2000-generator | `src/data/names.json` | nested by nationality -> given names | varies | YES - Cold War period + nationality specific |
+| mothership-generator | `src/data/names.json` | given (40) + family (30) | 70 | Mild - curated "blue-collar, multinational, unglamorous" per its own file note |
+| space1999generator | `NAMES_F`/`NAMES_L` inline | given (36) + surname (28), combinatorial | 64 | Mild - international Moonbase-crew vibe, includes show-canon surnames |
+| apegenerator | `APE_NAMES` inline | flat list | 30 | YES - canon Planet of the Apes ape names |
+| dredd-generator | `MC1_FIRST`/`MC1_LAST` inline | given (96) + surname (96), combinatorial | 192 words | YES - satirical dystopian wordplay, manually derived FROM the 1000-pool, not real names |
+
+- [ ] **Confirmed real problem, not a design call:** walkingdead-rpg's 1000-name
+      NAME_POOL was already copy-pasted (each copy's own file says "Xero asked
+      for the same pool here rather than a second list to maintain") into
+      traveller-generator and 2300ad-generator's names.json. Verified
+      byte-identical across all 3 right now (set-equal, 1000/1000/1000) - but
+      it's 3 physical files with NO sync mechanism, so the next edit to any one
+      of them (Xero asking to add names, say) silently drifts the other two out
+      of sync with no warning. FIX: one canonical source (propose: hosted in
+      TheTable, since it's the hub all 8 already proxy under) + a small sync
+      script the 3 consumers run instead of hand-copying. Proposing to
+      Character Generators (their repos) rather than doing it myself.
+- [ ] dredd-generator's MC1_FIRST/LAST are worth noting as a THIRD derivative
+      of the same 1000-pool (manually curated into satirical compound-word
+      parts, not names) - correctly bespoke, not a duplication bug, don't
+      touch.
+
 ## Repo hygiene (Puffer Fish)
 
 - [x] public/TASLogo.png - NOT a stray (corrected 2026-09-11 by Character
