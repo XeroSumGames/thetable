@@ -141,6 +141,19 @@ should NOT be merged.
       traveller-generator (src/tas-logo.b64 is generated from this PNG), which is
       why it looks unreferenced from inside TheTable. It is the original - do NOT
       delete. COMMITTED to public/ 2026-09-11 (Puffer Fish).
+- [ ] **One junk row in production `launch_signups`, mine, disclosed 2026-09-12
+      (Puffer Fish).** Verifying the new hub recorder I submitted the Notify-me
+      form with `secret-address@example.com`. The hub's Supabase URL is
+      hardcoded to the shared production project with no dev switch, so the dev
+      server posted to the live edge function: POST
+      /functions/v1/launch-signup returned 200 and the UI confirmed "You're on
+      the list", so assume the row landed with site=table. Harmless but it will
+      show in /mailinglist. There is NO delete affordance -
+      components/MailingListAdmin.tsx only selects - so removing it needs one
+      SQL statement in the Supabase dashboard. Owner: Xero, or tell me and I
+      will write the statement for him to run.
+      LESSON, worth more than the row: any form submitted against this hub's
+      dev server hits PRODUCTION data. There is no local Supabase for TheTable.
 - [ ] tasks/puffer-handoff-2026-07-29.md - untracked and badly stale (C:\thetable
       paths, "four generators", deploy listed as vercel --prod when it is git
       push). Superseded by decisions.md + atlas notes. Offer Xero to delete.
