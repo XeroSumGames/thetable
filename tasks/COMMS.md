@@ -50,10 +50,18 @@ blocking; the app works on the .vercel.app alias, which is why the worksheet
 points there. His own A24 notes warn Wix is finicky about subdomain CNAMEs; the
 recorded fallback is hosting under distemperverse.com.
 
-**3. Also asked twice and never answered, so asking a third time in one line:**
-delete tasks/puffer-handoff-2026-07-29.md? It is untracked and badly stale - old
-C:	hetable paths, says deploy is `vercel --prod` when it is a git push - and
-two handoffs now warn people not to trust it.
+**3. DELETE tasks/puffer-handoff-2026-07-29.md - ANSWERED 2026-09-12: yes.**
+Deleted the same day. It was UNTRACKED, so there is no git history to recover it
+from; Xero was told that before he answered.
+
+What it claimed, all wrong by 2026-09-12 and all of it the kind of thing a new
+session would have acted on: the repo is `C:	hetable` (it is
+D:\Coding\VTTs\TheTable); "there is NO GitHub remote for TheTable" and deploy
+with `vercel --prod --yes` (the remote is github.com/XeroSumGames/thetable and
+deploying is a git push); "four character generators" (there are eight); and no
+minimum-font rule on this repo (there is a 14px floor across all eight,
+completed 2026-09-11). Two handoff docs had accumulated warnings telling people
+not to trust it, which is what finally made deleting it the answer.
 
 Owning lane: none, these are Xero's own. Comms: put all three to him.
 
