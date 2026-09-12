@@ -27,33 +27,39 @@ attention on an unverified claim.
       and the code covers sheet content.
       STATUS: reproduced, Xero-ready. Raised as COMMS.md OPEN #2 - it is a design
       call, not a bug fix. One-line change once he picks a position.
-- [ ] Mothership (#8, Mothership 1e) - BUILT + VERIFIED 2026-09-11 (Char-Gen):
-      node fuzz 2000 characters/153535 checks/0 failures, full coverage; browser
-      probe 59/59 both themes; printed profile one page at typical and ceiling
-      layouts. Cover art exists and fits the band (gen-mothership-generator.jpg,
-      900x1236, aspect 0.728). DEPLOY ORDER (Char-Gen's, confirmed correct):
-      repo + Vercel + alias first, verify the generator answers on its own
-      domain, THEN the TheTable surface (GENERATOR_REWRITES + GENERATORS tile +
-      app/sitemap.ts) - doing the tile first would 404 against a project that
-      doesn't exist yet. OWNERSHIP: Char-Gen does the TheTable surface change
-      too (settled 2026-09-11 - they have done this 7 times, cover art is
-      already in their worktree). Lands on lane/character-generators; Puffer
-      Fish reviews the diff and merges to main (see decisions.md).
+- [x] Mothership (#8, Mothership 1e) - LIVE 2026-09-11. Own infra: repo
+      XeroSumGames/mothership-generator, Vercel git-connected, aliased,
+      mothership-generator.vercel.app verified 200 before the TheTable change
+      landed. TheTable surface merged 51406ff (reviewed a0ccd7e - 4 files, 4
+      lines: GENERATOR_REWRITES, GENERATORS tile, sitemap slug, cover art) and
+      pushed. VERIFIED LIVE by Puffer Fish independently (not on Char-Gen's
+      word): thetable.xerosumgames.com/mothership-generator -> 200,
+      byte-identical to the generator's own domain (81181 bytes, same ETag),
+      /mothership-generator/ -> 308, homepage tile present, all other routes
+      (/, /a24, /table, /walkingdead-rpg) still 200. Verification: node fuzz
+      2000/183535 checks/0 failures full coverage, browser probe 63/63 both
+      themes, printed profile one page (typical + a deliberate layout ceiling:
+      all 42 skills, longest loadout/trinket/patch).
 - [ ] mothership-generator-log dashboard on TheTapestry - does not exist yet
       (every other generator has one: app/<gen>-log/page.tsx +
       lib/data/<gen>-log.ts). NOT a blocker - the beacon already posts
       page='/mothership-generator' so data collects from day one regardless.
       Follow-up, same pattern as the other 7. Owner: Character Generators.
-- [ ] Character JSON export from the generators - Char-Gen's finding
-      2026-09-11: only 4/8 generators (Traveller, 2300AD, Twilight 2000,
-      Mothership) separate engine (src/engine.js, pure state, fuzz-testable
-      headless) from UI, so only those 4 can cheaply emit structured character
-      data for the VTT to import. The other 4 (apegenerator, space1999,
-      dredd-generator, walkingdead-rpg) interleave rules/state/DOM in one
-      index.html - getting structured output from those needs real surgery,
-      not a quick add. Envelope/transport/versioning decided in
-      mothership-vtt-architecture.md section 7. Char-Gen adding the export to
-      Mothership before it ships, as the reference implementation.
+- [x] Character JSON export from the generators - SHIPPED with Mothership
+      (51406ff, live). Exactly per mothership-vtt-architecture.md section 7:
+      {schemaVersion:1, system:"mothership-1e", generator, generatedAt,
+      character:{...}}, download-only (<name>.mothership.json), no fetch URL,
+      no postMessage. Two additions beyond the spec, both reasonable - Puffer
+      Fish confirmed no VTT-side issue: (1) payload carries both rolled and
+      final Stats/Saves, not just totals, so the VTT can show what a class
+      bonus did; (2) exportCharacter() lives in the ENGINE not the UI, so the
+      fuzz harness validates the envelope headlessly every run (2000
+      envelopes/run: schema version, system, complete payload, skills keep
+      tier+bonus, stats agree with state, survives a JSON round-trip) - also
+      means Traveller/2300AD/Twilight2000 can copy the function directly, not
+      just the shape. Reference implementation for the other 3 engine-based
+      generators, confirmed as intended. Still needed: the VTT's own "Import
+      character" side (not built yet - no VTT repo exists).
 
 ## Landing page
 
@@ -80,17 +86,27 @@ should NOT be merged.
 | apegenerator | `APE_NAMES` inline | flat list | 30 | YES - canon Planet of the Apes ape names |
 | dredd-generator | `MC1_FIRST`/`MC1_LAST` inline | given (96) + surname (96), combinatorial | 192 words | YES - satirical dystopian wordplay, manually derived FROM the 1000-pool, not real names |
 
-- [ ] **Confirmed real problem, not a design call:** walkingdead-rpg's 1000-name
-      NAME_POOL was already copy-pasted (each copy's own file says "Xero asked
-      for the same pool here rather than a second list to maintain") into
-      traveller-generator and 2300ad-generator's names.json. Verified
-      byte-identical across all 3 right now (set-equal, 1000/1000/1000) - but
-      it's 3 physical files with NO sync mechanism, so the next edit to any one
-      of them (Xero asking to add names, say) silently drifts the other two out
-      of sync with no warning. FIX: one canonical source (propose: hosted in
-      TheTable, since it's the hub all 8 already proxy under) + a small sync
-      script the 3 consumers run instead of hand-copying. Proposing to
-      Character Generators (their repos) rather than doing it myself.
+- [x] **Confirmed real problem, plan settled 2026-09-11.** Independently
+      re-verified by Character Generators: all 3 pools are the same 1000 names
+      (sha f18df6d6aa on a sorted hash, set-equal in every pairing); Mothership
+      is correctly separate (70 entries, different sha). WRINKLE Char-Gen
+      found: walkingdead-rpg's pool is an inline NAME_POOL in index.html (no
+      src/, hand-built, never re-assembled), NOT a names.json like the other
+      two - so the sync script needs two modes: a straight file copy for
+      traveller-generator/2300ad-generator, and marker-based injection into
+      walkingdead-rpg's index.html (same pattern already used for the Ape
+      sheet embed). DECIDED (decisions.md): canonical file is
+      shared/name-pool.json in TheTable (precedent: TheTable/public already
+      holds every generator's cover art); Character Generators builds and owns
+      tools/sync-name-pool.py (default = write all 3 consumers, --check =
+      report drift only, no writes - the part that actually catches silent
+      drift going forward). No deploy-time coupling - purely a local dev tool.
+      Lands on lane/character-generators for Puffer Fish's merge, like Mothership.
+- [ ] Traveller/2300AD fake a surname by drawing from the flat 1000-pool
+      TWICE and joining - a wart Character Generators already flagged in a
+      code comment, not new. Cosmetic, not blocking anything, not part of the
+      centralization fix. Low priority - revisit if/when someone's touching
+      those generators' name logic anyway.
 - [ ] dredd-generator's MC1_FIRST/LAST are worth noting as a THIRD derivative
       of the same 1000-pool (manually curated into satirical compound-word
       parts, not names) - correctly bespoke, not a duplication bug, don't

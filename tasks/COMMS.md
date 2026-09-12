@@ -17,8 +17,6 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 *(nothing open)*
 
-*(nothing open)*
-
 ## ANSWERED
 
 *(dated log, newest first)*
@@ -36,6 +34,17 @@ array.
 widen either generator to draw from the shared 1000-name pool - the small lists
 are deliberate genre-fit, and folding in generic names would dilute that on
 every roll.
+
+*Mechanical reason, filed by Character Generators AFTER Xero had already
+answered and verified by Comms 2026-09-11 - it strengthens the same call rather
+than changing it:* the shared pool is SINGLE GIVEN NAMES only (1000 entries, 0
+containing a space). Traveller and 2300AD fake a surname by drawing from it
+twice and joining; traveller-generator's own comment says so: "Two picks joined,
+so the sheet gets a full name. The pool is single given names". Mothership's
+pool is properly split into given+family, so switching it to the shared pool
+would LOSE structure rather than gain names - a straight downgrade, not a
+tradeoff. Not independently verified: the same reasoning for Space:1999's
+given+surname split, though it has the same shape.
 
 Separate and unaffected: the 3-way duplicate of the 1000-name pool is real and
 exact - 2300ad-generator, traveller-generator and walkingdead-rpg each carry a

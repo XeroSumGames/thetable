@@ -31,6 +31,8 @@ const GENERATOR_REWRITES: { slug: string; deployment: string }[] = [
   { slug: "2300ad-generator", deployment: "https://2300ad-generator.vercel.app" },
   // Twilight: 2000 4th Edition (Free League / Year Zero Engine)
   { slug: "twilight2000-generator", deployment: "https://twilight2000-generator.vercel.app" },
+  // Mothership 1st Edition (Tuesday Knight Games)
+  { slug: "mothership-generator", deployment: "https://mothership-generator.vercel.app" },
 ];
 
 const nextConfig: NextConfig = {
