@@ -15,9 +15,18 @@ than the UI was asserted on.
   still lit up and the event counter still ticked, because those are React
   state; capture was dead. `addEventListener` is idempotent for a given
   function reference and every effect run pairs with its own cleanup, so the
-  guard was protecting against nothing. **TheTableau and TheTapestry both still
-  carry this in their own recorders** - dev-only in all three cases, since
-  production never double-invokes.
+  guard was protecting against nothing. **TheTableau still carries this**
+  (`components/Recorder.tsx`, guard at line 34 and a cleanup at 164) - dev-only
+  there too, since production never double-invokes.
+  **Correction, 2026-09-12: I first wrote that TheTapestry carried it as well,
+  and it does not.** It has the same `initRef` guard but ZERO
+  `removeEventListener` calls - no cleanup function at all - so its listeners
+  install once and stay installed. It is the combination that breaks, not the
+  guard: guard plus cleanup goes inert, guard alone merely leaks on unmount
+  (harmless for a component mounted at the root that never unmounts). I
+  asserted this from a filename and a line count without opening the file, and
+  it went into decisions.md and lessons.md before being checked - the exact
+  failure this project keeps catching. Open the file.
 - **Assert on the mechanism, not the indicator.** The way this was caught was
   checking whether `console.error` had actually been replaced, not whether the
   button looked active. Same family as the cached-DOM-node and
