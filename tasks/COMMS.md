@@ -15,83 +15,56 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 1. Portrait also removed from the downloadable PDF - intended? (added 2026-09-11, Character Generators)
-
-Verified by Comms: f0dfa68 removed the portrait from BOTH draw sites, and the
-commit message says so. Ruling (d) named only the printed sheet.
-
-The lane's reasoning: the PDF is the artifact people keep, so leaving the
-portrait there at the same 78%/82% would have preserved the defect the ruling
-was about. Comms agrees that is the consistent reading, and the measurements in
-ANSWERED apply identically to the PDF.
-
-  (a) Yes, both - the ruling covers any printed artifact. RECOMMENDED, it is
-      what already shipped and is internally consistent.
-  (b) Print-only - put the portrait back in the downloadable PDF. Small revert.
-
-Owning lane: Character Generators. Comms: put this to Xero.
-
-### 3. Mothership VTT - repo/deploy topology (added 2026-09-11, Puffer Fish)
-
-New project, planning stage (see tasks/mothership-vtt-architecture.md). Two
-questions, both need an answer before any code:
-
-1. Where does it live?
-   (a) own repo + own Vercel project + own Supabase project, proxied at
-       /mothershipVTT - RECOMMENDED. Matches the generators' convention and
-       keeps real player accounts/characters off the shared Tapestry
-       Supabase, which the standalone-first decision was drawn to avoid.
-   (b) folded into TheTable's own Next.js app, reusing the shared Tapestry
-       Supabase - less infra, but mixes real player data into the shared
-       pool ahead of Tapestry 1.0.
-
-2. Auth model for players (not Xero)? **ANSWERED 2026-09-11: (a) full
-   email/password accounts, same as TheTable/Tapestry.**
-
-*Checked by Comms before relaying 2026-09-11 (two citations needed correcting,
-neither fatal to the question):*
-
-- *The "standing decision to keep The Table standalone" is NOT in decisions.md,
-  which the plan doc cites. It is README.md:37-39, and it is narrower than the
-  citation implies: it gates the MONOREPO consolidation behind Tapestry 1.0.
-  It leans toward (a) but it does not settle the database question, so this is
-  genuinely open rather than already-decided.*
-- *The /a24 precedent for (b) holds in substance: public/a24/index.html is a
-  static page inside TheTable that calls signInWithPassword against the shared
-  project and reads `profiles`. Nuance that cuts toward (a): it only READS
-  existing thriver accounts. It has never created a new class of player account
-  in the shared pool, which is what the VTT would do.*
-- *Proxy convention confirmed real: GENERATOR_REWRITES in next.config.ts, seven
-  generators each on their own Vercel deployment.*
-
-**Xero 2026-09-11 on question 1:** he does not want to pick the topology cold.
-Constraint given: it must be either `mothership.xerosumgames.com` or
-`thetable.xerosumgames.com/mothershipVTT`, and whatever is chosen becomes the
-CONSISTENT pattern for every future third-party VTT. He asked Comms to suggest.
-
-**Comms suggestion (a recommendation only - the call is Xero's, and Puffer Fish
-owns the architecture):** split the convention on a real technical property
-rather than taste.
-
-- *Generators stay as they are:* proxied subpath on thetable.xerosumgames.com.
-  Verified 2026-09-11 - all eight generator repos are a single static
-  index.html with no build step and no router, which is exactly why a rewrite
-  works for them.
-- *VTTs get their own subdomain:* `<game>.xerosumgames.com`, own repo, own
-  Vercel project, own Supabase project, linked from the hub. So
-  `mothership.xerosumgames.com`.
-
-Why, in one line: a Next.js VTT behind a path rewrite must carry a `basePath`
-that stays permanently in sync with the hub's rewrite table, a coupling the
-static generators never pay; a subdomain removes it, isolates auth storage per
-app, and costs one DNS record per VTT. Under this rule the hub stays the
-directory rather than the proxy for full apps.
-
-Owning lane: Puffer Fish. Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Mothership VTT topology and auth -> SUBDOMAIN + full accounts
+
+Asked by Puffer Fish. Comms corrected two citations first: the "standing
+decision to keep The Table standalone" is README.md:37-39, not decisions.md, and
+it gates only the monorepo consolidation; the /a24 precedent is real but only
+READS existing thriver accounts, it has never created player accounts in the
+shared pool.
+
+**Xero: own subdomain, and full email/password accounts.** He declined to pick
+the topology cold and asked Comms to suggest a rule, with the constraint that
+whatever is chosen becomes the CONSISTENT pattern for every future third-party
+VTT. He agreed with the suggestion as given:
+
+- **Generators keep the proxied subpath** on thetable.xerosumgames.com.
+  Verified 2026-09-11: all eight generator repos are a single static index.html,
+  no build step, no router - which is why a rewrite works for them.
+- **Every third-party VTT gets `<game>.xerosumgames.com`** - own repo, own
+  Vercel project, own Supabase project, linked from the hub. Mothership is
+  therefore **mothership.xerosumgames.com**, NOT /mothershipVTT.
+- **Players get full email/password accounts**, same as TheTable and Tapestry,
+  on the VTT's OWN Supabase project - not the shared Tapestry pool.
+
+Reasoning, for whoever revisits this: a Next.js VTT behind a path rewrite must
+carry a `basePath` kept permanently in sync with the hub's rewrite table, a
+coupling the static generators never pay. A subdomain removes it and isolates
+auth storage per app, at the cost of one DNS record per VTT. The hub stays the
+directory for full apps and the proxy only for static generators.
+
+Puffer Fish (owning lane) to update tasks/mothership-vtt-architecture.md, which
+currently assumes /mothershipVTT throughout, and to log the convention in
+decisions.md - it is a durable call, not just an answer. Routed 2026-09-11.
+
+### 2026-09-11 - Portrait also removed from the downloadable PDF? -> YES (a)
+
+Raised by Character Generators as an extension of the (d) print ruling, rather
+than absorbed silently. The portrait was drawn at 78%/82% in two places:
+buildSheet() for the printed sheet and generatePDF() for the downloadable
+fillable PDF. Comms verified the ship before recording: walkingdead-rpg f0dfa68
+takes `ps-portrait` from 4 occurrences to 0, and the live page serves 200 with
+none.
+
+**Xero: (a) both.** The ruling covers any printed artifact; the PDF is the one
+people keep. Nothing to revert - f0dfa68 already stands. Routed to Character
+Generators 2026-09-11.
 
 ### 2026-09-11 - Give Table | Character Generators its own worktree? -> YES
 
