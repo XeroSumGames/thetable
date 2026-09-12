@@ -184,12 +184,39 @@ and a Critical Failure auto-firing a Panic Check that rolls d20 against Stress
 and reads the real table. Mode swap measured at 1 drifting element out of 160
 (a native select, 1px, moves nothing) and identical 1496px page height.
 
+### Tier 1b SHIPPED 2026-09-11: auth, persistence, import
+
+- **Auth**: email/password on this project's own user pool. The sheet is behind
+  the gate; sign-out in the header.
+- **Persistence**: `public.characters`, owner-scoped RLS, `updated_at` trigger
+  (sql/001-characters.sql). Debounced autosave with a visible Saving/Saved
+  state, gated on initial load so the sample can never overwrite a real
+  character. Character stored as a jsonb payload shaped like the generator's
+  export, so imported and hand-rolled characters are the same thing to the
+  table and a rules change needs no migration.
+- **Import**: reads the generator's JSON export. Written against the
+  generator's ACTUAL engine output rather than section 7's prose - it emits
+  CAPITALISED stat keys (Strength, not strength), class as an object,
+  condition grouped, and loadout as one comma-joined string with Armor Points
+  embedded as "(AP n)". An importer assuming lowercase would have produced a
+  sheet of zeroes silently.
+- **Verified**: RLS denies anonymous reads (returns []) and rejects anonymous
+  inserts (42501). 27 importer assertions pass against a real generator
+  fixture, including hostile inputs. `npm run test:import`.
+
+**NOT verified by me, and it needs Xero:** signing in and the end-to-end
+import through the UI. Entering passwords and creating accounts is outside
+what I do, so the authenticated path - sign up, sheet loads, roll, autosave,
+sign out, sign back in, character still there, import a .mothership.json - is
+his to walk once.
+
 ### Next, in order
-1. **Wire Supabase**: auth (email/password), then a characters table with
-   owner-scoped RLS, replacing the local sample character.
-2. **Import**: the "Import character" upload consuming the generator's JSON
-   envelope (section 7) - the Mothership generator already emits it.
-3. **Tier 2/3** per section 3.
+1. **Tier 1c**: the Wound table and Death Save (PSG p29) - Health hitting 0
+   currently just floors, it does not roll a Wound.
+2. **Multiple characters**: the table already supports N per user; the UI
+   assumes one.
+3. **Tier 2/3** per section 3. Tier 3 needs a campaigns/members join before a
+   GM can read a player's sheet - do NOT widen the owner policy to get there.
 
 ### Known rough edges (deliberate, not forgotten)
 - Stress is unbounded, matching the book. The stress bar is drawn against a
