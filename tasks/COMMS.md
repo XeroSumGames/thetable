@@ -15,82 +15,47 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 1. Add TheTable origin to Supabase redirect URLs (added 2026-09-11, HP -> Puffer Fish)
-
-Xero-only dashboard action, verified and ready to put to him as-is. In the shared
-Supabase project: Auth -> URL Configuration -> Redirect URLs, add
-https://thetable.xerosumgames.com. One click. Only affects NEW-signup
-confirmation emails; existing-account login already works.
-
-*Verified independently by Comms 2026-09-11 (not relayed on the lane's word):
-live domain returns 200 on /, /apegenerator, /signup, /login;
-app/signup/page.tsx:24 passes emailRedirectTo `${window.location.origin}${next}`,
-so the new origin must be allow-listed or confirmation links break;
-app/login/page.tsx:20 uses signInWithPassword, which involves no redirect URL -
-that is why existing-account login is unaffected. Put to Xero 2026-09-11.*
-
-Owning lane: Puffer Fish (infra). Comms: put this to Xero.
-
-### 2. Where should the portrait sit on the printed Walking Dead sheet? (added 2026-09-11, Character Generators)
-
-Reproduced and ready to put to Xero; needs a decision, not a test.
-
-The portrait upload works end to end (verified live at walkingdead-rpg HEAD
-a37e9d6). The problem is where it lands on the printed sheet: bottom-right,
-on top of the TINY ITEMS grid, covering it.
-
-index.html:2716 places it at left:78%;top:82%;width:18%;height:14%. The comment
-directly above, on line 2715, says "portrait -> top-left corner of description
-box". Code and comment disagree, so one of them was changed without the other.
-
-This is a design call rather than a bug fix: the official sheet has no dedicated
-portrait box, and the description box the comment names is space players write
-in. Options for Xero:
-
-  (a) leave it where it is, over TINY ITEMS
-  (b) move it to the description box, as the comment intends - costs some
-      writing space
-  (c) somewhere else he names
-  (d) drop it from the printed sheet entirely and keep the portrait on screen
-
-One-line change either way. No rush - it has sat six weeks.
-
-*Verified by Comms 2026-09-11 at walkingdead-rpg HEAD a37e9d6 (not relayed on
-the lane's word): index.html:2716 does read left:78%;top:82%;width:18%;height:14%
-and the comment on 2715 does say the description box, so the two disagree; the
-description text itself prints at 42.0%, 9.7% (index.html:2671), nowhere near
-78/82. NOT independently confirmed: that the covered box is specifically TINY
-ITEMS - the box labels live in the SHEET_P1 background image (index.html:2665),
-not in code, so that part is taken on the lane's word. No generated text prints
-in that region, so what the portrait covers is sheet artwork, not other output.
-Put to Xero 2026-09-11.*
-
-**Measured on the actual sheet art by Comms 2026-09-11** (SHEET_P1 decoded from
-index.html:2321, 1041x1345, candidate rects composited over it):
-
-- Current 78/82/18/14 does NOT sit cleanly in TINY ITEMS. It starts above the
-  TINY ITEMS header and clips the bottom GEAR bonus row as well, so it damages
-  two boxes, not one.
-- The comment's own intent (right end of the Description box, ~78/8.5) is WORSE
-  at this size: 14% tall overflows the Description box downward into the Drive
-  row and its checkbox. The comment describes a placement that does not fit.
-- The sheet has no spare space. Every box is either artwork or in play. TINY
-  ITEMS is the only portrait-shaped hole on the page, which is very likely why
-  someone moved it there.
-- TINY ITEMS box measures approx x 65.6-96.3%, y 84.5-96.5%. A portrait at
-  left:79%; top:85.5%; width:17%; height:10.5% sits fully inside it and stops
-  the GEAR clipping.
-
-Comms recommendation (recommendation only - the call is Xero's): keep the
-bottom-right corner and resize to the measured TINY ITEMS fit above. It costs
-the cheapest box on the sheet, nothing is generated into it, and it is the only
-placement that does not squash the portrait's aspect.
-
-Owning lane: Character Generators. Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Portrait on the printed Walking Dead sheet? -> DROP IT (d)
+
+Asked by Character Generators. Comms verified the code at walkingdead-rpg HEAD
+a37e9d6 and then measured both candidate placements against the decoded sheet
+art (SHEET_P1, index.html:2321): the current 78/82/18/14 clips the bottom GEAR
+bonus row as well as covering TINY ITEMS, and the comment's own intent (right
+end of the Description box) overflows into the Drive row at that size. Comms
+recommended (a) keep-and-resize.
+
+**Xero: (d) drop it from the printed sheet.** The portrait stays on screen; it
+does not print at all. Overrides the Comms recommendation - the official sheet
+has no portrait box and no box is worth spending on it.
+
+Implementation for Character Generators: remove the `ps-portrait` div emitted at
+index.html:2716, and fix the now-dead comment on 2715 so code and comment stop
+disagreeing. Keep the upload, preview and on-screen render exactly as they are.
+Routed to Character Generators 2026-09-11.
+
+### 2026-09-11 - Add TheTable origin to Supabase redirect URLs? -> DONE (a)
+
+Asked by HP via Puffer Fish. Comms verified: live domain 200s, signup sends
+emailRedirectTo `${window.location.origin}${next}` (app/signup/page.tsx:24),
+login uses signInWithPassword so existing logins never needed it.
+
+**Xero: done.** He first added the bare origin
+`https://thetable.xerosumgames.com`, which would not have matched - `next`
+defaults to `/` and `/mailinglist` is reachable via
+components/MailingListAdmin.tsx:17. Corrected to
+`https://thetable.xerosumgames.com/**`, confirmed in the dashboard.
+
+Comms also verified the four pre-existing thetapestry rows are correct against
+that repo's code (origin + /auth/callback, and + ?next=<encoded>). Known
+caveat, not a defect: the two localhost:3000 rows only work if Tapestry's dev
+server actually runs on port 3000 - it has been squatted before and had to run
+on an auto-port. Routed to Puffer Fish (infra) 2026-09-11.
 
 ### 2026-09-11 - Give Table | HP its own worktree? -> YES (a)
 
