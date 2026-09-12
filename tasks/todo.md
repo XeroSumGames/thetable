@@ -7,13 +7,26 @@ attention on an unverified claim.
 
 ## Character Generators lane
 
-- [ ] walkingdead-rpg "Print to official sheet" - fixed in 33efe51 + dddc6f8,
-      never print-tested. Cannot be verified headless; needs a real print preview.
-      STATUS: needs repro. walkingdead-rpg HEAD a37e9d6, no follow-up in ~6 weeks
-      as of 2026-09-11. Reproduce, then route to Comms if still broken.
-- [ ] walkingdead-rpg portrait upload - 22cdcce wired the file input to change
-      instead of click; pushed, never confirmed live.
-      STATUS: needs repro. Confirm it still reproduces, then route to Comms.
+- [x] walkingdead-rpg "Print to official sheet" - REPRODUCED GOOD 2026-09-11 at
+      HEAD a37e9d6 (33efe51/dddc6f8/22cdcce all confirmed ancestors of HEAD).
+      NOT garbled: prints ONE page, letter portrait, with name, archetype, PC and
+      NPC anchors, drive, issues, notes, the attribute/skill dot grid, talent plus
+      rule text, health track, gear, stored gear and scar all in their proper
+      boxes, and no UI chrome leaked onto the sheet. 33efe51 + dddc6f8 held.
+      CORRECTION to the original filing: this IS headless-verifiable. print-to-PDF
+      renders exactly the print path; only the interactive preview dialog and a
+      real printer driver are out of reach. A paper check is nice-to-have, not
+      blocking, so this does not need to go to Xero.
+- [ ] walkingdead-rpg portrait placement on the printed sheet - the UPLOAD works
+      (reproduced 2026-09-11: a real File via DataTransfer plus a genuine change
+      event is consumed, the preview renders, and it reaches the print sheet, so
+      22cdcce is good). New defect found while verifying it: the portrait prints
+      BOTTOM-RIGHT on top of the TINY ITEMS grid. index.html:2716 sets
+      left:78%;top:82%;width:18%;height:14% while the comment on 2715 says
+      "portrait -> top-left corner of description box". Code and comment disagree
+      and the code covers sheet content.
+      STATUS: reproduced, Xero-ready. Raised as COMMS.md OPEN #2 - it is a design
+      call, not a bug fix. One-line change once he picks a position.
 
 ## Landing page
 
