@@ -50,6 +50,22 @@ questions, both need an answer before any code:
    (b) lighter - a shareable campaign link + a name, no account
    (c) something else he names
 
+*Checked by Comms before relaying 2026-09-11 (two citations needed correcting,
+neither fatal to the question):*
+
+- *The "standing decision to keep The Table standalone" is NOT in decisions.md,
+  which the plan doc cites. It is README.md:37-39, and it is narrower than the
+  citation implies: it gates the MONOREPO consolidation behind Tapestry 1.0.
+  It leans toward (a) but it does not settle the database question, so this is
+  genuinely open rather than already-decided.*
+- *The /a24 precedent for (b) holds in substance: public/a24/index.html is a
+  static page inside TheTable that calls signInWithPassword against the shared
+  project and reads `profiles`. Nuance that cuts toward (a): it only READS
+  existing thriver accounts. It has never created a new class of player account
+  in the shared pool, which is what the VTT would do.*
+- *Proxy convention confirmed real: GENERATOR_REWRITES in next.config.ts, seven
+  generators each on their own Vercel deployment.*
+
 Owning lane: Puffer Fish. Comms: put this to Xero.
 
 ## ANSWERED
