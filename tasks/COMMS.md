@@ -22,6 +22,13 @@ Supabase project: Auth -> URL Configuration -> Redirect URLs, add
 https://thetable.xerosumgames.com. One click. Only affects NEW-signup
 confirmation emails; existing-account login already works.
 
+*Verified independently by Comms 2026-09-11 (not relayed on the lane's word):
+live domain returns 200 on /, /apegenerator, /signup, /login;
+app/signup/page.tsx:24 passes emailRedirectTo `${window.location.origin}${next}`,
+so the new origin must be allow-listed or confirmation links break;
+app/login/page.tsx:20 uses signInWithPassword, which involves no redirect URL -
+that is why existing-account login is unaffected. Put to Xero 2026-09-11.*
+
 Owning lane: Puffer Fish (infra). Comms: put this to Xero.
 
 ## ANSWERED
