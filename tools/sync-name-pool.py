@@ -88,7 +88,9 @@ def sync_inline_pool(path, names, check):
     if not os.path.exists(path):
         return ("missing", None)
     s = io.open(path, encoding="utf-8").read()
-    block = "var NAME_POOL = %s;" % json.dumps(names, ensure_ascii=False)
+    # compact separators to match how the array was already written, so the one-time
+    # marker insertion is the only real change on that line
+    block = "var NAME_POOL = %s;" % json.dumps(names, ensure_ascii=False, separators=(",", ":"))
 
     marked = re.search(re.escape(WD_START) + r".*?" + re.escape(WD_END), s, re.S)
     if marked:
