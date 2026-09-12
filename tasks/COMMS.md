@@ -17,45 +17,32 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 *(nothing open)*
 
-### 4. Name pools - fold Mothership/Space:1999 into the shared 1000-name pool, or keep bespoke? (added 2026-09-11, Puffer Fish)
-
-Full findings in todo.md. Confirmed real bug (3-way duplicate of a 1000-name
-pool, currently in sync, no mechanism to stay that way) is being fixed
-regardless - not what this question is about.
-
-This is the one genuine content call: mothership-generator (given 40/family 30)
-and space1999generator (given 36/surname 28) both hand-curate a SMALL name list
-fitted to their fiction's tone - Mothership's own file literally says why
-("ordinary working names rather than heroic ones... blue-collar, multinational
-and unglamorous"); Space:1999's includes actual show-canon surnames. Twilight
-2000, Ape, and Dredd stay separate regardless (period/nationality-locked,
-non-human canon names, and satirical wordplay respectively - not in question).
-
-  (a) keep them bespoke, as curated - RECOMMENDED. The small lists read as
-      deliberate genre-fit, not filler; folding in the generic 1000-pool would
-      dilute that on every random roll.
-  (b) widen them to also draw from the shared 1000-pool (more variety, less
-      curated flavor)
-  (c) something else he names
-
-*Verified by Comms 2026-09-11, every claim checked at source:*
-
-- *Mothership: src/data/names.json holds given=40, family=30, plus callsigns=25
-  and pronouns=6 that the question does not mention. Its `_note` field really
-  does state the rationale: "Mothership's fiction is blue-collar, multinational
-  and unglamorous, so these are ordinary working names rather than heroic ones."*
-- *Space:1999: NAMES_F=36, NAMES_L=28 in index.html.*
-- *The 3-way duplicate is real and exact: 2300ad-generator, traveller-generator
-  and walkingdead-rpg each carry a 1000-entry pool, all three byte-identical
-  (sha1 0198a83a7e4a). Currently in sync with nothing keeping them that way.*
-- *Ape carries its own APE_NAMES=30. Twilight 2000 and Dredd use neither the
-  shared pool nor a matching array, so "separate regardless" holds trivially.*
-
-Owning lane: Character Generators (their files). Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Fold Mothership/Space:1999 name pools into the shared pool? -> NO, KEEP BESPOKE (a)
+
+Asked by Puffer Fish. Comms verified every claim at source first: Mothership's
+src/data/names.json is given=40, family=30 (plus callsigns=25, pronouns=6 that
+the question did not mention) and its `_note` really does state the curation
+rationale; Space:1999 is NAMES_F=36, NAMES_L=28; Ape carries its own
+APE_NAMES=30; Twilight 2000 and Dredd use neither the shared pool nor a matching
+array.
+
+**Xero: (a) keep them bespoke.** The curated lists stay as they are. Do not
+widen either generator to draw from the shared 1000-name pool - the small lists
+are deliberate genre-fit, and folding in generic names would dilute that on
+every roll.
+
+Separate and unaffected: the 3-way duplicate of the 1000-name pool is real and
+exact - 2300ad-generator, traveller-generator and walkingdead-rpg each carry a
+1000-entry pool, all three byte-identical (sha1 0198a83a7e4a), with no mechanism
+keeping them in sync. That fix proceeds regardless and must not touch the
+Mothership or Space:1999 lists. Routed to Character Generators (owns the files)
+and Puffer Fish (raised it) 2026-09-11.
 
 ### 2026-09-11 - Mothership VTT topology and auth -> SUBDOMAIN + full accounts
 
