@@ -17,7 +17,32 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 16. A Life Foundation emblem for the 2300AD masthead? (added 2026-09-11, Character Generators)
+
+NON-BLOCKING. The lane is building a CSS-drawn emblem so nothing waits on this,
+and the masthead is one element, so swapping art in later is a small change.
+
+*Verified by Comms 2026-09-11:* traveller-generator carries exactly one inlined
+`data:image/png;base64` asset, inside a block commented "Travellers' Aid Society
+masthead" - so Xero's actual TAS artwork really is what gives that frame its
+weight. 2300ad-generator has no inlined image at all and no equivalent asset in
+its repo. The redesign plan proposes Esperanto section subtitles as the
+distinguishing gift instead, the Life Foundation's official language per Core
+Book 1 p101.
+
+  (a) CSS-drawn emblem, as being built - nothing more needed from him
+  (b) he supplies art and the lane swaps it in later - base64-inlined exactly as
+      Traveller does. Recommended by the lane alongside (a); the two differ only
+      in whether he wants to supply something
+  (c) he supplies art and the lane HOLDS the masthead until he does - the only
+      option that blocks work
+
+*Not asked, because the repo already answers it: the old todo.md item about
+`public/TASLogo.png` being an unreferenced orphan is closed. Puffer Fish
+committed it at fb9e62c as Traveller source art, deliberately kept. No ruling
+needed.*
+
+Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
 
