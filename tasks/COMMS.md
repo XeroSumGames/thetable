@@ -273,6 +273,44 @@ into 1005 changed lines.
 
 *(dated log, newest first)*
 
+### 2026-09-12 - Q4: what failed at step 3 of the Mothership test? -> (b) THE CONFIRMATION LINK IS BROKEN
+
+**Root cause found, and it is not what Comms predicted.** Xero answered (b) and
+had pasted the error screenshot into the workbook itself, which is what made it
+diagnosable at all.
+
+The confirmation email's link points at **`localhost:3000`**. The screenshot
+shows `localhost:3000/#access_token=...` and ERR_CONNECTION_REFUSED. Comms had
+guessed the Supabase redirect-URL allow-list, the fault TheTable hit. Wrong: the
+allow-list was never consulted, because the app never asks for a redirect.
+
+*Located by Comms at source:*
+`D:\Coding\VTTs\mothership-vtt\components\Auth.tsx:37` calls
+`supabase.auth.signUp({ email, password })` with **no `options.emailRedirectTo`**.
+With no redirect supplied, Supabase falls back to the project's **Site URL**,
+which is still the development default `http://localhost:3000`. So every
+confirmation email any new user ever receives points at a machine that is not
+theirs.
+
+Why he still got in: the token was issued and the account confirmed correctly.
+Only the landing page was wrong. That is also why steps 4, 7 and 8 passed and
+why this looked cosmetic.
+
+**Two fixes, and both are wanted:**
+
+1. *Supabase dashboard (Xero only):* the mothership-vtt Supabase project ->
+   Authentication -> URL Configuration -> **Site URL** =
+   `https://mothership.xerosumgames.com`, with that and
+   `https://mothership-vtt.vercel.app` both in Redirect URLs.
+2. *Code (hub lane):* pass
+   `options: { emailRedirectTo: `${window.location.origin}` }` at Auth.tsx:37, so
+   the link is correct regardless of what Site URL happens to be set to. Belt and
+   braces - fix 1 alone leaves the same trap for the next environment.
+
+Routed to Puffer Fish 2026-09-12.
+
+### 2026-09-12 - Q3: where should the smoke-test standard live? -> (a) A USER-LEVEL SKILL
+
 ### 2026-09-11 - A Life Foundation emblem for the 2300AD masthead? -> CSS EMBLEM STANDS (a)
 
 Filed by Character Generators as non-blocking; it built a CSS-drawn emblem so
