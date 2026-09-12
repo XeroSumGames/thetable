@@ -33,8 +33,8 @@ to tasks/) even though the generator source lives in
 D:\Coding\RPG Character Generators\, so it is a real collision risk on the
 shared main checkout.
 
-Comms recorded the name as ../TheTable-chargen on branch lane/chargen to match
-the MeSuite role-based convention; Puffer Fish owns creation and may change it.
+Puffer Fish created it as ../TheTable-chargen on branch lane/character-generators
+(commit 4ed0ff5), superseding the lane/chargen placeholder Comms had recorded.
 Same caveat as HP: a session's cwd is fixed at launch, so the running
 Table | Character Generators session must be re-opened in the new worktree to
 actually use it. Routed to Puffer Fish (owning lane) 2026-09-11.
