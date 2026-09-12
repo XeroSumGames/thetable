@@ -26,6 +26,30 @@
       "port": 8793
     },
     {
+      "name": "ape-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8801", "--directory", "D:/Coding/RPG Character Generators/apegenerator"],
+      "port": 8801
+    },
+    {
+      "name": "space1999-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8802", "--directory", "D:/Coding/RPG Character Generators/space1999generator"],
+      "port": 8802
+    },
+    {
+      "name": "dredd-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8803", "--directory", "D:/Coding/RPG Character Generators/dredd-generator"],
+      "port": 8803
+    },
+    {
+      "name": "walkingdead-local",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "8804", "--directory", "D:/Coding/RPG Character Generators/walkingdead-rpg"],
+      "port": 8804
+    },
+    {
       "name": "thetable-chargen-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "-p", "3005"],
