@@ -81,6 +81,39 @@ swap - the layout is already mode-independent, so that retreat is cheap.
 
 Mockup: https://claude.ai/code/artifact/3d4ccdc6-380f-420a-b690-0f9a5e67aeb7
 
+## 2026-09-11 - mothership-vtt deploys by git push ONLY, never the Vercel CLI
+
+**What:** the mothership-vtt Vercel project is git-connected. Deploy with
+`git push origin main`. Never run `vercel deploy` / `vercel --prod` there.
+
+**Why:** a CLI deploy is attributed to the COMMIT AUTHOR EMAIL, and the GitHub
+no-reply address we commit with is not a Vercel team member, so Vercel rejects
+it:
+
+> 187208146+XeroSumGames@users.noreply.github.com attempted to deploy a commit
+> to xerosumgames' projects on Vercel through the Vercel CLI, but they're not a
+> member of the team.
+
+A git push is attributed through the GitHub integration instead and works
+fine - both push-triggered deploys went Ready while the CLI one landed
+`UNKNOWN` and never aliased. **No Vercel Pro upgrade is needed**; the
+suggestion in that error is a red herring for our setup.
+
+**The trap to avoid:** the obvious "fix" is to commit as
+xerosumgames@gmail.com so the CLI recognises the author. Do NOT. That is the
+INVERSE failure and it has already blocked two projects in this org
+(walkingdead-rpg and apegenerator - see atlas note #41/#42). Commits keep the
+no-reply address; the deploy method changes, not the email.
+
+**Watch for:** a deployment stuck in `UNKNOWN` in `vercel ls` is the signature
+of this, and it is the same signature that eventually forced the original
+apegenerator project to be deleted and rebuilt as potagenerator. An orphaned
+UNKNOWN deploy that never aliased is harmless; a project where EVERY deploy
+lands UNKNOWN is the corrupted case.
+
+This generalises: **any git-connected Vercel project in this org deploys by
+push.** The CLI is only for standing a project up before it is connected.
+
 ## 2026-09-11 - Third-party VTTs get their own subdomain; generators keep the proxied subpath
 
 **What:** a standing rule for how apps reach users on this property, not a
