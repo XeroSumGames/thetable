@@ -19,10 +19,17 @@ than the UI was asserted on.
   carry this in their own recorders** - dev-only in all three cases, since
   production never double-invokes.
 - **Assert on the mechanism, not the indicator.** The way this was caught was
-  checking whether `console.error` had actually been replaced
-  (`String(console.error).includes('patchedErr')`), not whether the button
-  looked active. Same family as the cached-DOM-node and fixed-width-mockup
-  entries elsewhere in this file: the measurement was the thing that was broken.
+  checking whether `console.error` had actually been replaced, not whether the
+  button looked active. Same family as the cached-DOM-node and
+  fixed-width-mockup entries elsewhere in this file: the measurement was the
+  thing that was broken.
+- **...but do not assert on a SYMBOL NAME, which minifies.** The check used for
+  the above was `String(console.error).includes('patchedErr')`. That works in
+  dev and reports a false NEGATIVE against a production build, where the
+  function name is mangled - it said capture was dead on the live hub when
+  capture was fine. Assert on BEHAVIOUR instead: start recording, fire a
+  `console.error`, confirm an event landed in the buffer. That works in both
+  builds. Two brittle measurements in one afternoon, in opposite directions.
 - **Dice inside a `setC` updater get rolled twice.** React double-invokes state
   updaters in dev to check purity. `takeDamage` and `doPanic` in the VTT
   resolved `applyDamage` / `rollPanic` inside one, so every Wound d10 and every
