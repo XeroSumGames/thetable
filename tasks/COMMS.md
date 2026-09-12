@@ -117,6 +117,44 @@ reads this file to find where the counter is.
 
 ## OPEN
 
+### Q4. What actually happened at step 3 of the Mothership test? (added 2026-09-12, Comms)
+
+He ran the Mothership VTT auth test 2026-09-12 and marked **step 3 Fail with no
+note**. It is the only result in the run that cannot be interpreted.
+
+Step 3 is "enter an email and password, click Create account". The step told him
+to STOP if the email-confirmation link errored. He did not stop, and steps 4, 7
+and 8 all PASSED - the sheet loaded, he signed out, he signed back in and the
+character persisted. So the account was created and works. Something about the
+step displeased him without blocking him.
+
+  (a) the confirmation email never arrived, but he got in anyway
+  (b) the confirmation link errored and he worked around it
+  (c) it worked but something looked wrong - an error flashed, wording was off
+  (d) something else - one line is enough
+
+Not routed to any lane until he answers: (a) and (b) are Supabase auth config,
+(c) is cosmetic, and they go to different fixes.
+
+### ROUTED TO THE HUB, not awaiting Xero - two findings from the same run
+
+**1. No export control on the character sheet.** Step 9 Fail, his note: "no
+export button visible". The sheet is specified to export a `.mothership.json`;
+there is no way to get one out. This also made step 10 (import) untestable -
+he had no file to import - so the whole export/import path is unverified, not
+just the export half.
+
+**2. Dark/light toggle wanted.** Step 4 Pass, his note: "should be a dark/light
+button". The sheet works; he wants the control. A feature request, not a defect.
+
+### NOT a product defect - a Comms error, already fixed
+
+Step 5 came back Fail with "uncertain how to roll something". That was a badly
+written step, not a bug: it said "Roll something on the sheet" without naming a
+control, and Comms could not see past the auth wall to name one. Rewritten
+2026-09-12 with a self-rescue clause, and the lesson is in the
+`smoke-test-workbook` skill. Step 6 was blocked by it.
+
 ### 17. Two things owed by Xero, carried over from the Puffer Fish handoff (added 2026-09-12, Comms)
 
 Both recorded in tasks/HANDOFF-puffer-fish-2026-09-12.md and neither is blocking.
