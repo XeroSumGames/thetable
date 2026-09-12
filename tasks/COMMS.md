@@ -15,7 +15,21 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 1. Portrait also removed from the downloadable PDF - intended? (added 2026-09-11, Character Generators)
+
+Verified by Comms: f0dfa68 removed the portrait from BOTH draw sites, and the
+commit message says so. Ruling (d) named only the printed sheet.
+
+The lane's reasoning: the PDF is the artifact people keep, so leaving the
+portrait there at the same 78%/82% would have preserved the defect the ruling
+was about. Comms agrees that is the consistent reading, and the measurements in
+ANSWERED apply identically to the PDF.
+
+  (a) Yes, both - the ruling covers any printed artifact. RECOMMENDED, it is
+      what already shipped and is internally consistent.
+  (b) Print-only - put the portrait back in the downloadable PDF. Small revert.
+
+Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
 
@@ -56,6 +70,18 @@ Implementation for Character Generators: remove the `ps-portrait` div emitted at
 index.html:2716, and fix the now-dead comment on 2715 so code and comment stop
 disagreeing. Keep the upload, preview and on-screen render exactly as they are.
 Routed to Character Generators 2026-09-11.
+
+**SHIPPED and verified by Comms 2026-09-11:** walkingdead-rpg f0dfa68 "drop the
+portrait from the printed sheet and the exported PDF". `ps-portrait` went 4
+occurrences at f0dfa68^ to 0 at HEAD, and the live file at
+thetable.xerosumgames.com/walkingdead-rpg serves 200 with 0 occurrences. Upload
+and on-screen preview still present (15 other `portrait` references remain).
+
+**Scope widened beyond the question - see OPEN #1.** The portrait was drawn at
+78%/82% in TWO places: buildSheet() for the printed sheet and generatePDF() for
+the downloadable fillable PDF. The question named only the printed sheet. The
+lane removed both, reasoning that leaving it in the PDF would preserve the exact
+defect in the artifact people keep. Flagged, not silent.
 
 ### 2026-09-11 - Add TheTable origin to Supabase redirect URLs? -> DONE (a)
 
