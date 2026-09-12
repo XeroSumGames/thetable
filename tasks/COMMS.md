@@ -8,11 +8,15 @@ Do NOT ask Xero anything already answered in decisions.md or todo.md.
 Verify a thing is actually reachable before asking him to test it.
 
 Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
-- Table | Puffer Fish (hub)        local_373a5c5c-ee39-47ef-92a9-0bf3ef94544d
+- Table | Puffer Fish (hub)        local_58826b41-8ebe-4b95-a65a-6e4dd5b2cf25
+  (restarted 2026-09-12 per tasks/HANDOFF-puffer-fish-2026-09-12.md; the old
+  session local_373a5c5c-ee39-47ef-92a9-0bf3ef94544d is stopped - do not route
+  to it)
 - Table | HP (features)            local_4aca6765-6aab-4c0e-961d-be4b5c01da3c
-- Table | Character Generators     local_eb161fa5-d93d-4048-aa94-6a27856de9d2
-  (restarted 2026-09-11; the old session local_1fa2c241-d7af-4e86-86dd-319b6f2df3bd
-  is stopped - do not route to it)
+- Table | Character Generators     local_e4a53d2c-e7e9-4c6c-87d4-bd6008bca5c6
+  (restarted again 2026-09-12; both local_eb161fa5-d93d-4048-aa94-6a27856de9d2
+  and the older local_1fa2c241-d7af-4e86-86dd-319b6f2df3bd are stopped - do not
+  route to either)
 - Table | Comms (this lane)        local_894fe581-b1be-4366-ae60-d38ce452c53c
 
 ## OPEN
