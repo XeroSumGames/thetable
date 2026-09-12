@@ -27,6 +27,21 @@ wrong model has already happened twice (2026-09-11, 2026-09-12):
   set_session_model by Puffer Fish the same day)
 - Table | Comms (this lane)  local_894fe581-b1be-4366-ae60-d38ce452c53c  [Opus 5]
 
+## Question numbering (Xero's instruction, 2026-09-12)
+
+Every question put to Xero carries a sequential number - Q1, Q2, Q3 - and the
+counter NEVER resets. It does not restart per batch, per day, per topic or per
+Comms session. He tracks answers by that number, so a reused number is worse
+than a missing one.
+
+Counter re-based at his instruction 2026-09-12: the Mothership VTT authenticated
+test is **Q1**, the Wix CNAME is **Q2**. The next question asked is **Q3**.
+Earlier questions in this log predate the scheme and are unnumbered; do not
+renumber them and do not reuse their old ad-hoc numbers.
+
+**Record the number here when you ask, not afterwards.** The next Comms session
+reads this file to find where the counter is.
+
 ## OPEN
 
 ### 17. Two things owed by Xero, carried over from the Puffer Fish handoff (added 2026-09-12, Comms)
