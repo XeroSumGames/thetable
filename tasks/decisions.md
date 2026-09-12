@@ -4,6 +4,45 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-12 - Mothership VTT adopts the house app frame STRUCTURALLY, not visually
+
+**What:** the VTT moves from its current single scrolling column to the
+two-sidebars-plus-centre-panel frame that TheTapestry and TheTableau use. Xero's
+call, asked and answered directly: **structurally.** Same shape, same widths,
+same collapse behaviour as the other two properties - while keeping its own
+Terminal/Zine two-mode identity. The frame is the house pattern; the skin stays
+Mothership's.
+
+**Why it was never decided before:** `tasks/mothership-vtt-architecture.md`
+specifies the mechanics, the scope tiers, the export contract and the two-mode
+visual identity, and has NO section on the app shell. So the sheet grew as one
+scrolling column by default rather than by choice. That is the gap this closes.
+
+**Why it is not cosmetic.** Two defects from Xero's own walkthrough and the next
+queued feature all resolve into this one piece of work:
+
+- The Roll log is currently the LAST section on the page, so a roll made at the
+  top landed below the fold. He marked step 5 "there needs to be a log or a
+  'current roll' area so the outcome is super clear". A readout above the Stats
+  patched it; a persistent right rail is the actual fix, because the log is then
+  always on screen.
+- He marked step 10 "there needs to be a 'new character' or random or similar as
+  I am just importing the same file". Character switching belongs in a left
+  rail, and that is the same surface the queued multiple-characters-per-user
+  feature needs - the `characters` table already supports N rows while the UI
+  assumes one.
+
+**Constraint carried into it:** the six layout-lock rules still apply. Whatever
+the frame is, both modes must measure identical - and note that rule 5 has
+already proven insufficient on its own once: a `<select>` with explicit
+font-family AND line-height still sized its box from the font's own metrics and
+drifted 1px. Fixed-height controls (rule 6) are the reliable answer, and any new
+rail must be measured in both modes rather than assumed.
+
+**Still to settle:** the concrete widths, what exactly each rail holds, and the
+narrow-width collapse behaviour, all pending a survey of how the other two
+properties actually implement it. Copy the house frame; do not invent a third.
+
 ## 2026-09-12 - Session recorder: on the hub and the VTT, ported not shared
 
 **What:** both TheTable's hub and mothership-vtt carry their own copy of the
