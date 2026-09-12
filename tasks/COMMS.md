@@ -45,6 +45,24 @@ per-generator tail of content rules. `.seo-intro` is NOT one of them - it has no
 font-size declaration in any of the four, appearing once per file as a class on
 a <p> with no CSS rule, so its size is inherited rather than declared.
 
+**The footer is four separate edits, not one repeated.** Unlike the src/-based
+three, where it was a single identical inline style in each assemble.py, the
+hand-built four each declare it under a DIFFERENT class name. *Verified at
+source by Comms 2026-09-11:*
+
+| generator | footer rule |
+| --- | --- |
+| apegenerator | `.site-footer` 12px |
+| space1999generator | `.footer` 12px |
+| dredd-generator | `.footer` 12px |
+| walkingdead-rpg | `.foot` 12px, markup `<footer class="foot no-print">` |
+
+*Correction to the lane's version of this finding, which said walkingdead-rpg
+had no footer font-size rule and inherited from elsewhere: it does declare one,
+at `.foot`, directly. The difference matters to whoever does the work - a
+declaration under an unexpected name is a one-line edit like the other three,
+whereas "inherits from somewhere else" implies a hunt that is not needed.*
+
 **Three measurements, all different, all recorded, because they answer different
 questions** - the static count is how many declarations you would EDIT, the
 rendered count is how much a user SEES, and neither converts into the other:
