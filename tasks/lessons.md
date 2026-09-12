@@ -2,6 +2,32 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## A generator tool must match the file's own conventions (2026-09-11, Character Generators)
+
+From building the name-pool sync script. The pool sync itself was trivial; all
+the work was stopping the tool reformatting what it touched.
+
+- **A sync tool whose diffs nobody reads is not a sync tool.** Three separate
+  reformatting faults, each of which would have made a real change unreviewable:
+  a 2-space JSON indent where both consumer files use one, so a one-name edit
+  came out as 1005 changed lines; a trailing newline one file did not have; and
+  rewriting a compact array with spaces after the commas. Match the file's own
+  conventions, and hold the end state that syncing an already-correct file is
+  BYTE-IDENTICAL to HEAD.
+- **Replace a marked block, never regex over live code.** The consumer array is
+  fenced with `name-pool:start` / `name-pool:end`, so a sync replaces an exact
+  span instead of pattern-matching against working JavaScript.
+- **Verify a checker by BREAKING it, not by a clean first run.** Inject drift,
+  confirm `--check` catches it and exits non-zero, run the write, confirm the
+  file comes back byte-identical and the check goes green. A tool that has only
+  ever seen correct input has not been tested.
+- **Re-query a DOM element every iteration.** A probe cached an input element and
+  read one distinct name from 40 clicks, which looked exactly like a broken
+  pool. The app re-renders on each suggest, so the cached node was detached and
+  frozen at its first value. Re-querying gave 29 distinct names from 30 clicks.
+  Same family as the other false results in this file: the measurement was
+  broken, not the code.
+
 ## Fixing a print sheet against real artwork (2026-09-11, Character Generators)
 
 From the Planet of the Apes sheet, the last of the note #121 fixes. Three of the
