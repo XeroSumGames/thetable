@@ -45,11 +45,15 @@ two handoffs now warn people not to trust it.
 
 Owning lane: none, these are Xero's own. Comms: put all three to him.
 
-### ROUTING - awaiting Puffer Fish, not Xero
+### ROUTING - DONE 2026-09-12
 
-**Merge 4e1d92a from lane/character-generators into main.** Raised by Character
-Generators 2026-09-11; routed to Puffer Fish the same day; delivery FAILED, so
-this line is the copy that survives. Nothing here needs Xero.
+**Merge 4e1d92a from lane/character-generators into main. COMPLETE.** Raised by
+Character Generators 2026-09-11; routed to Puffer Fish, delivery failed, and the
+repo carried it - which is exactly why it is written here. Puffer Fish landed all
+three lane branches in its retirement merge bcb763b before retiring. *Verified by
+Comms 2026-09-12: `4e1d92a` is an ancestor of `main`, and `shared/name-pool.json`
+and `tools/sync-name-pool.py` are both present on main.* Nothing owed to anyone.
+Kept below for the verification record.
 
 Adds two new directories to the hub repo: `shared/name-pool.json` (the one
 canonical copy of the 1000-name pool) and `tools/sync-name-pool.py` (writes it
