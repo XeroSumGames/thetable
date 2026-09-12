@@ -14,9 +14,11 @@ wrong model has already happened twice (2026-09-11, 2026-09-12):
 - Table | Puffer Fish (hub)  local_58826b41-8ebe-4b95-a65a-6e4dd5b2cf25  [Opus 5]
   (restarted 2026-09-12 per tasks/HANDOFF-puffer-fish-2026-09-12.md; the old
   session local_373a5c5c-ee39-47ef-92a9-0bf3ef94544d is stopped - do not route
-  to it. Found resumed on Sonnet 5 2026-09-12 - a session cannot switch its own
-  model, so Xero set it in the model menu the same day; verified Opus 5 by
-  get_session afterwards, RESOLVED)
+  to it. Found resumed on Sonnet 5 2026-09-12 - a session cannot switch its OWN
+  model, but ANOTHER session can: Comms set it with set_session_model and
+  verified Opus 5 by get_session afterwards. RESOLVED. Recovery note, because
+  the first version of this line credited Xero's model menu: a stuck lane does
+  NOT need him - any other lane can switch it, and the app asks him to approve.)
 - Table | HP (features)      local_4aca6765-6aab-4c0e-961d-be4b5c01da3c  [Sonnet 5]
 - Table | Character Generators  local_e4a53d2c-e7e9-4c6c-87d4-bd6008bca5c6  [Opus 5]
   (restarted again 2026-09-12; both local_eb161fa5-d93d-4048-aa94-6a27856de9d2
