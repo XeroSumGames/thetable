@@ -2,6 +2,25 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## Print regressions hide behind unpinned comparisons (2026-09-11, Character Generators)
+
+From the Dredd redesign. Both of these produce a confident wrong answer.
+
+- **A new wrapper element needs a PRINT RESET, not just `no-print` on its
+  children.** The summary layout is a CSS grid and the print block only reset
+  `.main`, so the official sheet kept a 300px sidebar COLUMN plus padding on
+  paper and spilled onto a third page. Hiding the sidebar was not enough - the
+  grid column survived. Reset the wrapper, not only its contents.
+- **Never compare page counts across builds without pinning the content.** A
+  first A/B read HEAD at 2 pages against NEW at 3 and proved nothing: the two
+  runs rolled different characters, 2862 characters of sheet against 2246. The
+  fix is a capture/inject probe that lifts the printsheet HTML out of one build
+  and injects it into the other, so the content is identical and the page counts
+  are genuinely comparable. Held constant, both builds produced two pages at
+  2161 characters. This is the same trap as comparing any two measurements taken
+  on different data - see the name-pool and font-size counts elsewhere in this
+  file.
+
 ## Two entry paths means two verifications (2026-09-11, Character Generators)
 
 Building the 2300AD redesign exposed a defect that had been LIVE in Traveller
