@@ -237,6 +237,21 @@ cannot measure from served bytes.
 dropped and not next; it waits its turn. Routed to Character Generators
 2026-09-11.
 
+**FIXED AND VERIFIED LIVE by Comms 2026-09-11:** twilight2000-generator 2947621,
+"keep the printed sheet on one page at the rules' ceiling". Live blob 683ae395,
+matching on both the alias and the proxy route; the served bytes carry one
+sub-14px rule, `.opt-box`, exempt.
+
+The diagnosis was not the spill. The sheet had been tightened once before and
+fit only to a hairline - the tallest of 240 random characters measured 1053px
+against a 1056px letter page. Three pixels is a coincidence, not a fit. Rather
+than hunting for an unlucky character, the lane MEASURED the ceiling using
+Chrome CDP's `Emulation.setEmulatedMedia({media:'print'})`, which applies the
+print stylesheet to the live DOM: the rules' true maximum - 10 terms, 14
+specialties, every skill, all gear, all five personal fields - came to 1093px,
+37px over. About 60px was bought back from gaps between blocks with type sizes
+untouched. Ceiling now 1043px, 13px clear.
+
 ### 2026-09-11 - Does the 2300AD floor pass also clear the 12px footers? -> YES (a)
 
 Raised by Comms after measuring the LIVE bytes post-push. The 14px floor pass

@@ -2,6 +2,24 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## Measure the ceiling, do not wait to roll it (2026-09-11, Character Generators)
+
+From fixing Twilight 2000's two-page print spill.
+
+- **Chrome CDP's `Emulation.setEmulatedMedia({media:'print'})` applies the print
+  stylesheet to the live DOM**, so the sheet and every block inside it can be
+  measured against the page height directly. No need to roll characters until an
+  unlucky one reproduces the overflow.
+- **A hairline fit is not a fit.** The sheet had been tightened once before and
+  the tallest of 240 random characters came to 1053px against a 1056px page.
+  Three pixels of clearance is a coincidence waiting to be spent.
+- **Enumerate EVERY dimension that grows the artefact and max them together.**
+  The ceiling was found in three passes, each revealing a dimension not yet
+  maxed: terms alone looked fine at 1025px; adding specialties took it to 1093;
+  adding every skill kept it over even after the first fix, because the skills
+  box grows 48px to 84px between a light and a full character. Do not stop at
+  the first ceiling you construct.
+
 ## Print regressions hide behind unpinned comparisons (2026-09-11, Character Generators)
 
 From the Dredd redesign. Both of these produce a confident wrong answer.
@@ -108,6 +126,13 @@ end, but every one of them nearly did.
   the first few entries of one list rather than intersecting the sets. The real
   overlap was six. It reached Xero and shaped a ruling before Character
   Generators caught it. Intersect the sets; never eyeball a count.
+- **Confident totals are the recurring failure, on both sides.** Three times in
+  one day a lane stated a number it had not re-derived at the moment of stating
+  it, and once a summary contradicted its own detail in the same message ("all
+  eight generators floored", above a remaining-work list naming apegenerator as
+  outstanding). Comms made the same class of error with a set-membership count.
+  Re-derive a total before you state it, and read a summary against the detail
+  beneath it.
 - **Xero answered the same question in two places** - once through Comms, once
   directly to a lane. The answers happened to match. Route through Comms so they
   cannot diverge.
