@@ -150,8 +150,17 @@ should NOT be merged.
       the list", so assume the row landed with site=table. Harmless but it will
       show in /mailinglist. There is NO delete affordance -
       components/MailingListAdmin.tsx only selects - so removing it needs one
-      SQL statement in the Supabase dashboard. Owner: Xero, or tell me and I
-      will write the statement for him to run.
+      SQL statement in the Supabase dashboard. Owner: Xero - asked for it to be
+      deleted 2026-09-12 and it CANNOT be done from here: the Supabase CLI has
+      no arbitrary-SQL subcommand, and the only remote write paths are a
+      migration push (which would risk carrying other pending migrations into
+      the revenue DB) or psql with the database password. Statement handed to
+      him instead, for the dashboard SQL editor:
+          select id, email, site, source, created_at from public.launch_signups
+            where email = 'secret-address@example.com';
+          delete from public.launch_signups
+            where email = 'secret-address@example.com';
+      Scoped by an address that could only have come from this session.
       LESSON, worth more than the row: any form submitted against this hub's
       dev server hits PRODUCTION data. There is no local Supabase for TheTable.
 - [ ] tasks/puffer-handoff-2026-07-29.md - untracked and badly stale (C:\thetable
