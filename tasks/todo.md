@@ -63,11 +63,19 @@ attention on an unverified claim.
 
 ## Landing page
 
-- [ ] Landing render last confirmed by DOM measurement only (screenshot tool was
-      timing out): geometry/aspect/overflow are numerically verified but the final
-      render was never eyeballed, and the page has changed since (Twilight 2000
-      tile, tile reorder). STATUS: low priority. Consider a landing-render smoke
-      worksheet once someone re-verifies visually. Owner: HP / Comms.
+- [x] Landing render VISUALLY CONFIRMED 2026-09-11 (HP) on the LIVE site at a
+      1024px viewport - the screenshot tool is working again, so the "never
+      eyeballed" gap is closed. Seen: masthead row (logo + account button side by
+      side), all three wordmarks full-column with their taglines on one line, and
+      the generator row carrying the Twilight 2000 cover in its new order.
+      Measured alongside: wrap 780px centred, each mark 740px ending at x=875,
+      documentElement.scrollWidth 1009 vs innerWidth 1024 - no horizontal
+      overflow; taglines 11px, 1 line each.
+      NOTE for whoever reads a capture next: a mid-scroll screenshot LOOKED
+      horizontally cut (wordmark and tagline running off the right edge). That is
+      a pane capture artifact - it grabbed ~800px of a 1024px viewport - NOT a
+      page defect. Verified by measurement before believing the picture.
+      No smoke worksheet needed. Owner: HP (closed).
 
 ## Name pools across the generators (investigated 2026-09-11, Puffer Fish)
 
