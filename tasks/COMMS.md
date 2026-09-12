@@ -31,6 +31,27 @@ ANSWERED apply identically to the PDF.
 
 Owning lane: Character Generators. Comms: put this to Xero.
 
+### 3. Mothership VTT - repo/deploy topology (added 2026-09-11, Puffer Fish)
+
+New project, planning stage (see tasks/mothership-vtt-architecture.md). Two
+questions, both need an answer before any code:
+
+1. Where does it live?
+   (a) own repo + own Vercel project + own Supabase project, proxied at
+       /mothershipVTT - RECOMMENDED. Matches the generators' convention and
+       keeps real player accounts/characters off the shared Tapestry
+       Supabase, which the standalone-first decision was drawn to avoid.
+   (b) folded into TheTable's own Next.js app, reusing the shared Tapestry
+       Supabase - less infra, but mixes real player data into the shared
+       pool ahead of Tapestry 1.0.
+
+2. Auth model for players (not Xero)?
+   (a) full email/password accounts, same as TheTable/Tapestry
+   (b) lighter - a shareable campaign link + a name, no account
+   (c) something else he names
+
+Owning lane: Puffer Fish. Comms: put this to Xero.
+
 ## ANSWERED
 
 *(dated log, newest first)*
