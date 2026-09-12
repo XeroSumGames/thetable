@@ -4,6 +4,22 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - Table | HP gets its own worktree
+
+**What:** Created worktree ../TheTable-hp on branch lane/hunt-peck. Xero
+approved (via Comms), mirroring MeSuite.
+
+**Why:** Puffer Fish, HP, and Character Generators were all running out of the
+one main checkout (D:\Coding\VTTs\TheTable). Two-plus sessions editing one
+working tree means the last save silently wins - this has cost rework on Tapestry.
+
+**Still to do (Xero):** the running Table | HP session is still homed in the main
+checkout; a session's cwd is fixed at launch, so HP must be re-opened as a new
+session in D:\Coding\VTTs\TheTable-hp to actually use the worktree. Until then the
+worktree exists but HP is still on main. Table | Character Generators is also
+still on the shared main checkout - its own worktree is an open question (see
+COMMS if it gets filed).
+
 ## 2026-09-11 - Stood up a Comms channel (4th session)
 
 **What:** Added a Comms lane for TheTable, matching Tapestry and TheTableau.
