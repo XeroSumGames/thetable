@@ -17,33 +17,34 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 15. Does "exempt" mean leave it alone, or merely not required? (added 2026-09-11, Character Generators)
-
-One word settles it, and it decides whether a shipped change gets reverted.
-
-The prose-only ruling exempts glyphs inside fixed-size boxes. Before that ruling
-existed, the lane raised `space1999generator`'s `.die-pip` from 12px to 14px.
-*Verified by Comms:* `.die-pip` is a fixed 24x24 box with centred content, so it
-WOULD have qualified as exempt. 14px fits inside 24px and the lane's sweeps
-found no overflow at 1280, 600 or 390. Nothing is broken either way.
-
-  (a) exempt means NOT REQUIRED - raising one anyway is fine, `.die-pip` stays
-      at 14px. RECOMMENDED: the exemption exists because a fixed box cannot
-      always accommodate larger text, and here it can
-  (b) exempt means LEAVE UNTOUCHED - the lane reverts `.die-pip` to 12px, one
-      line
-
-*Comms agrees with the lane's OTHER judgement call and is not asking about it:
-walkingdead's `.keytag` was raised to 14px and read as prose. Verified - it has
-no width or height, is sized by padding, and its content is the word "Key", so
-it grew 31px to 38px to fit. The exemption's rationale does not apply to a box
-that can grow. That one is right as shipped.*
-
-Owning lane: Character Generators. Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Does "exempt" mean leave alone, or merely not required? -> NOT REQUIRED (a)
+
+Filed by Character Generators, which had raised space1999generator's `.die-pip`
+from 12px to 14px before the prose-only ruling existed and offered to revert it.
+*Verified by Comms:* `.die-pip` is a fixed 24x24 box with centred content, so it
+would have qualified as exempt; 14px fits inside 24px and no overflow was found
+at 1280, 600 or 390.
+
+**Xero: (a) exempt means NOT REQUIRED.** Raising an exempt element anyway is
+fine. `.die-pip` stays at 14px; nothing is reverted. The exemption exists
+because a fixed box cannot always accommodate larger text - where it can, the
+larger text is welcome.
+
+Practical effect for the remaining work: exempt is a floor-compliance carve-out,
+not a prohibition. A lane may raise a glyph container when it fits, and must not
+when it would overflow. Both `.keytag` (raised, read as prose - verified correct,
+it is padding-sized with the word "Key" as content and grew 31px to 38px) and
+`.die-pip` (raised, exempt but fitting) stand as shipped.
+
+*Closes the 14px floor questions. Six of eight generators compliant; dredd and
+apegenerator remain, both already ruled on.* Routed to Character Generators
+2026-09-11.
 
 ### 2026-09-11 - Dredd: fold the floor pass into its redesign? -> YES, FOLD IT (a)
 
