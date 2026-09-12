@@ -30,6 +30,11 @@ end, but every one of them nearly did.
   one described which sheet box a graphic covered without having measured it.
   Both were caught by checking at source before relaying. Neither lane was being
   careless - a plausible-sounding citation is just very easy to pass along.
+- **Comms quoted a set-membership figure from the head of a list.** Routing the
+  callsign ruling, Comms said two name pools shared three entries, having read
+  the first few entries of one list rather than intersecting the sets. The real
+  overlap was six. It reached Xero and shaped a ruling before Character
+  Generators caught it. Intersect the sets; never eyeball a count.
 - **Xero answered the same question in two places** - once through Comms, once
   directly to a lane. The answers happened to match. Route through Comms so they
   cannot diverge.
