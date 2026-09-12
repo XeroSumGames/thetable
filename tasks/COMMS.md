@@ -17,33 +17,31 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 9. Does the 2300AD floor pass also clear the 12px footers? (added 2026-09-11, Comms)
-
-Small, follows directly from the (b) ruling on 2300AD. One word answers it.
-
-*Measured by Comms on the LIVE bytes 2026-09-11, after the push:* the 14px floor
-pass worked - live twilight2000's 8-at-12px and 4-at-13px are gone. What remains
-across the generators is a page footer at 12px: twilight2000 1, traveller 1,
-2300ad 9. All are `class="footer no-print"`, so it is on-screen prose, not print
-styling, and it breaks the 14px floor.
-
-*Correction to the lane's report, which called the residue a single `.opt-box`
-11px rule:* the opt-box is real and is a tick glyph inside a 16x16 checkbox
-rather than prose, so leaving it is defensible. But it is not the only residue -
-the 12px footer sits alongside it on both twilight2000 and traveller.
-
-  (a) yes - fold the footers into the 2300AD standalone pass and do the same one
-      line on traveller and twilight2000 while it is open. RECOMMENDED, it is the
-      same edit and leaves no known floor violation anywhere
-  (b) no - 2300AD only, leave the footers at 12px on all three
-  (c) leave footers out of the floor entirely - he may simply not count a footer
-      as on-screen prose, in which case say so and Comms will stop flagging it
-
-Owning lane: Character Generators. Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - Does the 2300AD floor pass also clear the 12px footers? -> YES (a)
+
+Raised by Comms after measuring the LIVE bytes post-push. The 14px floor pass
+worked - live twilight2000's 8-at-12px and 4-at-13px are gone - but a page
+footer at 12px remains: twilight2000 1, traveller 1, 2300ad 9. All are
+`class="footer no-print"`, so it is on-screen prose, not print styling.
+
+**Xero: (a) yes.** Fold the footers into the 2300AD standalone floor pass and do
+the same edit on traveller and twilight2000 while it is open. After this there
+should be no known 14px violation anywhere.
+
+Explicitly still allowed to stay: the `.opt-box` 11px rule. It sizes a tick
+glyph inside a 16x16 checkbox, not prose, and it predates the floor pass in
+Xero's own commit. Character Generators was right to leave it; it is not part of
+this job.
+
+Scope, measured by Comms on the live bytes so the lane does not rediscover it:
+2300ad 9 footer rules plus its 16 other sub-14px rules, traveller 1, twilight2000
+1. Routed to Character Generators 2026-09-11.
 
 ### 2026-09-11 - 2300AD is under the 14px floor: fix when? -> NOW, STANDALONE (b)
 
