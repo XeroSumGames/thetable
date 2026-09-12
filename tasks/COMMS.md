@@ -94,10 +94,21 @@ account with the link reading "I already have an account". The auth wall is
 exactly where verification has to stop. https://mothership.xerosumgames.com does
 NOT resolve - see item 2.
 
-**2. The Wix DNS record.** `mothership` CNAME -> `cname.vercel-dns.com`. Not
-blocking; the app works on the .vercel.app alias, which is why the worksheet
-points there. His own A24 notes warn Wix is finicky about subdomain CNAMEs; the
-recorded fallback is hosting under distemperverse.com.
+**2. The Wix DNS record (Q2).** Not blocking; the app works on the .vercel.app
+alias, which is why the worksheet points there.
+
+*Measured by Comms 2026-09-12, and it corrects the handoff:* xerosumgames.com is
+on Wix nameservers (ns0/ns1.wixdns.net), confirmed. `mothership.xerosumgames.com`
+does not resolve at all - non-existent domain, no record of any kind. But the
+sibling that already works, `thetable.xerosumgames.com`, resolves to **76.76.21.21
+via an A record**, NOT a CNAME to cname.vercel-dns.com as the handoff states.
+
+That matters because his own A24 notes warn Wix is finicky about subdomain
+CNAMEs, and the A record is very likely why thetable works. So the instruction
+given to him is: add the domain in Vercel and use whatever record ITS panel
+specifies, and if Wix refuses or mangles a CNAME, fall back to an A record to
+76.76.21.21 - the known-good configuration already live on this exact domain.
+The recorded last-resort fallback remains hosting under distemperverse.com.
 
 **3. DELETE tasks/puffer-handoff-2026-07-29.md - ANSWERED 2026-09-12: yes.**
 Deleted the same day. It was UNTRACKED, so there is no git history to recover it
