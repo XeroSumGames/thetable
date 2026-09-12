@@ -38,6 +38,19 @@ non-human canon names, and satirical wordplay respectively - not in question).
       curated flavor)
   (c) something else he names
 
+*Verified by Comms 2026-09-11, every claim checked at source:*
+
+- *Mothership: src/data/names.json holds given=40, family=30, plus callsigns=25
+  and pronouns=6 that the question does not mention. Its `_note` field really
+  does state the rationale: "Mothership's fiction is blue-collar, multinational
+  and unglamorous, so these are ordinary working names rather than heroic ones."*
+- *Space:1999: NAMES_F=36, NAMES_L=28 in index.html.*
+- *The 3-way duplicate is real and exact: 2300ad-generator, traveller-generator
+  and walkingdead-rpg each carry a 1000-entry pool, all three byte-identical
+  (sha1 0198a83a7e4a). Currently in sync with nothing keeping them that way.*
+- *Ape carries its own APE_NAMES=30. Twilight 2000 and Dredd use neither the
+  shared pool nor a matching array, so "separate regardless" holds trivially.*
+
 Owning lane: Character Generators (their files). Comms: put this to Xero.
 
 ## ANSWERED
