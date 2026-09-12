@@ -45,10 +45,8 @@ questions, both need an answer before any code:
        Supabase - less infra, but mixes real player data into the shared
        pool ahead of Tapestry 1.0.
 
-2. Auth model for players (not Xero)?
-   (a) full email/password accounts, same as TheTable/Tapestry
-   (b) lighter - a shareable campaign link + a name, no account
-   (c) something else he names
+2. Auth model for players (not Xero)? **ANSWERED 2026-09-11: (a) full
+   email/password accounts, same as TheTable/Tapestry.**
 
 *Checked by Comms before relaying 2026-09-11 (two citations needed correcting,
 neither fatal to the question):*
@@ -65,6 +63,29 @@ neither fatal to the question):*
   in the shared pool, which is what the VTT would do.*
 - *Proxy convention confirmed real: GENERATOR_REWRITES in next.config.ts, seven
   generators each on their own Vercel deployment.*
+
+**Xero 2026-09-11 on question 1:** he does not want to pick the topology cold.
+Constraint given: it must be either `mothership.xerosumgames.com` or
+`thetable.xerosumgames.com/mothershipVTT`, and whatever is chosen becomes the
+CONSISTENT pattern for every future third-party VTT. He asked Comms to suggest.
+
+**Comms suggestion (a recommendation only - the call is Xero's, and Puffer Fish
+owns the architecture):** split the convention on a real technical property
+rather than taste.
+
+- *Generators stay as they are:* proxied subpath on thetable.xerosumgames.com.
+  Verified 2026-09-11 - all eight generator repos are a single static
+  index.html with no build step and no router, which is exactly why a rewrite
+  works for them.
+- *VTTs get their own subdomain:* `<game>.xerosumgames.com`, own repo, own
+  Vercel project, own Supabase project, linked from the hub. So
+  `mothership.xerosumgames.com`.
+
+Why, in one line: a Next.js VTT behind a path rewrite must carry a `basePath`
+that stays permanently in sync with the hub's rewrite table, a coupling the
+static generators never pay; a subdomain removes it, isolates auth storage per
+app, and costs one DNS record per VTT. Under this rule the hub stays the
+directory rather than the proxy for full apps.
 
 Owning lane: Puffer Fish. Comms: put this to Xero.
 
