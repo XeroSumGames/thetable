@@ -4,6 +4,73 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - Mothership VTT visual direction: one design, two modes (dark Terminal / light Zine)
+
+**What:** Xero picked from three mockup directions and reframed them - Terminal
+and Zine are not competing options, they are the DARK and LIGHT modes of one
+design. Signal (the clean modern treatment) is dropped.
+
+- **Dark = Terminal.** Amber phosphor (#ffb400) on near-black (#07080a),
+  JetBrains Mono throughout, 1px hairline rules, scanline texture, ALL CAPS
+  labels. This is the DEFAULT - The Table's hub is forced-dark, so the VTT
+  opens dark and matches.
+- **Light = Zine.** Warm paper (#e9e3d3), near-black warm ink (#181410),
+  Archivo Black display + Work Sans body, 2.5px hard rules, halftone dots,
+  stamp red (#a8241c) as the single accent. Mirrors the actual printed
+  rulebooks.
+
+**This is a full IDENTITY swap, not a palette swap** - fonts, border weight,
+texture and letter case all change with the mode, not just colors. That is
+deliberate (each mode is faithful to a different real artifact: a ship
+terminal and a printed zine) but it has a standing cost: every new component
+has to be designed twice, for the life of the project. Accepted knowingly.
+
+**The constraint that keeps it affordable:** structure and field positions are
+IDENTICAL across both modes. Only the token layer changes. Toggling must never
+move anything on the page. Implementation follows from that - one set of CSS
+custom properties covering --bg/--panel/--ink/--ink-dim/--line/--line-width/
+--accent/--font-display/--font-body/--texture/--case, swapped as a block.
+
+**What would make us revisit:** if maintaining two identities starts slowing
+feature work, collapse to a shared type/border system and keep only the color
+swap - the layout is already mode-independent, so that retreat is cheap.
+
+Mockup: https://claude.ai/code/artifact/3d4ccdc6-380f-420a-b690-0f9a5e67aeb7
+
+## 2026-09-11 - Third-party VTTs get their own subdomain; generators keep the proxied subpath
+
+**What:** a standing rule for how apps reach users on this property, not a
+one-off for Mothership.
+
+- **Static character generators** stay proxied subpaths on
+  thetable.xerosumgames.com/<slug> (the existing GENERATOR_REWRITES pattern).
+  All eight are a single static index.html - no build step, no router - which
+  is exactly why a rewrite works for them.
+- **Every third-party-IP VTT gets `<game>.xerosumgames.com`**: own repo, own
+  Vercel project, own Supabase project, linked from the hub rather than
+  proxied through it. Mothership is therefore
+  **mothership.xerosumgames.com**, superseding the /mothershipVTT framing the
+  planning doc was written around.
+- **Players get full email/password accounts on the VTT's OWN Supabase
+  project** - never the shared Tapestry pool.
+
+**Why:** a Next.js app behind a path rewrite must carry a `basePath` kept
+permanently in sync with the hub's rewrite table. That is a live coupling
+between two repos that the static generators never pay, and it breaks in a
+way that is annoying to diagnose. A subdomain removes the coupling and
+isolates auth storage per app; the cost is one DNS record per VTT. The hub
+stays the DIRECTORY for full apps and the PROXY only for static ones.
+
+**Xero's framing:** he declined to pick cold and asked for a rule that would
+be applied consistently to every future third-party VTT, then agreed with the
+above. So the rule is the decision - Mothership is just its first application.
+
+**Two citations corrected while settling this** (both mine, worth not
+re-citing): the "keep The Table standalone" constraint lives at
+README.md:37-39, not decisions.md, and gates only the monorepo consolidation.
+And /a24 only ever READ existing thriver accounts - it never created player
+accounts in the shared pool, so it was not precedent for putting players there.
+
 ## 2026-09-11 - Model assignment per lane
 
 **What:** Puffer Fish (hub) Opus 5; Table | HP Sonnet 5; Character Generators

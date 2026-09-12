@@ -1,6 +1,8 @@
 # Mothership VTT - architecture plan (DRAFT, pending Xero's calls)
 
-Target: thetable.xerosumgames.com/mothershipVTT. Planning only - no code until
+Target: **mothership.xerosumgames.com** (own subdomain - SUPERSEDES the original
+/mothershipVTT framing; see decisions.md 2026-09-11 "Third-party VTTs get their
+own subdomain"). Planning only - no code until
 scope + visual direction are confirmed (see COMMS.md OPEN and the mockup sent
 directly in chat). Source material: E:\Documents\My RPG's\Mothership (core
 rules) and D:\Coding\RPG Character Generators\mothership-generator (Char-Gen's
@@ -105,11 +107,14 @@ Decided (architecture calls, mine to make - not routed to Xero):
   sheet renderer/importer.
 - **Transport:** a plain "Download character JSON" button, no live coupling.
   Ruled out a fetch URL or postMessage handshake - both imply the VTT
-  iframes or reaches into the generator, which conflicts with the existing
-  proxy-rewrite architecture (generators are served same-origin via rewrite,
-  not embedded). The VTT gets a matching "Import character" file upload -
-  the exact pattern /a24 already ships (Import backup), reused rather than
-  invented.
+  iframes or reaches into the generator. This is now MORE right, not less,
+  under the subdomain decision: the generators stay on
+  thetable.xerosumgames.com/<slug> while the VTT lives on
+  mothership.xerosumgames.com, so they are cross-origin to each other and any
+  live handshake would need CORS or postMessage plumbing for no gain. A file
+  the player downloads and uploads crosses that boundary for free. The VTT
+  gets a matching "Import character" upload - the exact pattern /a24 already
+  ships (Import backup), reused rather than invented.
 - **Versioning:** `schemaVersion` from day one (start at 1), so a future VTT
   reading an old export can tell.
 
@@ -118,39 +123,58 @@ implementation the other 3 engine-based generators follow. Not holding up the
 Mothership deploy for this - it is additive to an already-verified generator,
 not a redesign.
 
-## 4. Open architecture questions
+## 4. Architecture questions - ANSWERED 2026-09-11
 
-Two genuine forks that change the shape of everything downstream. Full
-question text with options is in tasks/COMMS.md OPEN (routed there per
-protocol, not decided here):
+Both forks are settled (COMMS ANSWERED, and decisions.md carries the durable
+convention). Recorded here because they shape everything below:
 
-- **Repo/deploy topology:** own repo + own Vercel project + own Supabase
-  project, proxied at /mothershipVTT (matches the generators' "own repo"
-  convention AND the standing decision to keep The Table standalone until
-  Tapestry 1.0 - see decisions.md) vs. folded into TheTable's existing
-  Next.js app reusing the shared Tapestry Supabase (matches how /a24 was
-  built, less infra to stand up). Recommendation: own Supabase project -
-  real players beyond Xero will have accounts/characters here, which is a
-  different trust boundary than the thriver-only /a24, and mixing it into
-  the shared pool blurs the "no shared platform DB yet" line that was drawn
-  on purpose.
-- **Auth model:** the Mothership table is presumably Xero + a handful of
-  actual players, not the public. Full email/password accounts (mirrors
-  TheTable/Tapestry) vs. something lighter - a shareable campaign link +
-  a name, no account at all (common in small VTT tools). This decides
-  whether Tier 3 needs a signup flow or not.
+- **Topology: own subdomain, `mothership.xerosumgames.com`.** Own repo, own
+  Vercel project, own Supabase project, linked from the hub. NOT a proxied
+  subpath. Why the original /mothershipVTT proposal was wrong: a Next.js app
+  behind a path rewrite has to carry a `basePath` kept permanently in sync
+  with the hub's rewrite table - a coupling the eight static generators never
+  pay, because each is a single index.html with no build step and no router.
+  A subdomain removes that coupling and isolates auth storage per app, for
+  the price of one DNS record.
+- **Auth: full email/password accounts** on the VTT's OWN Supabase project,
+  same shape as TheTable and Tapestry - NOT the shared Tapestry pool, and
+  not a lighter link+name scheme. Tier 3 therefore needs a real signup flow.
 
-## 5. Phase 0 gate (before any code)
+Two of my own citations were wrong when I filed these, corrected by Comms -
+worth keeping so they don't get re-cited: the "keep The Table standalone"
+decision is **README.md:37-39, not decisions.md**, and it gates only the
+monorepo consolidation, nothing else. And the /a24 precedent only ever READ
+existing thriver accounts - it has never created a player account in the
+shared pool, so it was never precedent for putting players there.
 
-Per Xero: a visual mockup + font/color decision happens before implementation
-starts, independent of the two questions above (the character-sheet screen
-exists in every scope tier). Sent directly in chat as a design-canvas
-Artifact with a few direction options grounded in Mothership's actual
-zine/horror-sci-fi print identity, not a generic app look.
+## 5. Phase 0 gate - CLEARED 2026-09-11
+
+Xero's rule was: visual mockup + font/color settled before any implementation.
+Three directions were put up (Terminal / Zine / Signal); he reframed them
+rather than picking one - **Terminal and Zine are the dark and light modes of
+one design**, Signal is dropped. Full call and the token contract that follows
+from it are in decisions.md; mockup canvas:
+https://claude.ai/code/artifact/3d4ccdc6-380f-420a-b690-0f9a5e67aeb7
+
+The build constraint that falls out of it: structure and field positions are
+identical in both modes, only the token layer swaps, and toggling must never
+move anything on the page. Design every new component against the token names,
+never against a literal color or font.
 
 ## 6. Status
 
-Planning only. No code, no repo, no Supabase project created. Waiting on:
-(a) COMMS answers to the two architecture questions above, (b) Xero's pick
-from the mockup, (c) Character Generators finishing its current work
-(Mothership generator + whatever's queued after) before build starts.
+**Not started - no repo, no Vercel project, no Supabase project, no code.**
+
+Cleared: topology + auth (subdomain, own Supabase, full accounts), visual
+direction (dark Terminal / light Zine), the character-import contract
+(section 7, and the Mothership generator already emits conforming JSON).
+
+Remaining before Tier 1 can start, in order:
+1. Stand up the infra: repo, Vercel project, Supabase project, DNS record for
+   mothership.xerosumgames.com.
+2. Build the two-mode token layer FIRST, before any component - it is the
+   thing every later screen depends on.
+3. Tier 1 character sheet + dice roller against those tokens.
+
+No dependency on Character Generators any more - Mothership generator shipped
+2026-09-11 and its JSON export is live, so the import target exists.
