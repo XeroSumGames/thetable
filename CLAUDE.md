@@ -29,12 +29,26 @@ worktree, move yourself with `mcp__ccd_directory__change_directory` before you
 edit anything - two sessions in one working tree means the last save silently
 wins, which has already cost rework on Tapestry.
 
-| Lane | Worktree | Branch |
-| --- | --- | --- |
-| Table \| Puffer Fish (hub) | D:\Coding\VTTs\TheTable | main |
-| Table \| HP (features) | D:\Coding\VTTs\TheTable-hp | lane/hunt-peck |
-| Table \| Character Generators | D:\Coding\VTTs\TheTable-chargen | lane/character-generators |
-| Table \| Comms | D:\Coding\VTTs\TheTable-comms | lane/comms |
+| Lane | Worktree | Branch | Model |
+| --- | --- | --- | --- |
+| Table \| Puffer Fish (hub) | D:\Coding\VTTs\TheTable | main | Opus 5 |
+| Table \| HP (features) | D:\Coding\VTTs\TheTable-hp | lane/hunt-peck | Sonnet 5 |
+| Table \| Character Generators | D:\Coding\VTTs\TheTable-chargen | lane/character-generators | Opus 5 |
+| Table \| Comms | D:\Coding\VTTs\TheTable-comms | lane/comms | Opus 5 |
+
+## Check your own model at session start
+
+Compare your model against the table above (`get_session` with `"self"`). A new
+or restarted session inherits the app default, NOT its lane's assignment, so
+drift is the normal case and not the exception - it has already happened three
+times (2026-09-11, and two lanes at once on 2026-09-12, caught by Xero and not
+by us).
+
+**A session cannot change its own model.** If yours is wrong, say so in your
+first reply and ask Xero to set it in the model menu; do not quietly carry on.
+You CAN fix another session with `mcp__ccd_session_mgmt__set_session_model`, so
+the hub should correct any lane it finds adrift. Rationale for who gets what is
+in `tasks/decisions.md` under "Model assignment per lane".
 
 ## Other standing files
 
