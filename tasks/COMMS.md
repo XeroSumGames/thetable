@@ -17,7 +17,29 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+### 15. Does "exempt" mean leave it alone, or merely not required? (added 2026-09-11, Character Generators)
+
+One word settles it, and it decides whether a shipped change gets reverted.
+
+The prose-only ruling exempts glyphs inside fixed-size boxes. Before that ruling
+existed, the lane raised `space1999generator`'s `.die-pip` from 12px to 14px.
+*Verified by Comms:* `.die-pip` is a fixed 24x24 box with centred content, so it
+WOULD have qualified as exempt. 14px fits inside 24px and the lane's sweeps
+found no overflow at 1280, 600 or 390. Nothing is broken either way.
+
+  (a) exempt means NOT REQUIRED - raising one anyway is fine, `.die-pip` stays
+      at 14px. RECOMMENDED: the exemption exists because a fixed box cannot
+      always accommodate larger text, and here it can
+  (b) exempt means LEAVE UNTOUCHED - the lane reverts `.die-pip` to 12px, one
+      line
+
+*Comms agrees with the lane's OTHER judgement call and is not asking about it:
+walkingdead's `.keytag` was raised to 14px and read as prose. Verified - it has
+no width or height, is sized by padding, and its content is the word "Key", so
+it grew 31px to 38px to fit. The exemption's rationale does not apply to a box
+that can grow. That one is right as shipped.*
+
+Owning lane: Character Generators. Comms: put this to Xero.
 
 ## ANSWERED
 
@@ -91,6 +113,26 @@ markup wants.
 ruling, and the pass that shipped (84c9994, live blob 0c4f8485, verified on both
 hostnames by Comms) is complete as it stands.* Routed to Character Generators
 2026-09-11.
+
+**Scoping consequence, verified by Comms 2026-09-11:** `.step-num` is EXEMPT
+under this ruling, not shared chrome to raise as Comms had earlier scoped it. It
+is a fixed circle - 20x20 in dredd-generator, 17x17 in apegenerator,
+`border-radius:50%` - containing a digit or a checkmark. That shrinks the
+remaining job in both generators slightly.
+
+**Classified audit of all eight, lane's figures, spot-checked by Comms:**
+traveller / 2300ad / twilight2000 zero prose + 1 exempt (`.opt-box`);
+mothership and walkingdead zero prose + 0 exempt; space1999 zero prose + 2
+exempt (`.sel-badge`, `.pk-box`); dredd 32 prose + 3 exempt; apegenerator 36
+prose + 3 exempt. Six of eight compliant; the two outstanding are exactly the
+two Xero has now ruled on.
+
+**Reconciles an earlier unexplained discrepancy.** Comms' static scan of
+dredd-generator said 53 sub-14px against the lane's 35. The difference is
+print-sheet sizes written as inline `style=` strings inside the `printSheet()`
+JS function - roughly eighteen of them, at 7px to 11px. They are print output,
+not screen, and correctly out of scope. Neither count was wrong; they were
+counting different things.
 
 ### 2026-09-11 - Does the 14px floor apply to the four hand-built generators? -> YES (a)
 
