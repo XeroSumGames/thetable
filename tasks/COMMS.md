@@ -102,11 +102,17 @@ and unglamorous"); Space:1999's includes actual show-canon surnames. Twilight
 2000, Ape, and Dredd stay separate regardless (period/nationality-locked,
 non-human canon names, and satirical wordplay respectively - not in question).
 
-  (a) keep them bespoke, as curated - RECOMMENDED. The small lists read as
-      deliberate genre-fit, not filler; folding in the generic 1000-pool would
-      dilute that on every random roll.
+  (a) keep them bespoke, as curated - RECOMMENDED, now for a mechanical reason
+      too, not just tone. Character Generators found: the shared pool is
+      SINGLE given names only. Traveller/2300AD fake a surname today by
+      drawing from it twice and joining (a wart, already flagged in their own
+      code). Mothership's pool is properly split into given+family; switching
+      it to the shared pool would mean LOSING that structure, not gaining
+      names - a straight downgrade, not a tradeoff.
   (b) widen them to also draw from the shared 1000-pool (more variety, less
-      curated flavor)
+      curated flavor, and mechanically worse per above for Mothership - likely
+      the same for Space:1999's given+surname split, not independently
+      verified)
   (c) something else he names
 
 Owning lane: Character Generators (their files). Comms: put this to Xero.

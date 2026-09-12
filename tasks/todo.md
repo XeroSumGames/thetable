@@ -86,17 +86,27 @@ should NOT be merged.
 | apegenerator | `APE_NAMES` inline | flat list | 30 | YES - canon Planet of the Apes ape names |
 | dredd-generator | `MC1_FIRST`/`MC1_LAST` inline | given (96) + surname (96), combinatorial | 192 words | YES - satirical dystopian wordplay, manually derived FROM the 1000-pool, not real names |
 
-- [ ] **Confirmed real problem, not a design call:** walkingdead-rpg's 1000-name
-      NAME_POOL was already copy-pasted (each copy's own file says "Xero asked
-      for the same pool here rather than a second list to maintain") into
-      traveller-generator and 2300ad-generator's names.json. Verified
-      byte-identical across all 3 right now (set-equal, 1000/1000/1000) - but
-      it's 3 physical files with NO sync mechanism, so the next edit to any one
-      of them (Xero asking to add names, say) silently drifts the other two out
-      of sync with no warning. FIX: one canonical source (propose: hosted in
-      TheTable, since it's the hub all 8 already proxy under) + a small sync
-      script the 3 consumers run instead of hand-copying. Proposing to
-      Character Generators (their repos) rather than doing it myself.
+- [x] **Confirmed real problem, plan settled 2026-09-11.** Independently
+      re-verified by Character Generators: all 3 pools are the same 1000 names
+      (sha f18df6d6aa on a sorted hash, set-equal in every pairing); Mothership
+      is correctly separate (70 entries, different sha). WRINKLE Char-Gen
+      found: walkingdead-rpg's pool is an inline NAME_POOL in index.html (no
+      src/, hand-built, never re-assembled), NOT a names.json like the other
+      two - so the sync script needs two modes: a straight file copy for
+      traveller-generator/2300ad-generator, and marker-based injection into
+      walkingdead-rpg's index.html (same pattern already used for the Ape
+      sheet embed). DECIDED (decisions.md): canonical file is
+      shared/name-pool.json in TheTable (precedent: TheTable/public already
+      holds every generator's cover art); Character Generators builds and owns
+      tools/sync-name-pool.py (default = write all 3 consumers, --check =
+      report drift only, no writes - the part that actually catches silent
+      drift going forward). No deploy-time coupling - purely a local dev tool.
+      Lands on lane/character-generators for Puffer Fish's merge, like Mothership.
+- [ ] Traveller/2300AD fake a surname by drawing from the flat 1000-pool
+      TWICE and joining - a wart Character Generators already flagged in a
+      code comment, not new. Cosmetic, not blocking anything, not part of the
+      centralization fix. Low priority - revisit if/when someone's touching
+      those generators' name logic anyway.
 - [ ] dredd-generator's MC1_FIRST/LAST are worth noting as a THIRD derivative
       of the same 1000-pool (manually curated into satirical compound-word
       parts, not names) - correctly bespoke, not a duplication bug, don't

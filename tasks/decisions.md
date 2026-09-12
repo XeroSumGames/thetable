@@ -4,6 +4,34 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - Canonical home for the shared name pool: shared/name-pool.json in TheTable
+
+**What:** the 1000-name pool duplicated across walkingdead-rpg (inline
+NAME_POOL), traveller-generator and 2300ad-generator (both src/data/names.json,
+verified byte-identical by Character Generators - sha f18df6d6aa on a sorted
+hash, set-equal in every pairing) gets ONE canonical source at
+shared/name-pool.json in TheTable, synced into the 3 consumers by a script
+Character Generators owns (tools/sync-name-pool.py in their lane, two modes:
+default writes, --check reports drift only and writes nothing).
+
+**Why here, not a generator repo:** precedent already exists - TheTable/public
+holds every generator's cover art, so shared generator content living in the
+hub is an established pattern, not a new coupling. Nominating one generator
+repo as canonical instead would depend on which repos a given checkout has
+cloned and break for anyone who only has one. No deploy-time coupling either
+way - Vercel serves the static index.html for these, never runs assemble.py,
+so this is a local dev-time tool with zero risk to the live sites.
+
+**The wrinkle that shaped this:** walkingdead-rpg has no src/ (hand-built,
+edited in place per the program rule, never re-assembled), so the sync script
+has two jobs, not one - a straight file copy for the two src/-based consumers,
+and marker-based injection into walkingdead-rpg's index.html (the same pattern
+Character Generators already uses for the Ape sheet embed).
+
+**What would make us drop it:** if a 4th consumer needed the pool and the
+marker-injection approach stopped scaling, revisit as a proper shared package -
+not needed at this size.
+
 ## 2026-09-11 - How lane branches reach main (shared/hot files only)
 
 **What:** For files every lane reads and a mistake in breaks the whole site -
