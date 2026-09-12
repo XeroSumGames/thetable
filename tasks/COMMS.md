@@ -17,40 +17,29 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 16. A Life Foundation emblem for the 2300AD masthead? (added 2026-09-11, Character Generators)
-
-NON-BLOCKING. The lane is building a CSS-drawn emblem so nothing waits on this,
-and the masthead is one element, so swapping art in later is a small change.
-
-*Verified by Comms 2026-09-11:* traveller-generator carries exactly one inlined
-`data:image/png;base64` asset, inside a block commented "Travellers' Aid Society
-masthead" - so Xero's actual TAS artwork really is what gives that frame its
-weight. 2300ad-generator has no inlined image at all and no equivalent asset in
-its repo. The redesign plan proposes Esperanto section subtitles as the
-distinguishing gift instead, the Life Foundation's official language per Core
-Book 1 p101.
-
-*Status 2026-09-11: the 2300AD redesign has SHIPPED with the CSS-drawn emblem
-(8b41c8d, live blob f3163944, verified by Comms). This question is now only
-whether he wants to replace it later, not whether anything waits.*
-
-  (a) CSS-drawn emblem, as built and shipped - nothing more needed from him
-  (b) he supplies art and the lane swaps it in later - base64-inlined exactly as
-      Traveller does. Recommended by the lane alongside (a); the two differ only
-      in whether he wants to supply something
-  (c) he supplies art and the lane HOLDS the masthead until he does - the only
-      option that blocks work
-
-*Not asked, because the repo already answers it: the old todo.md item about
-`public/TASLogo.png` being an unreferenced orphan is closed. Puffer Fish
-committed it at fb9e62c as Traveller source art, deliberately kept. No ruling
-needed.*
-
-Owning lane: Character Generators. Comms: put this to Xero.
+*(nothing open)*
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - A Life Foundation emblem for the 2300AD masthead? -> CSS EMBLEM STANDS (a)
+
+Filed by Character Generators as non-blocking; it built a CSS-drawn emblem so
+nothing waited, and the redesign shipped with it (8b41c8d, live blob f3163944,
+verified by Comms).
+
+**Xero: (a) keep the CSS-drawn emblem.** He is not supplying Life Foundation
+artwork. 2300AD's distinguishing gift stays the Esperanto section subtitles -
+the Life Foundation's official language per Core Book 1 p101 - rather than an
+inlined image.
+
+*Context verified by Comms: traveller-generator carries exactly one inlined
+`data:image/png;base64` asset, inside a block commented "Travellers' Aid Society
+masthead", so Xero's real TAS artwork is genuinely what gives that frame its
+weight. 2300AD has no equivalent asset and will not get one. If he ever changes
+his mind the masthead is one element and the swap is small.* Routed to Character
+Generators 2026-09-11.
 
 ### 2026-09-11 - Does "exempt" mean leave alone, or merely not required? -> NOT REQUIRED (a)
 
