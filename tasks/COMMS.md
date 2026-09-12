@@ -174,6 +174,19 @@ NOT resolve - see item 2.
 **2. The Wix DNS record (Q2).** Not blocking; the app works on the .vercel.app
 alias, which is why the worksheet points there.
 
+**Direct URL, resolved by Comms 2026-09-12 via `vercel teams ls`:**
+`https://vercel.com/xerosumgames-projects/mothership-vtt/settings/domains`
+
+*Xero could not find Domains because he was in TEAM settings (Billing,
+Members, Access Groups, Compliance...). Domains is a PROJECT-level tab.
+Team slug is `xerosumgames-projects`, display name "xerosumgames' projects";
+project is `mothership-vtt`; org id team_sN42g41yxJ62DxivPKSUCCuh, project id
+prj_DjmqfNdmeNmetnmdXco3MxFsI6v4, both from
+`D:\Coding\VTTs\mothership-vtt\.vercel\project.json`. The Vercel CLI is
+installed and authed on this box, so a session can resolve this rather than
+guess. Only xerosumgames.com and distemperverse.com are on the account,
+both third-party registered with third-party nameservers - Wix.*
+
 *Measured by Comms 2026-09-12, and it corrects the handoff:* xerosumgames.com is
 on Wix nameservers (ns0/ns1.wixdns.net), confirmed. `mothership.xerosumgames.com`
 does not resolve at all - non-existent domain, no record of any kind. But the
