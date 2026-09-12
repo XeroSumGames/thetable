@@ -17,9 +17,20 @@ Route every question for Xero and every testing ask to **Table | Comms** rather
 than to Xero directly. Check `tasks/decisions.md` and `tasks/todo.md` first - if
 they answer it, it is decided. Reproduce a defect live before filing it.
 
-Comms owns `tasks/COMMS.md` and `tasks/The Table Smoke Testing.xlsx` (one living
-workbook, one worksheet per test ask - never a new file, never a markdown test
-plan). Other lanes file into COMMS.md OPEN; Comms records ANSWERED.
+Comms owns `tasks/COMMS.md` and the smoke-test workbook (one living workbook,
+one worksheet per test ask - never a new file, never a markdown test plan).
+Other lanes file into COMMS.md OPEN; Comms records ANSWERED.
+
+**The workbook has ONE canonical copy and it is the Comms worktree's:**
+
+    D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx
+
+Read and cite THAT absolute path, always - never the copy in your own worktree.
+It is a tracked binary, so every worktree holds its own stale checkout that git
+cannot merge; on 2026-09-12 there were three different versions across four
+worktrees and Xero's filled-in results were read from the wrong one. Quote the
+full path back to him whenever you reference the workbook, so he never has to
+guess which copy you mean.
 
 ## Work in your own worktree
 
