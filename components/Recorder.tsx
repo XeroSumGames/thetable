@@ -19,7 +19,7 @@
 // unauthenticated site. Arm it by visiting any hub page with ?rec=1
 // once - it sticks in localStorage from then on. ?rec=0 disarms.
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { supabase, SUPABASE_URL } from '../lib/supabase'
 import {
@@ -32,17 +32,24 @@ import {
 const SCOPE = 'hub'
 
 export default function Recorder() {
-  const initOnce = useRef(false)
   const [recording, setRecording] = useState(false)
   const [armed, setArmed] = useState(false)
   const [count, setCount] = useState(0)
   const pathname = usePathname()
 
-  // One-time global init. React strict mode runs effects twice in dev;
-  // the ref guard stops us double-installing the listeners.
+  // Install on mount, remove on unmount, symmetrically.
+  // DO NOT add an "init once" ref guard here. Both parent implementations
+  // (TheTableau, TheTapestry) have one and it makes the recorder INERT in
+  // dev: strict mode runs the effect, runs the cleanup, then runs the
+  // effect again - and the guard turns that third step into a no-op, so
+  // the listeners the cleanup just removed are never re-installed.
+  // Nothing gets captured while the Record button still lights up, so it
+  // looks like it works. Caught on the VTT port by checking whether
+  // console.error had actually been patched. Production never
+  // double-invokes, which is why it went unnoticed upstream.
+  // addEventListener is idempotent for a given function reference and
+  // each run pairs with its own cleanup, so a guard protects nothing.
   useEffect(() => {
-    if (initOnce.current) return
-    initOnce.current = true
     ensureRecorder()
     startPeriodicFlush()
     setArmed(syncArmedFromUrl())
@@ -193,8 +200,7 @@ export default function Recorder() {
       window.fetch = origFetch
       off()
     }
-    // Mount-once: deliberately empty deps, and the ref guard above makes
-    // a re-invocation a no-op anyway.
+    // Deliberately empty deps: one install per mount lifecycle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

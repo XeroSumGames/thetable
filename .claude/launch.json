@@ -60,6 +60,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "-p", "3007"],
       "port": 3007
+    },
+    {
+      "name": "mothership-vtt-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "D:/Coding/VTTs/mothership-vtt", "run", "dev", "--", "-p", "3011"],
+      "port": 3011
     }
   ]
 }
