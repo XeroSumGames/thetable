@@ -117,24 +117,28 @@ reads this file to find where the counter is.
 
 ## OPEN
 
-### Q4. What actually happened at step 3 of the Mothership test? (added 2026-09-12, Comms)
+### Q5. A partial access token is in a PUBLIC repo (added 2026-09-12, Comms)
 
-He ran the Mothership VTT auth test 2026-09-12 and marked **step 3 Fail with no
-note**. It is the only result in the run that cannot be interpreted.
+Xero pasted the step-3 error screenshot into the smoke-test workbook, which is
+exactly the right thing to do - it turned an uninterpretable Fail into a
+diagnosed root cause in one move. But the screenshot shows a browser URL bar
+containing `#access_token=eyJ...`, and `github.com/XeroSumGames/thetable` is
+**PUBLIC** (`gh repo view`: isPrivate false). The workbook is committed there.
 
-Step 3 is "enter an email and password, click Create account". The step told him
-to STOP if the email-confirmation link errored. He did not stop, and steps 4, 7
-and 8 all PASSED - the sheet loaded, he signed out, he signed back in and the
-character persisted. So the account was created and works. Something about the
-step displeased him without blocking him.
+Assessed rather than alarmed: the token is TRUNCATED by the URL bar, so only the
+first portion is visible, and a Supabase access token expires in about an hour,
+so it was dead long before this was noticed. Real risk is low. The habit is the
+thing worth fixing.
 
-  (a) the confirmation email never arrived, but he got in anyway
-  (b) the confirmation link errored and he worked around it
-  (c) it worked but something looked wrong - an error flashed, wording was off
-  (d) something else - one line is enough
+  (a) crop the URL bar out of the image and re-commit - stops it appearing in
+      any future checkout. RECOMMENDED, Comms can do it
+  (b) leave it - it is partial and long expired
+  (c) purge it from git history too - possible, but it rewrites shared history
+      across four worktrees for a dead partial token
 
-Not routed to any lane until he answers: (a) and (b) are Supabase auth config,
-(c) is cosmetic, and they go to different fixes.
+Note for the future either way: screenshots for the workbook should have the URL
+bar cropped when a token can appear in it, and that now belongs in the
+smoke-test skill.
 
 ### ROUTED TO THE HUB, not awaiting Xero - two findings from the same run
 
