@@ -17,11 +17,392 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-*(nothing open)*
+*(nothing open for Xero)*
+
+### ROUTING - awaiting Puffer Fish, not Xero
+
+**Merge 4e1d92a from lane/character-generators into main.** Raised by Character
+Generators 2026-09-11; routed to Puffer Fish the same day; delivery FAILED, so
+this line is the copy that survives. Nothing here needs Xero.
+
+Adds two new directories to the hub repo: `shared/name-pool.json` (the one
+canonical copy of the 1000-name pool) and `tools/sync-name-pool.py` (writes it
+outward; `--check` reports drift and exits non-zero without writing). Not
+next.config-adjacent, so not under the merge gate - it goes to Puffer Fish
+because the canonical file has to live in the hub.
+
+*Verified by Comms at source before routing:* the canonical pool holds 1000
+names at sha1 0198a83a7e4a over the parsed array - the exact hash Comms derived
+independently from the three duplicated consumers earlier the same day, so it is
+genuinely the same pool and not a re-transcription. Consumers are the three that
+were duplicated: 2300ad-generator, traveller-generator, walkingdead-rpg. The
+file records Xero's bespoke-pools ruling in its own `_not_consumers` field
+rather than only in a commit message. walkingdead-rpg e3f132a is live and
+verified on the proxy, blob 84e8bf2b, and its entire diff is TWO inserted marker
+lines with the 1000-name array byte-identical - checked, not taken on report.
+
+Property not to break if anyone later tidies the writer: syncing an
+already-correct file must produce a BYTE-IDENTICAL result. The first version
+used a 2-space JSON indent where the consumers use one, turning a one-name edit
+into 1005 changed lines.
 
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - A Life Foundation emblem for the 2300AD masthead? -> CSS EMBLEM STANDS (a)
+
+Filed by Character Generators as non-blocking; it built a CSS-drawn emblem so
+nothing waited, and the redesign shipped with it (8b41c8d, live blob f3163944,
+verified by Comms).
+
+**Xero: (a) keep the CSS-drawn emblem.** He is not supplying Life Foundation
+artwork. 2300AD's distinguishing gift stays the Esperanto section subtitles -
+the Life Foundation's official language per Core Book 1 p101 - rather than an
+inlined image.
+
+*Context verified by Comms: traveller-generator carries exactly one inlined
+`data:image/png;base64` asset, inside a block commented "Travellers' Aid Society
+masthead", so Xero's real TAS artwork is genuinely what gives that frame its
+weight. 2300AD has no equivalent asset and will not get one. If he ever changes
+his mind the masthead is one element and the swap is small.* Routed to Character
+Generators 2026-09-11.
+
+### 2026-09-11 - Does "exempt" mean leave alone, or merely not required? -> NOT REQUIRED (a)
+
+Filed by Character Generators, which had raised space1999generator's `.die-pip`
+from 12px to 14px before the prose-only ruling existed and offered to revert it.
+*Verified by Comms:* `.die-pip` is a fixed 24x24 box with centred content, so it
+would have qualified as exempt; 14px fits inside 24px and no overflow was found
+at 1280, 600 or 390.
+
+**Xero: (a) exempt means NOT REQUIRED.** Raising an exempt element anyway is
+fine. `.die-pip` stays at 14px; nothing is reverted. The exemption exists
+because a fixed box cannot always accommodate larger text - where it can, the
+larger text is welcome.
+
+Practical effect for the remaining work: exempt is a floor-compliance carve-out,
+not a prohibition. A lane may raise a glyph container when it fits, and must not
+when it would overflow. Both `.keytag` (raised, read as prose - verified correct,
+it is padding-sized with the word "Key" as content and grew 31px to 38px) and
+`.die-pip` (raised, exempt but fitting) stand as shipped.
+
+*Closes the 14px floor questions. Six of eight generators compliant; dredd and
+apegenerator remain, both already ruled on.* Routed to Character Generators
+2026-09-11.
+
+### 2026-09-11 - Dredd: fold the floor pass into its redesign? -> YES, FOLD IT (a)
+
+Filed by Comms rather than the lane, because the lane was proposing the option
+Xero had rejected once and may not have known it.
+
+**Xero: (a) fold Dredd's 14px floor pass into its life-path redesign.** One job.
+
+This deliberately differs from his 2300AD ruling the same day, where the same
+choice was offered and he chose standalone. The difference that justifies it:
+2300AD's redesign was queued but its floor pass could ship immediately and
+independently, whereas Dredd's redesign rewrites that generator's UI markup
+wholesale - so flooring first is work thrown away, and worse, the redesign could
+quietly reintroduce sub-14px rules after the floor pass had signed them off.
+
+**Consequence to hold onto:** Dredd's live site keeps breaking the 14px rule
+until the redesign ships. That is accepted, not overlooked.
+
+**Same hazard in reverse on 2300AD, already handled by the lane and needing no
+ruling:** its floor pass is ALREADY shipped, so its redesign could undo it
+unnoticed. The lane is treating "nothing on screen below 14px prose" as an
+acceptance criterion of both redesigns, verified by computed style before either
+ships, rather than re-auditing afterwards. Routed to Character Generators
+2026-09-11.
+
+### 2026-09-11 - apegenerator's floor pass would push parked work live -> FIX THE SHEET FIRST (b)
+
+Filed by Character Generators. *Verified by Comms:* apegenerator was 1 ahead of
+origin on b5f49d3, "print the official Planet of the Apes character sheet,
+filled in" - Xero's own commit from 2026-08-16, replacing the CSS dossier print
+output with the publisher sheet. The live site does not have it, so any
+floor-pass push would have taken it live. The push-all-four ruling covered
+mothership, 2300ad, twilight2000 and traveller only.
+
+**Xero: (b) do the POTA sheet fixes from atlas note #121 first, then ship both
+together.** So he does still want the official sheet; it is not being abandoned
+and it is not shipping as-is.
+
+**SHIPPED AND VERIFIED LIVE by Comms 2026-09-11:** apegenerator df00342, "make
+the printed sheet legible, and put a 14px floor under the text", sitting on top
+of b5f49d3 - so his parked sheet went live with it, as the ruling intended. Live
+blob 89b75d6c, matching on potagenerator.vercel.app and on the
+thetable.xerosumgames.com/apegenerator proxy route. The official sheet is
+present in the served bytes (one inlined base64 image, SHEET_FIELDS). Verified
+against potagenerator, NOT the dead apegenerator.vercel.app hostname.
+
+**THE 14px FLOOR PROGRAMME IS COMPLETE - 8 of 8.** Total re-derived by Comms
+from the live bytes of all eight rather than recalled, as promised:
+
+| generator | prose | exempt | print |
+| --- | --- | --- | --- |
+| traveller | 0 | 1 | 0 |
+| 2300ad | 0 | 1 | 0 |
+| twilight2000 | 0 | 1 | 0 |
+| mothership | 0 | 0 | 0 |
+| space1999 | 0 | 2 | 6 |
+| walkingdead | 0 | 0 | 0 |
+| dredd | 0 | 3 | 33 |
+| apegenerator | 0 | 3 | 0 |
+
+**Zero prose rules outstanding anywhere.** Comms and the lane agree on every
+generator; the only difference is bucketing - the lane reported space1999 as
+0 prose / 8 exempt, rolling its px-sized print sheet into the exempt column,
+where Comms counts print separately. Same underlying bytes.
+
+This makes apegenerator the LARGEST of the four hand-built jobs rather than the
+smallest: sheet fixes plus floor pass plus the print and probe verification each
+needs, in one push. It is correctly last in the lane's sequence.
+
+*Comms verified the commit and its unpushed state; Comms did NOT verify atlas
+note #121's contents - the lane owns reading that.* Note also that apegenerator
+carries a modified .gitignore alongside, which the lane had attributed to
+dredd-generator only. Routed to Character Generators 2026-09-11.
+
+### 2026-09-11 - Does the 14px floor cover glyphs inside fixed-size UI shapes? -> PROSE ONLY (a)
+
+Raised by Comms after finding two sub-14px rules surviving in the SERVED
+space1999generator bytes, which the lane had reported as zero. Both were glyph
+containers: `.sel-badge` (20x20 circle, border-radius:50%, content `&#10003;`)
+and `.pk-box` (17x17 rounded-square checkbox, same construction as `.opt-box`).
+
+**Xero: (a) the floor covers PROSE only.** A glyph inside a fixed-size box or
+badge is exempt, as `.opt-box` already was. This is a CATEGORY ruling, not a
+per-selector one - it settles `.opt-box`, `.sel-badge`, `.pk-box` and every
+similar container in walkingdead-rpg, dredd-generator and apegenerator. Do not
+re-ask per generator.
+
+Practical effect: a sweep that reports sub-14px rules should classify them
+first. A 12px tick inside a 17px box stays; prose does not. Raising the glyph
+would overflow its container, which is why this reading is also the one the
+markup wants.
+
+*Space 1999 itself needs no change - both surviving rules are exempt under this
+ruling, and the pass that shipped (84c9994, live blob 0c4f8485, verified on both
+hostnames by Comms) is complete as it stands.* Routed to Character Generators
+2026-09-11.
+
+**Scoping consequence, verified by Comms 2026-09-11:** `.step-num` is EXEMPT
+under this ruling, not shared chrome to raise as Comms had earlier scoped it. It
+is a fixed circle - 20x20 in dredd-generator, 17x17 in apegenerator,
+`border-radius:50%` - containing a digit or a checkmark. That shrinks the
+remaining job in both generators slightly.
+
+**Classified audit of all eight, lane's figures, spot-checked by Comms:**
+traveller / 2300ad / twilight2000 zero prose + 1 exempt (`.opt-box`);
+mothership and walkingdead zero prose + 0 exempt; space1999 zero prose + 2
+exempt (`.sel-badge`, `.pk-box`); dredd 32 prose + 3 exempt; apegenerator 36
+prose + 3 exempt. Six of eight compliant; the two outstanding are exactly the
+two Xero has now ruled on.
+
+**Reconciles an earlier unexplained discrepancy.** Comms' static scan of
+dredd-generator said 53 sub-14px against the lane's 35. The difference is
+print-sheet sizes written as inline `style=` strings inside the `printSheet()`
+JS function - roughly eighteen of them, at 7px to 11px. They are print output,
+not screen, and correctly out of scope. Neither count was wrong; they were
+counting different things.
+
+### 2026-09-11 - Does the 14px floor apply to the four hand-built generators? -> YES (a)
+
+Filed by Character Generators after it found that the floor had only ever
+reached the four src/-based generators, because it rode along on the Traveller
+and T2K redesigns. So "no known 14px violation anywhere" was not true when Comms
+reported it.
+
+**Xero: (a) yes, apply the floor to all four** - apegenerator, space1999generator,
+dredd-generator, walkingdead-rpg. As separate passes, one generator at a time,
+each with its own print and probe verification. These are hand-built single
+index.html files with rules, state and DOM interleaved and no src/, so this is a
+genuinely different job from the three-repo pass that preceded it.
+
+**Scope, and why the headline number overstates it.** *Verified at source by
+Comms 2026-09-11:* `.tt-btn`, `.hdr-sub` and `.hdr-rand` are 12px in all four;
+`.step-item` and `.step-num` are 12px in three and absent from walkingdead-rpg,
+which uses different stepper markup for the same thing. A large share of the job
+is therefore one small set of shared classes repeated across four files, with a
+per-generator tail of content rules. `.seo-intro` is NOT one of them - it has no
+font-size declaration in any of the four, appearing once per file as a class on
+a <p> with no CSS rule, so its size is inherited rather than declared.
+
+**The footer is four separate edits, not one repeated.** Unlike the src/-based
+three, where it was a single identical inline style in each assemble.py, the
+hand-built four each declare it under a DIFFERENT class name. *Verified at
+source by Comms 2026-09-11:*
+
+| generator | footer rule |
+| --- | --- |
+| apegenerator | `.site-footer` 12px |
+| space1999generator | `.footer` 12px |
+| dredd-generator | `.footer` 12px |
+| walkingdead-rpg | `.foot` 12px, markup `<footer class="foot no-print">` |
+
+*Correction to the lane's version of this finding, which said walkingdead-rpg
+had no footer font-size rule and inherited from elsewhere: it does declare one,
+at `.foot`, directly. The difference matters to whoever does the work - a
+declaration under an unexpected name is a one-line edit like the other three,
+whereas "inherits from somewhere else" implies a hunt that is not needed.*
+
+**Three measurements, all different, all recorded, because they answer different
+questions** - the static count is how many declarations you would EDIT, the
+rendered count is how much a user SEES, and neither converts into the other:
+
+| generator | static (Comms) | static (lane) | rendered combos / elements (lane) |
+| --- | --- | --- | --- |
+| apegenerator | 43 | 40 | 15 / 164 |
+| space1999generator | 52 | 52 | 16 / 68 |
+| dredd-generator | 53 | 35 | 9 / 20 |
+| walkingdead-rpg | 16 | 16 | 11 / 63 |
+
+Rendered figures are start-screen only at 1280x900 - a floor, not a total.
+
+*Comms error corrected in the same breath, for the record: Comms told Xero the
+lane's static numbers were computed-style measurements and therefore
+authoritative. They were not; the lane said so itself. Ordering note: this lands
+behind the life-path redesign and the T2K print spill only if Xero says so - he
+has not sequenced it against those.* Routed to Character Generators 2026-09-11.
+
+### 2026-09-11 - Twilight 2000's printed sheet spills to two pages -> QUEUE IT (b)
+
+Filed by Character Generators. Pre-existing defect, not introduced by any of the
+day's work: heavy characters tip the printed sheet onto page 2, reproduced at a
+sheet weight around 1400 characters (a 9-term character with a full specialty
+list). The lane proved it was not its own change by printing identical captured
+sheet HTML through both the old and the new build and getting 2 pages from each.
+Comms did NOT independently reproduce this - printing is the one thing Comms
+cannot measure from served bytes.
+
+**Xero: (b) queue it behind the life-path redesign already in flight.** Not
+dropped and not next; it waits its turn. Routed to Character Generators
+2026-09-11.
+
+**FIXED AND VERIFIED LIVE by Comms 2026-09-11:** twilight2000-generator 2947621,
+"keep the printed sheet on one page at the rules' ceiling". Live blob 683ae395,
+matching on both the alias and the proxy route; the served bytes carry one
+sub-14px rule, `.opt-box`, exempt.
+
+The diagnosis was not the spill. The sheet had been tightened once before and
+fit only to a hairline - the tallest of 240 random characters measured 1053px
+against a 1056px letter page. Three pixels is a coincidence, not a fit. Rather
+than hunting for an unlucky character, the lane MEASURED the ceiling using
+Chrome CDP's `Emulation.setEmulatedMedia({media:'print'})`, which applies the
+print stylesheet to the live DOM: the rules' true maximum - 10 terms, 14
+specialties, every skill, all gear, all five personal fields - came to 1093px,
+37px over. About 60px was bought back from gaps between blocks with type sizes
+untouched. Ceiling now 1043px, 13px clear.
+
+### 2026-09-11 - Does the 2300AD floor pass also clear the 12px footers? -> YES (a)
+
+Raised by Comms after measuring the LIVE bytes post-push. The 14px floor pass
+worked - live twilight2000's 8-at-12px and 4-at-13px are gone - but a page
+footer at 12px remains: twilight2000 1, traveller 1, 2300ad 9. All are
+`class="footer no-print"`, so it is on-screen prose, not print styling.
+
+**Xero: (a) yes.** Fold the footers into the 2300AD standalone floor pass and do
+the same edit on traveller and twilight2000 while it is open.
+
+**SHIPPED AND VERIFIED LIVE by Comms 2026-09-11:** 2300ad 76e0dad, traveller
+bdca34d, twilight2000 bfb8b69. All three live footers now read
+`font-size:14px`; zero occurrences of `font-size:12px` remain in any of them.
+Measured outside print blocks, the four src/-based generators now carry only the
+`.opt-box` 11px rule (2300ad 1, twilight2000 1, traveller 0, mothership 0).
+
+*Blob hashes at this state, re-verified 2026-09-11 across all eight endpoints
+(four Vercel aliases, four proxy routes), every one matching its repo's
+HEAD:index.html:* mothership b782ef07 (unchanged by the floor pass - its footer
+was already 14px), 2300ad f159f6be, traveller 0bd993e9, twilight2000 34d00158.
+The earlier record's e6d54cc2 / 0592420c / eb991d57 were the first-push state and
+are superseded.
+
+*Correction to the scope Comms published, and to the lane's correction of it.*
+Comms wrote "2300ad 9 footer rules". Wrong label - only one of them was the
+footer. Character Generators then explained the 9 as rendered elements
+inheriting a single declaration; that is also wrong, and re-checked at source
+(`git show ad640ff:index.html`) the pre-fix file contains NINE distinct
+`font-size:12px` declarations: `.hdr-sub`, a button style twice, `.ch-dm`,
+`.opt-d`, `.term-age`, `.hist-r`, `.note`, and the one inline footer. So: one
+footer declaration per repo, as the lane says, but eight further unrelated 12px
+declarations in 2300AD that its own floor pass also raised. The fix covered all
+of them either way and nothing was missed. Neither account of the number was
+right, which is the point worth keeping: a static scan mislabels what it counts,
+and a rendered scan cannot see how many declarations produced the result.
+
+**"No known 14px violation anywhere" was NOT achieved by this - see OPEN.**
+
+Explicitly still allowed to stay: the `.opt-box` 11px rule. It sizes a tick
+glyph inside a 16x16 checkbox, not prose, and it predates the floor pass in
+Xero's own commit. Character Generators was right to leave it; it is not part of
+this job.
+
+Scope, measured by Comms on the live bytes so the lane does not rediscover it:
+2300ad 9 footer rules plus its 16 other sub-14px rules, traveller 1, twilight2000
+1. Routed to Character Generators 2026-09-11.
+
+### 2026-09-11 - 2300AD is under the 14px floor: fix when? -> NOW, STANDALONE (b)
+
+Asked by Character Generators, which recommended folding it into 2300AD's
+queued Life Foundation lifepath redesign. Comms verified the defect: 2300AD
+carries 16 sub-14px rules (7 at 11px, 9 at 12px) against Traveller's and
+Twilight 2000's 2 each, and those two are a small centred element and the page
+footer. Pre-existing, not introduced by the export work.
+
+**Xero: (b) fix it now, as its own pass.** Do not wait for the lifepath
+redesign - the live site should stop breaking the 14px rule sooner rather than
+being bundled into a larger job.
+
+Ordering that follows from the push ruling the same day: all four repos are
+being pushed, so 2300AD ships its VTT export first and this floor pass is a
+follow-up commit and push, not part of it. Routed to Character Generators
+2026-09-11.
+
+### 2026-09-11 - What ships now, across four repos? -> PUSH ALL FOUR (a)
+
+Asked by Character Generators. Comms verified every SHA and count at source:
+mothership-generator 6f1a9ba (1 unpushed, callsigns), 2300ad-generator ad640ff
+(1, VTT export), twilight2000-generator d1f2043 (5 - export plus 4 parked, of
+which two cancel out, so 2 substantive), traveller-generator e857f57 (4 - export
+plus 3 parked).
+
+**PUSHED AND INDEPENDENTLY VERIFIED by Comms 2026-09-11.** All four repos are
+level with origin (mothership 6f1a9ba, 2300ad ad640ff, twilight2000 d1f2043,
+traveller e857f57). All EIGHT endpoints - four Vercel aliases and four
+thetable.xerosumgames.com proxy routes - return 200 and hash byte-identical to
+each repo's HEAD:index.html blob (b782ef07, e6d54cc2, eb991d57, 0592420c).
+Verified by hashing the served bytes with git hash-object, not by status code.
+`exportCharacter` present in all four; `callsign` in Mothership only. The
+slashed proxy form 308s to the unslashed canonical, as the lane reported.
+
+**Xero: (a) push all four.** This explicitly takes his parked redesigns live -
+the Travellers Aid Society redesign on Traveller and the NATO
+intelligence-report redesign plus the 14px floor pass on Twilight 2000. They
+were fully verified and green, just never asked for. No cherry-picking needed.
+
+Comms finding that informed the call: the 14px issue had been filed as
+2300AD-only, but live twilight2000 was measuring 8 rules at 12px, 4 at 13px and
+1 at 11px - under Xero's own floor, with the fix (3a5bf5c) sitting in the parked
+commits. Pushing clears that violation as a side effect. Routed to Character
+Generators 2026-09-11.
+
+### 2026-09-11 - Mothership/T2K name overlap is six, not three -> LEAVE IT (a)
+
+**Comms' error, not a lane's.** When routing the callsign ruling, Comms told
+Xero the two pools shared three entries after eyeballing the head of T2K's list
+rather than intersecting the sets. Character Generators did the intersection:
+the real overlap is six - Cinder, Doc, Mouse, Patch, Preacher, Sparks - across
+T2K's 28 nicknames and Mothership's 50 callsigns. Re-verified by Comms.
+
+**Xero: (a) leave it.** Six of 50 against 28 stays. No swap. The lane's 25 new
+callsigns collide with nothing, so the pools are not converging, and it was
+right to hold at the ruling rather than act on the corrected number itself.
+Routed to Character Generators 2026-09-11.
+
+*Lesson for Comms, also in tasks/lessons.md: never quote a set-membership figure
+from reading the start of a list. Intersect the sets. This one reached Xero and
+shaped a ruling before it was caught.*
 
 ### 2026-09-11 - Mothership callsigns: use or delete? -> USE THEM (a), AND EXPAND TO 50
 
