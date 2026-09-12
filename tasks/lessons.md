@@ -13,9 +13,20 @@ than the UI was asserted on.
   runs the effect again - and the guard turns that third step into a no-op, so
   the listeners the cleanup just removed are never restored. The Record button
   still lit up and the event counter still ticked, because those are React
-  state; capture was dead. `addEventListener` is idempotent for a given
-  function reference and every effect run pairs with its own cleanup, so the
-  guard was protecting against nothing. **TheTableau still carries this**
+  state; capture was dead.
+  **The guard is not the villain, and deleting one without understanding it is
+  how this gets reintroduced.** With no cleanup, a double-invoke really does
+  double-install: each run builds fresh closures, so two runs leave two click
+  listeners, and worse, a `console.error` patch NESTS - run 2 saves run 1's
+  patch as its "original", so every error records twice and the real
+  `console.error` is buried permanently. There are exactly two valid shapes:
+  **guard + no cleanup** (install once, never tear down - TheTapestry, works)
+  or **cleanup + no guard** (install A, remove A, install B, ending at one set
+  of listeners and one layer of patches, because the cleanup restores the true
+  original before the next run saves it - the hub and the VTT, works). Having
+  NEITHER double-records. Having BOTH records nothing. The failure here was a
+  cleanup added later, correctly by React's contract, on top of a guard that
+  had become redundant the moment it landed. **TheTableau still carries this**
   (`components/Recorder.tsx`, guard at line 34 and a cleanup at 164) - dev-only
   there too, since production never double-invokes.
   **Correction, 2026-09-12: I first wrote that TheTapestry carried it as well,

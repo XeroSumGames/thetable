@@ -47,8 +47,22 @@ export default function Recorder() {
   // looks like it works. Caught on the VTT port by checking whether
   // console.error had actually been patched. Production never
   // double-invokes, which is why it went unnoticed upstream.
-  // addEventListener is idempotent for a given function reference and
-  // each run pairs with its own cleanup, so a guard protects nothing.
+  //
+  // What the guard was FOR, because it was not pointless: with no
+  // cleanup, a double-invoke really does double-install. Each run
+  // builds fresh closures, so two runs leave two click listeners; and
+  // the console patch NESTS, run 2 saving run 1's patch as its
+  // "original", so errors record twice and the real console.error is
+  // buried for good. A guard is the right answer to that - it is what
+  // TheTapestry does, and its recorder works.
+  //
+  // So there are two valid shapes and this file is the other one:
+  // guard + no cleanup (install once, never tear down), or cleanup +
+  // no guard (this file - install A, remove A, install B, ending at
+  // exactly one set of listeners and one layer of patches, because
+  // cleanup restores the true original before the next run saves it).
+  // Mixing them is what captures nothing. Do not re-add the guard
+  // without also deleting the cleanup.
   useEffect(() => {
     ensureRecorder()
     startPeriodicFlush()
