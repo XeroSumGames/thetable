@@ -4,6 +4,27 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-11 - Model assignment per lane
+
+**What:** Puffer Fish (hub) Opus 5; Table | HP Sonnet 5; Character Generators
+Opus 5; Comms Opus 5. Verified applied 2026-09-11.
+
+**Why:** assign by the cost of an undetected error, not by how much the lane
+types. Puffer Fish makes architecture calls that govern every future VTT.
+Character Generators transcribes rulebooks into data that ships to users and
+that nobody proofreads against the source - a wrong skill prerequisite is
+invisible until a player hits it. Comms exists to catch bad claims before they
+reach Xero; a miss there propagates a wrong answer to three lanes. HP ships
+features on a small Next.js hub where errors surface by running it, so it is the
+right place to spend less.
+
+Corrected two drifts at the same time: Puffer Fish had been left on Opus 4.8, a
+generation behind, and Character Generators had silently resumed on Sonnet after
+a restart. Check `get_session` after any lane restart.
+
+**What would make us drop it:** if Character Generators moves off rules
+transcription onto routine wiring, it can drop to Sonnet too.
+
 ## 2026-09-11 - Canonical home for the shared name pool: shared/name-pool.json in TheTable
 
 **What:** the 1000-name pool duplicated across walkingdead-rpg (inline
