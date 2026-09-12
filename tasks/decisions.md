@@ -50,10 +50,25 @@ both modes:
    auto-height box a real border adds real height. Draw every border as
    `box-shadow: inset 0 0 0 var(--bw)` (or `outline` for dashed) - visually
    identical, zero layout cost. Keeps the Zine's heavy rules for free.
-4. **Reserve space for variable-length text.** Work Sans wraps the trauma
-   paragraph to an extra line where JetBrains Mono does not (+20px, cascading
-   4px into everything below). Any box holding prose gets a min-height sized
-   for the worst case.
+4. **Give re-wrappable text an EXPLICIT height, not a min-height.** First
+   attempt used min-height sized against the 1440px mockup; building the real
+   app proved that insufficient. At narrower viewports JetBrains Mono wraps the
+   trauma paragraph to far more lines than Work Sans and the light panel
+   collapsed by 81px. A min-height only holds at the width you measured at. Use
+   a fixed height with internal overflow.
+5. **Form controls do not inherit line-height.** Rule 2 is not enough on its
+   own: button/input/select/textarea take a UA default of `normal`, which
+   smuggles per-typeface drift back in through every control. Set
+   font-family and line-height on them explicitly.
+6. **Prefer controls that cannot rewrap.** A row of chips wrapped to different
+   line counts per font AND collapsed at narrow widths (448px of content in a
+   61px scroller, in both modes). A segmented control and a select are
+   fixed-height by construction - that removes the failure mode instead of
+   padding around it. Reach for those over free-flowing chip rows.
+
+*(Rules 4-6 were found by measuring the REAL app, not the mockup. The mockup
+was measured at a fixed 1440px and reported zero drift; the running app at a
+narrower viewport had 24 drifting elements. Measure the thing that ships.)*
 
 **Verified result:** 0 vertical position differences, 0 height differences, 0
 container x differences across all 142 elements; both sheets 1900px tall;

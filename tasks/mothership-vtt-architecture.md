@@ -161,9 +161,42 @@ identical in both modes, only the token layer swaps, and toggling must never
 move anything on the page. Design every new component against the token names,
 never against a literal color or font.
 
-## 6. Status
+## 6. Status - Tier 1 SHIPPED 2026-09-11
 
-**Not started - no repo, no Vercel project, no Supabase project, no code.**
+Live: **https://mothership-vtt.vercel.app** (stable alias; never link the
+per-build hashed URL, it sits behind Vercel's auth wall).
+
+- Repo: github.com/XeroSumGames/mothership-vtt (PRIVATE for now, branch main).
+- Vercel: project mothership-vtt, git-connected, auto-deploys on push.
+- Supabase: project `dtcqtbrfghuxtogkarzy` (mothership-vtt) created in the
+  XeroSumStudio org `ztiibbpagibquyyojvjw`. **Provisioned but NOT yet wired** -
+  Tier 1 runs on local state.
+- DNS: NOT done. mothership.xerosumgames.com still needs a Wix CNAME to
+  cname.vercel-dns.com. The app is fully usable on the .vercel.app alias until
+  then, so this is a finishing step, not a blocker.
+
+Built: the two-mode token layer (app/globals.css) carrying all six layout-lock
+rules, and lib/rules.ts - Mothership 1e resolution transcribed from PSG v1.2
+with page citations, pure and DOM-free so it stays headlessly testable.
+Verified live: roll-under d100, skill bonuses, advantage/disadvantage, doubles
+as Criticals (99 -> Critical Failure confirmed), failed Save gains 1 Stress,
+and a Critical Failure auto-firing a Panic Check that rolls d20 against Stress
+and reads the real table. Mode swap measured at 1 drifting element out of 160
+(a native select, 1px, moves nothing) and identical 1496px page height.
+
+### Next, in order
+1. **Wire Supabase**: auth (email/password), then a characters table with
+   owner-scoped RLS, replacing the local sample character.
+2. **Import**: the "Import character" upload consuming the generator's JSON
+   envelope (section 7) - the Mothership generator already emits it.
+3. **Tier 2/3** per section 3.
+
+### Known rough edges (deliberate, not forgotten)
+- Stress is unbounded, matching the book. The stress bar is drawn against a
+  denominator of 20 because d20 is the Panic Check die, so 20 is the point
+  where panic is certain - past that the bar just pins full.
+- Wounds/Health steppers are manual; the Wound table and Death Save (PSG p29)
+  are not implemented yet.
 
 Cleared: topology + auth (subdomain, own Supabase, full accounts), visual
 direction (dark Terminal / light Zine), the character-import contract
