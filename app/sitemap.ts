@@ -14,6 +14,7 @@ const GENERATOR_SLUGS = [
   "traveller-generator",
   "2300ad-generator",
   "twilight2000-generator",
+  "mothership-generator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
