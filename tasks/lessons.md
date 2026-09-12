@@ -2,6 +2,32 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## Fixing a print sheet against real artwork (2026-09-11, Character Generators)
+
+From the Planet of the Apes sheet, the last of the note #121 fixes. Three of the
+five faults were not what the note said they were.
+
+- **Sample the artwork, do not inherit a colour from a note.** The note gave the
+  sheet's ink as roughly `#8b4a32`. Sampled, its printed labels run `#5a3925` to
+  `#5f3428`, so the fill used is `#6b3a24`.
+- **Print a calibration grid in the artefact's own coordinate space before
+  moving anything.** Two of the five "position" faults were not position faults:
+  the psi ovals were correctly placed all along, and the handwriting face that
+  replaced Courier is simply wider, so values overhung their labels. The fix was
+  a smaller size, not a new position. The same grid showed the SRP ovals
+  ALTERNATE - S and P left of their letter, R right of it - so the three never
+  shared an x, although the field table gave all three 18.5.
+- **Raising text breaks any box sized to the old text.** Third instance of the
+  same family in one day: space1999's stat grid, walkingdead's key row, and here
+  a tracked label needing 93px inside a 90px min-width box, clipping 12px on a
+  phone. A per-container `scrollWidth > clientWidth` check at 390px belongs in
+  every floor pass, not just a viewport-level sweep.
+- **Never use backslash escapes in code emitted from another language.** A
+  `
+` written inside a Python string that emits JavaScript became a real
+  newline inside a JS string literal - a syntax error that killed the whole
+  block and printed an entirely empty sheet. `String.fromCharCode(10)` instead.
+
 ## Measure the ceiling, do not wait to roll it (2026-09-11, Character Generators)
 
 From fixing Twilight 2000's two-page print spill.

@@ -101,6 +101,33 @@ mothership, 2300ad, twilight2000 and traveller only.
 together.** So he does still want the official sheet; it is not being abandoned
 and it is not shipping as-is.
 
+**SHIPPED AND VERIFIED LIVE by Comms 2026-09-11:** apegenerator df00342, "make
+the printed sheet legible, and put a 14px floor under the text", sitting on top
+of b5f49d3 - so his parked sheet went live with it, as the ruling intended. Live
+blob 89b75d6c, matching on potagenerator.vercel.app and on the
+thetable.xerosumgames.com/apegenerator proxy route. The official sheet is
+present in the served bytes (one inlined base64 image, SHEET_FIELDS). Verified
+against potagenerator, NOT the dead apegenerator.vercel.app hostname.
+
+**THE 14px FLOOR PROGRAMME IS COMPLETE - 8 of 8.** Total re-derived by Comms
+from the live bytes of all eight rather than recalled, as promised:
+
+| generator | prose | exempt | print |
+| --- | --- | --- | --- |
+| traveller | 0 | 1 | 0 |
+| 2300ad | 0 | 1 | 0 |
+| twilight2000 | 0 | 1 | 0 |
+| mothership | 0 | 0 | 0 |
+| space1999 | 0 | 2 | 6 |
+| walkingdead | 0 | 0 | 0 |
+| dredd | 0 | 3 | 33 |
+| apegenerator | 0 | 3 | 0 |
+
+**Zero prose rules outstanding anywhere.** Comms and the lane agree on every
+generator; the only difference is bucketing - the lane reported space1999 as
+0 prose / 8 exempt, rolling its px-sized print sheet into the exempt column,
+where Comms counts print separately. Same underlying bytes.
+
 This makes apegenerator the LARGEST of the four hand-built jobs rather than the
 smallest: sheet fixes plus floor pass plus the print and probe verification each
 needs, in one push. It is correctly last in the lane's sequence.
