@@ -210,11 +210,30 @@ what I do, so the authenticated path - sign up, sheet loads, roll, autosave,
 sign out, sign back in, character still there, import a .mothership.json - is
 his to walk once.
 
+### Tier 1c SHIPPED 2026-09-11: wounds, damage cascade, Death Save
+
+Full d10 x 5 Wounds Table and the d10 Death Table (PSG p28.2, p29), verbatim.
+Damage now behaves like the book rather than flooring at zero: Health drops, at
+zero the character gains a Wound and rolls the table for that damage type,
+Health resets to Maximum and the carryover is subtracted - so ONE hit can cause
+several Wounds - and reaching Maximum Wounds calls for a Death Save.
+
+The Death Save keeps the table ritual (p29.2): the die is rolled immediately
+and CONCEALED, revealed only when someone spends a turn checking your vitals.
+It is not re-rolled on reveal; the result already exists, which is the point.
+
+**Verified live** (behind a temporary local-only auth bypass, reverted and
+never committed): 60 damage vs 14 Health cascaded to 2 Wounds with correct
+gunshot-column entries, hit Maximum Wounds, raised a concealed Death Save with
+no roll visible, and revealed 00 -> the correct unconscious band, stable across
+re-renders. Plus 71 unit assertions (`npm test`), including ~10,000 randomised
+rolls checked against invariants rather than one lucky result.
+
 ### Next, in order
-1. **Tier 1c**: the Wound table and Death Save (PSG p29) - Health hitting 0
-   currently just floors, it does not roll a Wound.
-2. **Multiple characters**: the table already supports N per user; the UI
+1. **Multiple characters**: the table already supports N per user; the UI
    assumes one.
+2. **Bleeding** (PSG p32.2) - several Wounds entries grant "Bleeding +N" and
+   nothing currently tracks it.
 3. **Tier 2/3** per section 3. Tier 3 needs a campaigns/members join before a
    GM can read a player's sheet - do NOT widen the owner policy to get there.
 
