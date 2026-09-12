@@ -7,17 +7,23 @@ owning lane.
 Do NOT ask Xero anything already answered in decisions.md or todo.md.
 Verify a thing is actually reachable before asking him to test it.
 
-Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
-- Table | Puffer Fish (hub)        local_58826b41-8ebe-4b95-a65a-6e4dd5b2cf25
+Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay).
+Required model is per tasks/decisions.md "Model assignment per lane" - CHECK
+get_session AND SET IT after every restart, a lane silently resuming on the
+wrong model has already happened twice (2026-09-11, 2026-09-12):
+- Table | Puffer Fish (hub)  local_58826b41-8ebe-4b95-a65a-6e4dd5b2cf25  [Opus 5]
   (restarted 2026-09-12 per tasks/HANDOFF-puffer-fish-2026-09-12.md; the old
   session local_373a5c5c-ee39-47ef-92a9-0bf3ef94544d is stopped - do not route
-  to it)
-- Table | HP (features)            local_4aca6765-6aab-4c0e-961d-be4b5c01da3c
-- Table | Character Generators     local_e4a53d2c-e7e9-4c6c-87d4-bd6008bca5c6
+  to it. Found resumed on Sonnet 5 2026-09-12 - a session cannot switch its own
+  model, Xero has to do it in the model menu; flagged to him, unresolved as of
+  this line)
+- Table | HP (features)      local_4aca6765-6aab-4c0e-961d-be4b5c01da3c  [Sonnet 5]
+- Table | Character Generators  local_e4a53d2c-e7e9-4c6c-87d4-bd6008bca5c6  [Opus 5]
   (restarted again 2026-09-12; both local_eb161fa5-d93d-4048-aa94-6a27856de9d2
   and the older local_1fa2c241-d7af-4e86-86dd-319b6f2df3bd are stopped - do not
-  route to either)
-- Table | Comms (this lane)        local_894fe581-b1be-4366-ae60-d38ce452c53c
+  route to either. Found resumed on Sonnet 5 2026-09-12, corrected via
+  set_session_model by Puffer Fish the same day)
+- Table | Comms (this lane)  local_894fe581-b1be-4366-ae60-d38ce452c53c  [Opus 5]
 
 ## OPEN
 
