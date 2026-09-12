@@ -102,6 +102,19 @@ should NOT be merged.
       report drift only, no writes - the part that actually catches silent
       drift going forward). No deploy-time coupling - purely a local dev tool.
       Lands on lane/character-generators for Puffer Fish's merge, like Mothership.
+      PAUSED 2026-09-11 on Xero's direct instruction to Character Generators
+      (route through Comms, hold for further instructions) - NOT started,
+      lane/character-generators is clean at the Mothership merge, nothing
+      half-written. Recon done before the pause, worth keeping so whoever
+      resumes doesn't re-derive it: walkingdead-rpg's NAME_POOL is a single
+      line at index.html:2334 (1000 quoted strings, 5 references in the file),
+      no markers today - plan is to add BEGIN/END marker comments around the
+      declaration on first run so every later sync is an exact block
+      replacement, not a regex rewrite of a 1000-element line (same pattern as
+      apegenerator's tools/embed-sheet.py). traveller-generator/2300ad-generator
+      are the easy half: both {_source, _count, names:[...]} in
+      src/data/names.json, sync replaces `names` + refreshes `_count`, leaves
+      each file's own `_source` note alone. Resume when Xero says go.
 - [ ] Traveller/2300AD fake a surname by drawing from the flat 1000-pool
       TWICE and joining - a wart Character Generators already flagged in a
       code comment, not new. Cosmetic, not blocking anything, not part of the
