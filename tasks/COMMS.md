@@ -17,82 +17,45 @@ Sessions (route with mcp__ccd_session_mgmt__send_message; Xero does not relay):
 
 ## OPEN
 
-### 6. What ships now? Four repos hold unpushed work (added 2026-09-11, Character Generators)
-
-Two of the four also carry Xero's parked redesigns, so pushing them takes that
-live too. All four are all-or-nothing per repo unless he asks for cherry-picks.
-
-*Verified by Comms 2026-09-11, every SHA and count confirmed at source:*
-
-- *mothership-generator 6f1a9ba - 1 unpushed, the callsign work only. Live
-  currently equals origin/main and is behind HEAD by exactly this commit.*
-- *2300ad-generator ad640ff - 1 unpushed, the VTT export only.*
-- *twilight2000-generator d1f2043 - 5 unpushed: the export plus 4 parked.
-  CORRECTION to the filing: two of those four cancel out (25e2f02 lightens a
-  token, 073965e reverts it), so it is 2 substantive parked changes - the NATO
-  intelligence-report redesign and a 14px floor pass.*
-- *traveller-generator e857f57 - 4 unpushed: the export plus 3 parked
-  (Travellers Aid Society redesign, a merged opening step, a token lightening).*
-
-**Finding that changes this question.** The 14px issue was filed as 2300AD-only.
-On LIVE sites that is wrong: live twilight2000 measures 8 rules at 12px, 4 at
-13px and 1 at 11px - it is under Xero's 14px floor RIGHT NOW. The fix (3a5bf5c,
-"put a 14px floor under every piece of on-screen text") is one of the parked
-commits sitting unpushed. Holding Twilight 2000 keeps a known, already-fixed
-violation live. Local T2K measures clean.
-
-  (a) push all four - everything ships, both parked redesigns go live, floor
-      violation cleared
-  (b) the safe subset - mothership and 2300AD only. No parked work touched, but
-      leaves the T2K floor violation live
-  (c) mothership, 2300AD and twilight2000; hold traveller - clears the live floor
-      violation, keeps the TAS redesign parked
-  (d) hold everything
-
-Comms has no recommendation between them: whether the parked redesigns ship is a
-product call. The only thing Comms adds is that (b) and (d) carry a cost that was
-not in the original question.
-
-### 8. Mothership/T2K name overlap is SIX, not three - revisit? (added 2026-09-11, Comms error)
-
-**This one is Comms' mistake, not a lane's.** When routing the callsign ruling I
-told Xero the Mothership and Twilight 2000 pools shared three entries (Doc,
-Preacher, Sparks). I had eyeballed the first few entries of T2K's list rather
-than intersecting the two sets. Character Generators did the intersection and
-found six.
-
-*Re-verified by Comms 2026-09-11 by set intersection: T2K has 28 nicknames,
-Mothership now has 50 callsigns, and the overlap is exactly six - Cinder, Doc,
-Mouse, Patch, Preacher, Sparks.*
-
-The lane did not act beyond the ruling: all 25 NEW callsigns collide with
-nothing, so the overlap has not grown, and it left the original six alone
-because the ruling called existing overlap "fine in isolation". That judgement
-was made against a count of three.
-
-  (a) leave it - six of 50 against 28 is still small. RECOMMENDED unless the
-      number bothers him; nothing is broken and the pools are not converging
-  (b) swap the three he was not told about (Cinder, Mouse, Patch) - a one-line
-      data change in the lane
-
-### 7. 2300AD is under the 14px floor - fix now or with the lifepath redesign? (added 2026-09-11, Character Generators)
-
-Pre-existing, not introduced by the export work. Nothing broken, not urgent.
-
-*Verified by Comms 2026-09-11:* 2300AD carries 16 sub-14px rules (7 at 11px,
-9 at 12px) against Traveller's and Twilight 2000's 2 each, and those two are a
-small centred element and the page footer. The claim that 2300AD never got the
-floor pass the others did holds.
-
-  (a) fold it into 2300AD's Life Foundation lifepath redesign, already queue
-      item 2 - RECOMMENDED by the lane, and nothing argues against it
-  (b) fix it now as a standalone pass
-
-Owning lane: Character Generators. Comms: put both to Xero.
-
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-11 - What ships now, across four repos? -> PUSH ALL FOUR (a)
+
+Asked by Character Generators. Comms verified every SHA and count at source:
+mothership-generator 6f1a9ba (1 unpushed, callsigns), 2300ad-generator ad640ff
+(1, VTT export), twilight2000-generator d1f2043 (5 - export plus 4 parked, of
+which two cancel out, so 2 substantive), traveller-generator e857f57 (4 - export
+plus 3 parked).
+
+**Xero: (a) push all four.** This explicitly takes his parked redesigns live -
+the Travellers Aid Society redesign on Traveller and the NATO
+intelligence-report redesign plus the 14px floor pass on Twilight 2000. They
+were fully verified and green, just never asked for. No cherry-picking needed.
+
+Comms finding that informed the call: the 14px issue had been filed as
+2300AD-only, but live twilight2000 was measuring 8 rules at 12px, 4 at 13px and
+1 at 11px - under Xero's own floor, with the fix (3a5bf5c) sitting in the parked
+commits. Pushing clears that violation as a side effect. Routed to Character
+Generators 2026-09-11.
+
+### 2026-09-11 - Mothership/T2K name overlap is six, not three -> LEAVE IT (a)
+
+**Comms' error, not a lane's.** When routing the callsign ruling, Comms told
+Xero the two pools shared three entries after eyeballing the head of T2K's list
+rather than intersecting the sets. Character Generators did the intersection:
+the real overlap is six - Cinder, Doc, Mouse, Patch, Preacher, Sparks - across
+T2K's 28 nicknames and Mothership's 50 callsigns. Re-verified by Comms.
+
+**Xero: (a) leave it.** Six of 50 against 28 stays. No swap. The lane's 25 new
+callsigns collide with nothing, so the pools are not converging, and it was
+right to hold at the ruling rather than act on the corrected number itself.
+Routed to Character Generators 2026-09-11.
+
+*Lesson for Comms, also in tasks/lessons.md: never quote a set-membership figure
+from reading the start of a list. Intersect the sets. This one reached Xero and
+shaped a ruling before it was caught.*
 
 ### 2026-09-11 - Mothership callsigns: use or delete? -> USE THEM (a), AND EXPAND TO 50
 
