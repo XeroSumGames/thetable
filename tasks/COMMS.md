@@ -61,6 +61,30 @@ and neither of us finds out.
 Files OUTSIDE this repo still get their full path, e.g.
 `D:\Coding\RPG Character Generators\CHARGEN-LANE-HANDOFF.md`.
 
+## Worksheet formatting rules (Xero's instruction, 2026-09-12)
+
+"having all that text put in column b is impossible to read." He is right, and
+the cause was a formatting bug: the intro prose was written into column B while
+column B was 5 characters wide, so every sentence rendered as a one-character
+column hundreds of rows tall.
+
+Rules for every worksheet from here:
+
+- **Prose never sits in a narrow column.** Any heading or paragraph is MERGED
+  across the full table width (B:F) before the text goes in.
+- **Merged cells do not auto-fit - set the row height explicitly.** Excel will
+  not grow a merged row to its content, so compute it: characters divided by the
+  merged width, times the line height.
+- **Wrap text and top-align every cell**, prose and table alike.
+- **One narrow gutter column A**, so nothing touches the window edge.
+- **Freeze under the header row** and turn gridlines OFF - the borders carry the
+  table, and gridlines make wrapped prose unreadable.
+- **Check it after writing**, do not assume openpyxl rendered what was intended.
+
+Layout that works for a test tab: A gutter 2, B "#" 5, C "Pass / Fail" 12
+(dropdown: Pass / Fail / Skipped), D "What you do" 50, E "What you should see if
+it is right" 50, F "Notes" 24.
+
 ## Question numbering (Xero's instruction, 2026-09-12)
 
 Every question put to Xero carries a sequential number - Q1, Q2, Q3 - and the
