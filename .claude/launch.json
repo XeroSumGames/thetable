@@ -66,6 +66,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "D:/Coding/VTTs/mothership-vtt", "run", "dev", "--", "-p", "3011"],
       "port": 3011
+    },
+    {
+      "name": "mockups",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "3013", "--directory", "C:/Users/tony_/AppData/Local/Temp/claude/D--Coding-VTTs-TheTable/e658abb8-4af6-41a3-a235-d8b41fc563bb/scratchpad"],
+      "port": 3013
     }
   ]
 }
