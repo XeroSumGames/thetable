@@ -30,7 +30,11 @@ its repo. The redesign plan proposes Esperanto section subtitles as the
 distinguishing gift instead, the Life Foundation's official language per Core
 Book 1 p101.
 
-  (a) CSS-drawn emblem, as being built - nothing more needed from him
+*Status 2026-09-11: the 2300AD redesign has SHIPPED with the CSS-drawn emblem
+(8b41c8d, live blob f3163944, verified by Comms). This question is now only
+whether he wants to replace it later, not whether anything waits.*
+
+  (a) CSS-drawn emblem, as built and shipped - nothing more needed from him
   (b) he supplies art and the lane swaps it in later - base64-inlined exactly as
       Traveller does. Recommended by the lane alongside (a); the two differ only
       in whether he wants to supply something

@@ -2,6 +2,30 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## Two entry paths means two verifications (2026-09-11, Character Generators)
+
+Building the 2300AD redesign exposed a defect that had been LIVE in Traveller
+since its own redesign shipped, and the reason it survived verification is the
+lesson.
+
+- **The free-navigation gate photographed a section only inside `A.go()`.** The
+  Randomise button never calls `A.go` - it builds the whole character and jumps
+  to the dossier - so a randomised character held NO snapshots. "Amend this
+  part" restored nothing, the unlock returned early, and the warning told the
+  player it would discard nothing while the button silently did nothing. A
+  hand-filled application was unaffected, which is exactly why the original
+  verification passed. Fixed by moving the photograph into `snapGate()`, called
+  from both paths.
+- **So: when a feature has a hand-driven path and a randomiser path, verify
+  BOTH.** The randomiser is the one users actually press, and it was the
+  unverified one.
+- **A red fuzz result is a hypothesis, not a verdict.** A new invariant failed
+  226 times on first run and every failure was the test's fault: it asserted
+  that a skill granted after a snapshot vanished on restore, using "Steward",
+  but many characters already have Steward so restore correctly returned the
+  original value. A sentinel key that cannot collide with real data fixed it.
+  Confirm what a failure means before reporting it as a defect.
+
 ## Flooring a hand-built generator: where sizes hide (2026-09-11, Character Generators + Comms)
 
 From the space1999generator pass, the first of the four hand-built four. All of
