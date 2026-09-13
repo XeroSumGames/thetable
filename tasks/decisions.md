@@ -4,6 +4,33 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-13 - Mothership VTT build order: shared game first; maps are zones plus an optional grid
+
+**What (COMMS Q9 a, Q10 b, Xero's reply "Q9A Q10B"):**
+
+1. **Shared game comes first.** A Warden creates a campaign and players join it.
+   There is one roll log for the whole table, the Warden can roll hidden, and the
+   Warden can read players' sheets. The per-character localStorage log is a
+   stopgap until then. Maps and NPCs are built on top of this, not beside it.
+2. **Maps: zones by default, grid opt-in.** This follows the books (PSG PDF p30,
+   WOM 18.1, Gradient Descent PDF p6): range bands and zone/flowchart maps, not
+   squares. The Warden uploads a map image, places tokens freely, hides and
+   reveals areas, and keeps room notes on a Warden-only layer. A grid overlay is a
+   per-map toggle for groups who want one. Published TKG maps are never bundled
+   into the app; the Warden uploads their own.
+3. **The Record button becomes Thriver-only** the moment a second player can see
+   a game.
+
+**Constraints carried in:**
+- The owner-only RLS on `characters` is not widened. The Warden's read access
+  goes through a campaign-membership rule of its own.
+- Campaigns and members must sit on the one-login model (entry below):
+  `property_access` grants the property, and membership grants the campaign.
+  Nothing should be built that the move onto Tapestry's identity would have to
+  undo.
+- Hidden Warden rolls must not reach players' browsers at all, including through
+  realtime payloads or the recorder. Filtering them in the UI is not enough.
+
 ## 2026-09-12 - One Xero Sum Games login across all four properties, activated per property
 
 **What:** a single account works on TheTapestry, TheTableau, TheTable and
