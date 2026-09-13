@@ -158,6 +158,23 @@ From the Dredd redesign. Both of these produce a confident wrong answer.
   on different data - see the name-pool and font-size counts elsewhere in this
   file.
 
+## A modified workbook is not a new test run (2026-09-13, Comms)
+
+Comms found the smoke workbook modified at session start, read fresh-looking notes
+in it, and routed them as a rerun - concluding that three controls were
+undiscoverable. Puffer Fish caught it: the notes were a day old (typos and all) and
+predated the very controls they complained about. The file's timestamp was Comms'
+own later edit.
+
+- **Date a result before interpreting it.** A file's mtime or an uncommitted diff
+  tells you when it was SAVED, not when he TESTED. Ask, or find the notes in an
+  earlier commit.
+- **Line results up against what shipped.** Check the feature's commit time before
+  reading "X is missing" as a finding. A note that predates the feature is not
+  evidence about the feature.
+- **Commit his workbook the moment it lands.** Uncommitted results lose their date.
+  Had the 09-12 notes been committed on 09-12, the timing would have been obvious.
+
 ## Two entry paths means two verifications (2026-09-11, Character Generators)
 
 Building the 2300AD redesign exposed a defect that had been LIVE in Traveller

@@ -138,31 +138,34 @@ two logo PNGs in the title bar as a masthead, black in light mode, white in dark
 Q8 drop the mockup change (no work); and **make LIGHT the default mode** (today
 `app/layout.tsx` defaults to dark).
 
-From Xero's rerun of the Mothership auth tab (results in
-`D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`):
+From Xero's test notes on the Mothership auth tab (in
+`D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx`).
 
-- Step 3: the code half of the Q4 fix - `components/Auth.tsx:37` signUp passes no
-  `emailRedirectTo`. Still not done.
-- Step 5 Pass, but "there needs to be a log or a 'current roll' area so the outcome
-  is super clear". No roll log exists in the app (grep finds none).
-- Step 6 Pass, but "it reloads as was, but I haven't seen the dice roll" - the last
-  roll result is not shown after reload.
-- Step 9 marked Pass with the note "still no visible export button". *Checked by
-  Comms: the button EXISTS and is deployed* - `app/page.tsx:708-720`, a text button
-  "Export" in the left rail next to the Dark/Light toggle, live at de03c1f. So this
-  is DISCOVERABILITY, not a missing feature: he cannot find it.
-- Step 10 Incomplete: "there needs to be a 'new character' or random or similar as
-  I am just importing the same file". *Checked by Comms: "New character" and
-  "Random character" buttons also EXIST* (`app/page.tsx:643-661`), beside Import.
-  Same finding as step 9 - three account buttons he could not see.
+**CORRECTED 2026-09-13 - these are NOT from a rerun today.** Comms labelled them a
+rerun because the workbook arrived modified at session start. Puffer Fish showed
+otherwise and the git history agrees: they are Xero's SECOND pass on 2026-09-12
+(after Comms rewrote step 5 at 08:36 - hence "much better"), which the hub dates to
+about 16:19. They sat uncommitted until Comms committed them 09-13 09:45. Timing
+against what shipped in mothership-vtt:
 
-The pattern matters more than any one item: every control Xero said was missing is
-already built. The account and export controls are not visible to a first-time
-user. Treat it as one layout problem, not four features.
+- Export button first committed d1f1337, 2026-09-12 16:16 - minutes before that
+  pass, very likely not yet live on his screen.
+- New character / Random character: ba6c893 18:39, f254e95 19:05, 5104bdc 19:16 -
+  two to three hours AFTER the pass.
 
-## ANSWERED
+So steps 9 and 10 are NOT evidence that those controls are hard to find. Comms'
+"one layout problem" conclusion is **withdrawn** - it was built on notes that predate
+the controls. What still stands:
 
-*(dated log, newest first)*
+- Step 3: code half of the Q4 fix (emailRedirectTo, Auth.tsx:37). Hub doing it.
+- Step 5: wants a roll log / "current roll" area. A left-rail Game log also shipped
+  later on 09-12, so this may already be met - needs a genuine rerun.
+- Step 6: the last roll is gone after a reload. STILL TRUE regardless of timing -
+  the log is in-memory only. Hub taking it.
+- Steps 9 and 10: unproven either way until a genuine rerun.
+
+**Next test ask:** after the hub's push, Comms verifies it live, then writes a NEW
+dated tab for a genuine rerun of steps 3 (signup email), 5, 6, 9 and 10.
 
 ### 2026-09-13 - Q5, Q6, Q7, Q8 -> a, a, a, b (plus LIGHT MODE DEFAULT)
 
