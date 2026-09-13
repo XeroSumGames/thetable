@@ -36,6 +36,45 @@ the right rail and character identity in the left. That is wrong under this
 standard: the log is game-owned and belongs left. Do not copy that arrangement
 from the mockup's first version.
 
+## 1b. The chrome above the panes - a title bar AND a section strip
+
+**Both are part of the frame, not decoration.** Added to this standard
+2026-09-12 after the Mothership build shipped the three panes alone and Xero
+caught it: "there should be tabs on all the VTTs like on thetableau."
+
+```
++--------------------------------------------------------------+
+| title bar        identity, context, status        46px        |
++----------------+---------------------------------------------+
+| Home  (280px)  | Section  | Section  | Section  |   34px      |   <- section strip
++----------------+----------+----------+----------+-------------+
+| left rail      | centre                    | right rail       |
+|  280px         |  flexible                 |  260px           |
++----------------+---------------------------+------------------+
+```
+
+- **The first section tab is the width of the LEFT RAIL** and takes the panel
+  background, so the strip lines up with the columns beneath it rather than
+  floating free of them. That is how TheTableau's TERMINAL tab reads.
+- **The remaining tabs share what is left**, equal width.
+- **The grid sizes itself against the chrome**, so the three panes fill exactly
+  what remains and the document never scrolls.
+
+**Compose the chrome height from named parts, do not hardcode a total.**
+TheTableau writes its bar's height in one file and `calc(100vh - 130px)` in
+another; those two can drift apart silently. Mothership uses
+`--titlebar-h` + `--navstrip-h` composed into `--chrome-h`, and the grid reads
+only the composed value.
+
+**A section with no content yet renders a named "nothing here yet" panel**, not
+an empty column - an empty column reads as a broken page. Placeholder sections
+are legitimate: they show the shape of the app before its content exists.
+
+**The rails do not change with the section.** They are the game frame and the
+player panel; the section changes the CENTRE. That follows from the pane roles
+in section 1 - if a section needs its own rail content, that is a signal the
+role split is wrong, not that the rail should swap.
+
 ## 2. Geometry
 
 Taken from TheTableau's `components/TerminalFrame.tsx`, which is the more
