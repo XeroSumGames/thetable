@@ -448,7 +448,31 @@ rest partly on search snippets.
      `scripts/test-condition.ts` has 15 checks against the rules text.
    - Not modelled: fire's "2d10 Damage per round" (Limb on fire), which the
      Warden runs by hand for now.
-6. **Rest, Health recovery, Shore Leave, medical treatments.**
+6. **Rest, Health recovery, Shore Leave, medical treatments** - Rest and Shore
+   Leave BUILT 2026-09-13, pending Xero's test. mothership-vtt `lib/rules.ts`
+   and `components/ShoreLeave.tsx`, with 22 checks in `scripts/test-rest.ts`.
+   - Rest Save (PSG p20.2): a button on the Saves heading. It rolls your worst
+     Save at the Next roll Advantage.
+     - Success relieves Stress by the ones digit rolled, never below Minimum.
+     - Failure gains 1 Stress.
+     - A Critical Failure forces a Panic Check.
+   - Shore Leave (p39): opened from the Inventory tab into the centre panel.
+     - Pick a port class and get a quote. It is rolled and logged, but switching
+       port and back re-quotes; every quote shows in the table log.
+     - Pay, then make a Sanity Save:
+       - Success converts up to the port's roll of Stress ABOVE Minimum and
+         relieves the rest.
+       - Critical Success converts the port's maximum.
+       - Failure relieves Stress to Minimum, then +1.
+       - Critical Failure changes nothing and forces a Panic Check.
+     - Converted points must be shared among the Saves before Close.
+   - Reading to confirm if a table disagrees: Minimum Stress cannot be
+     converted, because no outcome relieves it either.
+   - Not built:
+     - Health has no natural recovery rule in the PSG. It comes from items
+       (Stimpak 1d10) and the sheet's Health +1.
+     - The medical treatments table (p35), which a Warden applies by hand for
+       now.
 7. **Contractors** with Loyalty.
 8. **Ship Manifest and ship combat.**
 9. Credits and pay, travel and Jump time, advancement, house-rule toggles.
