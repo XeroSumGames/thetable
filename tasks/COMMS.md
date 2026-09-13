@@ -14,9 +14,11 @@ wrong model has already happened twice (2026-09-11, 2026-09-12):
 - Table | Puffer Fish (hub)  local_58826b41-8ebe-4b95-a65a-6e4dd5b2cf25  [Opus 5]
   (restarted 2026-09-12 per tasks/HANDOFF-puffer-fish-2026-09-12.md; the old
   session local_373a5c5c-ee39-47ef-92a9-0bf3ef94544d is stopped - do not route
-  to it. Found resumed on Sonnet 5 2026-09-12 - a session cannot switch its own
-  model, so Xero set it in the model menu the same day; verified Opus 5 by
-  get_session afterwards, RESOLVED)
+  to it. Found resumed on Sonnet 5 2026-09-12 - a session cannot switch its OWN
+  model, but ANOTHER session can: Comms set it with set_session_model and
+  verified Opus 5 by get_session afterwards. RESOLVED. Recovery note, because
+  the first version of this line credited Xero's model menu: a stuck lane does
+  NOT need him - any other lane can switch it, and the app asks him to approve.)
 - Table | HP (features)      local_4aca6765-6aab-4c0e-961d-be4b5c01da3c  [Sonnet 5]
 - Table | Character Generators  local_e4a53d2c-e7e9-4c6c-87d4-bd6008bca5c6  [Opus 5]
   (restarted again 2026-09-12; both local_eb161fa5-d93d-4048-aa94-6a27856de9d2
@@ -25,7 +27,137 @@ wrong model has already happened twice (2026-09-11, 2026-09-12):
   set_session_model by Puffer Fish the same day)
 - Table | Comms (this lane)  local_894fe581-b1be-4366-ae60-d38ce452c53c  [Opus 5]
 
+## Give Xero FULL PATHS (his instruction, 2026-09-12)
+
+"instructions like 'the worksheet in The Table Smoke Testing.xlsx' are useless
+without a folder structure. look how many folders there are."
+
+D:\Coding\VTTs holds ~25 sibling folders, including four worktrees of THIS repo
+that each carry their own copy of every tracked file. Naming a file without its
+folder is not an instruction.
+
+**Every file Xero is asked to open gets its full absolute path, every time.** No
+bare filenames, no "the workbook", no "tasks/COMMS.md" on its own.
+
+**The copy he opens is always the one in the Comms worktree**, because Comms
+owns these files and commits from there:
+
+| What | Exact path |
+| --- | --- |
+| Test workbook | `D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx` |
+| This file | `D:\Coding\VTTs\TheTable-comms	asks\COMMS.md` |
+| Decisions | `D:\Coding\VTTs\TheTable-comms	asks\decisions.md` |
+| Lessons | `D:\Coding\VTTs\TheTable-comms	asks\lessons.md` |
+| Backlog | `D:\Coding\VTTs\TheTable-comms	asks	odo.md` |
+| Deploy runbook | `D:\Coding\VTTs\TheTable-comms	asks\deploy-runbook.md` |
+| Hub handoff | `D:\Coding\VTTs\TheTable-comms	asks\HANDOFF-puffer-fish-2026-09-12.md` |
+| Mothership VTT spec | `D:\Coding\VTTs\TheTable-comms	asks\mothership-vtt-architecture.md` |
+
+**This is not pedantry - the other copies go stale.** Checked 2026-09-12: the
+workbook in TheTable-chargen and TheTable-hp was a day behind and did not contain
+the Mothership test tab at all. If he opens the wrong one he sees the wrong file
+and neither of us finds out.
+
+Files OUTSIDE this repo still get their full path, e.g.
+`D:\Coding\RPG Character Generators\CHARGEN-LANE-HANDOFF.md`.
+
+## Worksheet formatting rules (Xero's instruction, 2026-09-12)
+
+**These rules now live in a machine-wide SKILL, not just here.** Xero ruled
+2026-09-12 that the smoke-test standard applies to TheTapestry, TheTable,
+TheTableau and all their sub-projects, so it was lifted out of this repo:
+
+- `C:\Users\tony_\.claude\skills\smoke-test-workbook\SKILL.md` - the standard
+- `C:\Users\tony_\.claude\skills\smoke-test-workbook\build_test_sheet.py` -
+  the builder every lane should call instead of hand-rolling openpyxl
+- `C:\Users\tony_\.claude\CLAUDE.md` carries a pointer, so a session finds it
+  even if skill discovery does not fire
+
+Deliberately NOT an atlas note: atlas notes are per-project, recency-ordered and
+built to be dropped, so a cross-property standard would have to be duplicated
+into three projects and would scroll away. The section below is this project's
+local copy; if the two ever disagree, the skill wins.
+
+"having all that text put in column b is impossible to read." He is right, and
+the cause was a formatting bug: the intro prose was written into column B while
+column B was 5 characters wide, so every sentence rendered as a one-character
+column hundreds of rows tall.
+
+Rules for every worksheet from here:
+
+- **Prose never sits in a narrow column.** Any heading or paragraph is MERGED
+  across the full table width (B:F) before the text goes in.
+- **Merged cells do not auto-fit - set the row height explicitly.** Excel will
+  not grow a merged row to its content, so compute it: characters divided by the
+  merged width, times the line height.
+- **Wrap text and top-align every cell**, prose and table alike.
+- **One narrow gutter column A**, so nothing touches the window edge.
+- **Freeze under the header row** and turn gridlines OFF - the borders carry the
+  table, and gridlines make wrapped prose unreadable.
+- **Check it after writing**, do not assume openpyxl rendered what was intended.
+
+Layout that works for a test tab: A gutter 2, B "#" 5, C "Pass / Fail" 12
+(dropdown: Pass / Fail / Skipped), D "What you do" 50, E "What you should see if
+it is right" 50, F "Notes" 24.
+
+## Question numbering (Xero's instruction, 2026-09-12)
+
+Every question put to Xero carries a sequential number - Q1, Q2, Q3 - and the
+counter NEVER resets. It does not restart per batch, per day, per topic or per
+Comms session. He tracks answers by that number, so a reused number is worse
+than a missing one.
+
+Counter re-based at his instruction 2026-09-12: the Mothership VTT authenticated
+test is **Q1**, the Wix CNAME is **Q2**. The next question asked is **Q3**.
+Earlier questions in this log predate the scheme and are unnumbered; do not
+renumber them and do not reuse their old ad-hoc numbers.
+
+**Record the number here when you ask, not afterwards.** The next Comms session
+reads this file to find where the counter is.
+
 ## OPEN
+
+### Q5. A partial access token is in a PUBLIC repo (added 2026-09-12, Comms)
+
+Xero pasted the step-3 error screenshot into the smoke-test workbook, which is
+exactly the right thing to do - it turned an uninterpretable Fail into a
+diagnosed root cause in one move. But the screenshot shows a browser URL bar
+containing `#access_token=eyJ...`, and `github.com/XeroSumGames/thetable` is
+**PUBLIC** (`gh repo view`: isPrivate false). The workbook is committed there.
+
+Assessed rather than alarmed: the token is TRUNCATED by the URL bar, so only the
+first portion is visible, and a Supabase access token expires in about an hour,
+so it was dead long before this was noticed. Real risk is low. The habit is the
+thing worth fixing.
+
+  (a) crop the URL bar out of the image and re-commit - stops it appearing in
+      any future checkout. RECOMMENDED, Comms can do it
+  (b) leave it - it is partial and long expired
+  (c) purge it from git history too - possible, but it rewrites shared history
+      across four worktrees for a dead partial token
+
+Note for the future either way: screenshots for the workbook should have the URL
+bar cropped when a token can appear in it, and that now belongs in the
+smoke-test skill.
+
+### ROUTED TO THE HUB, not awaiting Xero - two findings from the same run
+
+**1. No export control on the character sheet.** Step 9 Fail, his note: "no
+export button visible". The sheet is specified to export a `.mothership.json`;
+there is no way to get one out. This also made step 10 (import) untestable -
+he had no file to import - so the whole export/import path is unverified, not
+just the export half.
+
+**2. Dark/light toggle wanted.** Step 4 Pass, his note: "should be a dark/light
+button". The sheet works; he wants the control. A feature request, not a defect.
+
+### NOT a product defect - a Comms error, already fixed
+
+Step 5 came back Fail with "uncertain how to roll something". That was a badly
+written step, not a bug: it said "Roll something on the sheet" without naming a
+control, and Comms could not see past the auth wall to name one. Rewritten
+2026-09-12 with a self-rescue clause, and the lesson is in the
+`smoke-test-workbook` skill. Step 6 was blocked by it.
 
 ### 17. Two things owed by Xero, carried over from the Puffer Fish handoff (added 2026-09-12, Comms)
 
@@ -43,15 +175,85 @@ account with the link reading "I already have an account". The auth wall is
 exactly where verification has to stop. https://mothership.xerosumgames.com does
 NOT resolve - see item 2.
 
-**2. The Wix DNS record.** `mothership` CNAME -> `cname.vercel-dns.com`. Not
-blocking; the app works on the .vercel.app alias, which is why the worksheet
-points there. His own A24 notes warn Wix is finicky about subdomain CNAMEs; the
-recorded fallback is hosting under distemperverse.com.
+**2. The Wix DNS record (Q2).** Not blocking; the app works on the .vercel.app
+alias, which is why the worksheet points there.
 
-**3. Also asked twice and never answered, so asking a third time in one line:**
-delete tasks/puffer-handoff-2026-07-29.md? It is untracked and badly stale - old
-C:	hetable paths, says deploy is `vercel --prod` when it is a git push - and
-two handoffs now warn people not to trust it.
+**DONE BY COMMS 2026-09-12 - the Vercel half is finished.** The domain was
+added to the project with the authed CLI rather than handed to Xero as
+dashboard steps:
+
+    vercel domains add mothership.xerosumgames.com mothership-vtt --scope xerosumgames-projects
+    -> {"status":"success","reason":"domain_added"}
+
+`vercel domains inspect` then gave the record Vercel actually wants, which
+settles the handoff's CNAME claim for good:
+
+    A    mothership.xerosumgames.com    76.76.21.21     [Vercel's word, recommended]
+
+An **A record**, not a CNAME - matching `thetable.xerosumgames.com`, which
+already resolves to 76.76.21.21 on this same Wix-hosted domain. The handoff's
+`CNAME -> cname.vercel-dns.com` would have been wrong.
+
+**Q2 COMPLETE 2026-09-12. https://mothership.xerosumgames.com is LIVE.**
+
+Sequence, for whoever does the next one: Comms added the domain with the authed
+CLI; `vercel domains inspect` gave the record (A -> 76.76.21.21, not a CNAME);
+Xero added it in Wix - the only step he could not be spared; DNS then resolved on
+both 8.8.8.8 and 1.1.1.1 within minutes and HTTP served 200.
+
+**The certificate did NOT issue on its own.** After ~25 minutes HTTPS still
+failed the handshake with no peer certificate, and `vercel certs ls` showed
+certs for thetableau, thetapestry and thetable but none for mothership. Fixed
+with an explicit request:
+
+    vercel certs issue mothership.xerosumgames.com --scope xerosumgames-projects
+
+which succeeded in 9s, and HTTPS answered 200 on the next attempt. Do not wait
+indefinitely on automatic issuance - check `vercel certs ls` and issue it.
+
+*Verified by Comms: https://mothership.xerosumgames.com serves the real app -
+the Mothership sign-in card with Email, Password, Sign in, "Create an account"
+and the "The Table" link back to the hub, driven in a browser rather than
+inferred from a status code.*
+
+**Direct URL, resolved by Comms 2026-09-12 via `vercel teams ls`:**
+`https://vercel.com/xerosumgames-projects/mothership-vtt/settings/domains`
+
+*Xero could not find Domains because he was in TEAM settings (Billing,
+Members, Access Groups, Compliance...). Domains is a PROJECT-level tab.
+Team slug is `xerosumgames-projects`, display name "xerosumgames' projects";
+project is `mothership-vtt`; org id team_sN42g41yxJ62DxivPKSUCCuh, project id
+prj_DjmqfNdmeNmetnmdXco3MxFsI6v4, both from
+`D:\Coding\VTTs\mothership-vtt\.vercel\project.json`. The Vercel CLI is
+installed and authed on this box, so a session can resolve this rather than
+guess. Only xerosumgames.com and distemperverse.com are on the account,
+both third-party registered with third-party nameservers - Wix.*
+
+*Measured by Comms 2026-09-12, and it corrects the handoff:* xerosumgames.com is
+on Wix nameservers (ns0/ns1.wixdns.net), confirmed. `mothership.xerosumgames.com`
+does not resolve at all - non-existent domain, no record of any kind. But the
+sibling that already works, `thetable.xerosumgames.com`, resolves to **76.76.21.21
+via an A record**, NOT a CNAME to cname.vercel-dns.com as the handoff states.
+
+That matters because his own A24 notes warn Wix is finicky about subdomain
+CNAMEs, and the A record is very likely why thetable works. So the instruction
+given to him is: add the domain in Vercel and use whatever record ITS panel
+specifies, and if Wix refuses or mangles a CNAME, fall back to an A record to
+76.76.21.21 - the known-good configuration already live on this exact domain.
+The recorded last-resort fallback remains hosting under distemperverse.com.
+
+**3. DELETE tasks/puffer-handoff-2026-07-29.md - ANSWERED 2026-09-12: yes.**
+Deleted the same day. It was UNTRACKED, so there is no git history to recover it
+from; Xero was told that before he answered.
+
+What it claimed, all wrong by 2026-09-12 and all of it the kind of thing a new
+session would have acted on: the repo is `C:	hetable` (it is
+D:\Coding\VTTs\TheTable); "there is NO GitHub remote for TheTable" and deploy
+with `vercel --prod --yes` (the remote is github.com/XeroSumGames/thetable and
+deploying is a git push); "four character generators" (there are eight); and no
+minimum-font rule on this repo (there is a 14px floor across all eight,
+completed 2026-09-11). Two handoff docs had accumulated warnings telling people
+not to trust it, which is what finally made deleting it the answer.
 
 Owning lane: none, these are Xero's own. Comms: put all three to him.
 
@@ -89,6 +291,44 @@ into 1005 changed lines.
 ## ANSWERED
 
 *(dated log, newest first)*
+
+### 2026-09-12 - Q4: what failed at step 3 of the Mothership test? -> (b) THE CONFIRMATION LINK IS BROKEN
+
+**Root cause found, and it is not what Comms predicted.** Xero answered (b) and
+had pasted the error screenshot into the workbook itself, which is what made it
+diagnosable at all.
+
+The confirmation email's link points at **`localhost:3000`**. The screenshot
+shows `localhost:3000/#access_token=...` and ERR_CONNECTION_REFUSED. Comms had
+guessed the Supabase redirect-URL allow-list, the fault TheTable hit. Wrong: the
+allow-list was never consulted, because the app never asks for a redirect.
+
+*Located by Comms at source:*
+`D:\Coding\VTTs\mothership-vtt\components\Auth.tsx:37` calls
+`supabase.auth.signUp({ email, password })` with **no `options.emailRedirectTo`**.
+With no redirect supplied, Supabase falls back to the project's **Site URL**,
+which is still the development default `http://localhost:3000`. So every
+confirmation email any new user ever receives points at a machine that is not
+theirs.
+
+Why he still got in: the token was issued and the account confirmed correctly.
+Only the landing page was wrong. That is also why steps 4, 7 and 8 passed and
+why this looked cosmetic.
+
+**Two fixes, and both are wanted:**
+
+1. *Supabase dashboard (Xero only):* the mothership-vtt Supabase project ->
+   Authentication -> URL Configuration -> **Site URL** =
+   `https://mothership.xerosumgames.com`, with that and
+   `https://mothership-vtt.vercel.app` both in Redirect URLs.
+2. *Code (hub lane):* pass
+   `options: { emailRedirectTo: `${window.location.origin}` }` at Auth.tsx:37, so
+   the link is correct regardless of what Site URL happens to be set to. Belt and
+   braces - fix 1 alone leaves the same trap for the next environment.
+
+Routed to Puffer Fish 2026-09-12.
+
+### 2026-09-12 - Q3: where should the smoke-test standard live? -> (a) A USER-LEVEL SKILL
 
 ### 2026-09-11 - A Life Foundation emblem for the 2300AD masthead? -> CSS EMBLEM STANDS (a)
 
