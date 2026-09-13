@@ -44,14 +44,14 @@ owns these files and commits from there:
 
 | What | Exact path |
 | --- | --- |
-| Test workbook | `D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx` |
-| This file | `D:\Coding\VTTs\TheTable-comms	asks\COMMS.md` |
-| Decisions | `D:\Coding\VTTs\TheTable-comms	asks\decisions.md` |
-| Lessons | `D:\Coding\VTTs\TheTable-comms	asks\lessons.md` |
-| Backlog | `D:\Coding\VTTs\TheTable-comms	asks	odo.md` |
-| Deploy runbook | `D:\Coding\VTTs\TheTable-comms	asks\deploy-runbook.md` |
-| Hub handoff | `D:\Coding\VTTs\TheTable-comms	asks\HANDOFF-puffer-fish-2026-09-12.md` |
-| Mothership VTT spec | `D:\Coding\VTTs\TheTable-comms	asks\mothership-vtt-architecture.md` |
+| Test workbook | `D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx` |
+| This file | `D:\Coding\VTTs\TheTable-comms\tasks\COMMS.md` |
+| Decisions | `D:\Coding\VTTs\TheTable-comms\tasks\decisions.md` |
+| Lessons | `D:\Coding\VTTs\TheTable-comms\tasks\lessons.md` |
+| Backlog | `D:\Coding\VTTs\TheTable-comms\tasks\todo.md` |
+| Deploy runbook | `D:\Coding\VTTs\TheTable-comms\tasks\deploy-runbook.md` |
+| Hub handoff | `D:\Coding\VTTs\TheTable-comms\tasks\HANDOFF-puffer-fish-2026-09-12.md` |
+| Mothership VTT spec | `D:\Coding\VTTs\TheTable-comms\tasks\mothership-vtt-architecture.md` |
 
 **This is not pedantry - the other copies go stale.** Checked 2026-09-12: the
 workbook in TheTable-chargen and TheTable-hp was a day behind and did not contain
@@ -128,7 +128,7 @@ reads this file to find where the counter is.
    `https://mothership-vtt.vercel.app` in Redirect URLs. Dashboard only.
 2. **Delete one junk signup row** Puffer Fish created while testing. Supabase SQL
    editor on the shared production project - statement in
-   `D:\Coding\VTTs\TheTable-comms	asks	odo.md`, scoped to
+   `D:\Coding\VTTs\TheTable-comms\tasks\todo.md`, scoped to
    `secret-address@example.com`. Sessions may not delete production data.
 
 ### ROUTED TO THE HUB (Puffer Fish) 2026-09-13 - build work from Xero's answers and his test rerun
@@ -139,7 +139,7 @@ Q8 drop the mockup change (no work); and **make LIGHT the default mode** (today
 `app/layout.tsx` defaults to dark).
 
 From Xero's rerun of the Mothership auth tab (results in
-`D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx`):
+`D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`):
 
 - Step 3: the code half of the Q4 fix - `components/Auth.tsx:37` signUp passes no
   `emailRedirectTo`. Still not done.
