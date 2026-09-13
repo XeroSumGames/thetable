@@ -173,6 +173,23 @@ own campaign, not bundled into the app - distributing TKG's art is not ours to d
 Owning lane: Puffer Fish.
 
 
+### INSTRUCTION FROM XERO 2026-09-13 - the Record button (routed to the hub, no decision)
+
+"the RECORD button is only needed for now, when we start adding other players that
+should only be for me as a Thriver."
+
+- **Now:** leave it as is.
+- **Once other players exist** (the shared-session work in Q9): show the Record
+  button to Xero only, as a Thriver. Nobody else sees it.
+
+*Checked by Comms 2026-09-13:* today the button is UNGATED. In mothership-vtt it
+renders on the signed-out sign-in card (`components/Auth.tsx:67`) and in the app
+(`app/page.tsx:625`), for anyone. So this is a real change to make when players
+arrive, not already true. Natural hook: the one-login decision (decisions.md,
+2026-09-12) puts identity in TheTapestry's project, where Thriver status lives.
+TheTable's own hub recorder (`components/Recorder.tsx`) likely wants the same rule -
+hub to confirm scope.
+
 ### STILL OWED BY XERO - nothing (cleared 2026-09-13)
 
 - **Supabase Site URL: DONE 2026-09-13.** mothership-vtt project Site URL =
