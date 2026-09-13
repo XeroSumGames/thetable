@@ -427,7 +427,27 @@ rest partly on search snippets.
    - Open reading to confirm with Xero if a table disagrees: "suffer any
      remaining Damage" is taken as the Damage beyond the AP, so a hit equal to
      AP destroys the armor for 0.
-5. **Bleeding** and the **Death Save timer**.
+5. **Bleeding** and the **Death Save timer** - BUILT 2026-09-13, pending Xero's
+   test. mothership-vtt `lib/rules.ts` and `components/ConditionStrip.tsx`.
+   - Bleeding (PSG p32.2): "Bleeding +N" Wound results add up. Each round deals
+     that much Damage straight to Health, ignoring armor and DR, and a Wound it
+     causes rolls on the Bleeding column. Stored as optional
+     `CharacterData.bleeding`.
+   - Wound results now do what they say. "Death Save." (Headshot, spine and the
+     other 09 results) calls for a Death Save, where the sheet used to check
+     only Maximum Wounds. "No Death Save. You have died." is final.
+   - Death Save (p29.2): still rolled the moment it is called for and hidden
+     under the cup, never in the page or the recorder until revealed. A 01-02
+     result starts a 1d5-round dying countdown, with Stabilised to stop it.
+   - One condition strip in the LEFT rail, above the log, with a single "Next
+     round" button that ticks both Bleeding and dying. It is a fixed 122px and
+     the log gives way.
+   - It replaces the old centre Death Save panel, which was 110px against 66px
+     of spare sheet at 1024x768, so every death made the sheet scroll.
+   - Measured at 1024x768 in every state, and the frame tests assert it.
+     `scripts/test-condition.ts` has 15 checks against the rules text.
+   - Not modelled: fire's "2d10 Damage per round" (Limb on fire), which the
+     Warden runs by hand for now.
 6. **Rest, Health recovery, Shore Leave, medical treatments.**
 7. **Contractors** with Loyalty.
 8. **Ship Manifest and ship combat.**
