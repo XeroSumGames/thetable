@@ -4,6 +4,72 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-12 - One Xero Sum Games login across all four properties, activated per property
+
+**What:** a single account works on TheTapestry, TheTableau, TheTable and
+Mothership - and every VTT after them. Access to each property is granted
+SEPARATELY, by a confirmation link, so one login does not silently mean access
+to everything.
+
+Xero's flow, as he specified it:
+
+1. Someone signs up at any property. Say TheTapestry.
+2. They go to Mothership and choose "reuse existing Xero Sum Games account".
+3. That sends an activation email for THAT property, exactly like a new signup.
+4. No click, no access. Click, and they now have both Tapestry and Mothership.
+5. Same again for each further property.
+
+**Shape, decided after he asked what industry standard is.** Standard is
+centralised authentication with decentralised authorisation - one identity
+provider, each product deciding separately what that identity may do, products
+keeping their own data stores. That is Google, Atlassian, Slack, Discord; his
+flow is essentially the Slack/Discord per-workspace join.
+
+**But that shape assumes a real IdP.** Supabase projects can accept tokens from
+an external issuer, but one Supabase project acting as the issuer for another is
+not a first-class path - so "separate databases plus one login" on Supabase
+means adding Clerk or Auth0 and migrating existing users onto it. Offered; he
+chose the simpler shape:
+
+- **Identity lives in TheTapestry's existing project** (`jbudzglgtxeoaufpejrv`),
+  because the real users are already there and migrating live auth is the one
+  genuinely dangerous step. Marked "for now, we may reconsider".
+- **One database, separated per property** by schema.
+- **A `property_access` table - `(user_id, property, status, activated_at)` -
+  is the ONLY thing that grants access to anything.** Status carries pending ->
+  active, plus blocked for Xero. No access rule anywhere reads a data table
+  without going through it.
+
+**That last rule is the whole point and is not a style preference.** If
+`property_access` is the sole grant mechanism, moving later to separate
+databases behind a real IdP is a data move. If any policy reaches straight into
+a table instead, that move becomes a rewrite. Anyone widening a policy here
+should read this paragraph first.
+
+**AMENDS the 2026-09-11 topology decision, partially.** That entry says every
+third-party VTT gets its own Supabase project and that players get accounts on
+the VTT's OWN project, "never the shared Tapestry pool". The AUTH half of that
+is now reversed - one shared pool is the point. What still stands: each VTT
+keeps its own repo, its own Vercel project and its own subdomain. Only identity
+and data storage consolidate.
+
+**Context that makes this affordable now:** it is a beta, nobody is paying, and
+there is no grandfathering - one uniform rule for everyone including Xero. The
+Mothership project currently holds one user and one character row. This is
+dramatically cheaper today than it will be with real players.
+
+**Also true, and to be built in from the start:** the activation link is a
+credential. Single-use, expiring, bound to the account it was issued for - a
+forwarded email must not be an access grant.
+
+**Free vs paid:** some properties will have paid components, but every property
+has a free mode. So `property_access` needs an entitlement dimension, not just
+allow/block.
+
+**Status: NOT STARTED.** Sequenced after multiple-characters-per-user on the
+Mothership VTT, by his call. Nothing touches TheTapestry's live auth until the
+Tapestry lane has been brought in - an atlas note is on that project.
+
 ## 2026-09-12 - Mothership VTT adopts the house app frame STRUCTURALLY, not visually
 
 **What:** the VTT moves from its current single scrolling column to the
