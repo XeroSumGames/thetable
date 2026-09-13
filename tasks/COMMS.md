@@ -190,6 +190,24 @@ arrive, not already true. Natural hook: the one-login decision (decisions.md,
 TheTable's own hub recorder (`components/Recorder.tsx`) likely wants the same rule -
 hub to confirm scope.
 
+### TEST RESULT 2026-09-13 - Mothership rerun: ALL NINE STEPS PASS
+
+Tab "Mothership rerun 2026-09-13" in
+`D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`, results
+committed on arrival at eb40393.
+
+- **Step 3 PASS - the signup email is FIXED.** The real confirmation link now lands
+  on mothership.xerosumgames.com, not localhost. Closes the Q4 defect end to end:
+  Xero's Site URL change plus the hub's emailRedirectTo (bdba267).
+- Steps 1, 2, 5, 7, 8, 9 PASS: light mode default, account creation, roll shown in
+  the Game log, Export downloads, Random character works, Import round-trips.
+- Step 6 PASS with no note, although the tab warned the last roll would likely be
+  gone after reload. Not interpreted further - the hub should confirm whether the
+  in-memory log issue still exists rather than read this as proof it is fixed.
+- **Step 4 PASS, with a request: "the account name needs to be in this title bar
+  too".** The masthead logo is there; he wants the signed-in account name beside it.
+  Routed to the hub.
+
 ### STILL OWED BY XERO - nothing (cleared 2026-09-13)
 
 - **Supabase Site URL: DONE 2026-09-13.** mothership-vtt project Site URL =
