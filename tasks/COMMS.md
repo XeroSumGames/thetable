@@ -121,12 +121,12 @@ reads this file to find where the counter is.
 
 ### STILL OWED BY XERO - only he can do these, no decision needed
 
-1. **Supabase Site URL** (root cause of Q4). The mothership-vtt Supabase project
+1. **Supabase Site URL** (root cause of Q4). *2026-09-13: Xero set Site URL and both Redirect URLs - screenshot shows them in place. Awaiting the code half from the hub, then Comms re-tests signup.* The mothership-vtt Supabase project
    still sends every confirmation email to `http://localhost:3000`. Supabase ->
    mothership-vtt project -> Authentication -> URL Configuration -> Site URL =
    `https://mothership.xerosumgames.com`, and put that plus
    `https://mothership-vtt.vercel.app` in Redirect URLs. Dashboard only.
-2. **Delete one junk signup row** Puffer Fish created while testing. Supabase SQL
+2. **Delete one junk signup row** Puffer Fish created while testing. *2026-09-13: first attempt ran in the mothership-vtt project by mistake and failed harmlessly (table does not exist there, nothing deleted). The row lives in the shared project jbudzglgtxeoaufpejrv - Xero sent the direct SQL editor URL.* Supabase SQL
    editor on the shared production project - statement in
    `D:\Coding\VTTs\TheTable-comms\tasks\todo.md`, scoped to
    `secret-address@example.com`. Sessions may not delete production data.
