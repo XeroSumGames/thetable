@@ -206,6 +206,33 @@ Tab "Mothership rerun 2026-09-13" in the canonical workbook, nine steps, step 3 
 real confirmation email) the one that matters. Step 6 flagged in the tab as the known
 unfixed roll-lost-on-reload issue so it is not re-reported as new.
 
+## ANSWERED
+
+*(dated log, newest first)*
+
+### 2026-09-13 - Q9 build order, Q10 maps -> Q9 (a) SHARED GAME FIRST, Q10 (b) ZONES PLUS AN OPTIONAL GRID
+
+Xero's reply, verbatim and complete: "Q9A Q10B". No other words.
+
+- **Q9 (a):** "live shared session first - a Warden creates a campaign, players
+  join it, one shared roll log, hidden Warden rolls, and the Warden can see
+  players' sheets. Maps and NPCs are then built on top of it." Carries his
+  2026-09-13 rule into that work: once other players exist, the Record button is
+  visible to him only, as a Thriver.
+- **Q10 (b):** "zones, plus an optional grid for groups that want one" - chosen
+  over the recommended (a), zones only. Zones are the default, as the books have it
+  (citations verified by Comms: PSG PDF p30, WOM 18.1, Gradient Descent PDF p6); the
+  grid is opt-in. The rest of the filed proposal stands: Warden uploads a map image,
+  tokens placed freely, hide and reveal areas, room notes with a Warden-only layer.
+
+Routed to Puffer Fish 2026-09-13. This orders all VTT work that follows, so the hub
+is writing it into decisions.md from THIS entry.
+
+*Record repair, 2026-09-13: this entry was first lost. Commit 68d9e7c accidentally
+deleted the "## ANSWERED" header while replacing the section above it, so the
+answer write in 7d0360f matched nothing and silently wrote no entry, while still
+removing Q9 and Q10 from OPEN. Puffer Fish caught it. Header and entry restored.*
+
 ### 2026-09-13 - Q5, Q6, Q7, Q8 -> a, a, a, b (plus LIGHT MODE DEFAULT)
 
 - **Q5 (a)** crop the access token out of the screenshot. DONE by Comms: the
