@@ -163,6 +163,6 @@ should NOT be merged.
       Scoped by an address that could only have come from this session.
       LESSON, worth more than the row: any form submitted against this hub's
       dev server hits PRODUCTION data. There is no local Supabase for TheTable.
-- [ ] tasks/puffer-handoff-2026-07-29.md - untracked and badly stale (C:\thetable
+- [x] tasks/puffer-handoff-2026-07-29.md - DELETED 2026-09-12 on Xero's yes. Was untracked and badly stale (C:\thetable
       paths, "four generators", deploy listed as vercel --prod when it is git
       push). Superseded by decisions.md + atlas notes. Offer Xero to delete.

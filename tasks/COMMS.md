@@ -117,129 +117,67 @@ reads this file to find where the counter is.
 
 ## OPEN
 
-### Q5. A partial access token is in a PUBLIC repo (added 2026-09-12, Comms)
+*(nothing open for Xero as a decision)*
 
-Xero pasted the step-3 error screenshot into the smoke-test workbook, which is
-exactly the right thing to do - it turned an uninterpretable Fail into a
-diagnosed root cause in one move. But the screenshot shows a browser URL bar
-containing `#access_token=eyJ...`, and `github.com/XeroSumGames/thetable` is
-**PUBLIC** (`gh repo view`: isPrivate false). The workbook is committed there.
+### STILL OWED BY XERO - only he can do these, no decision needed
 
-Assessed rather than alarmed: the token is TRUNCATED by the URL bar, so only the
-first portion is visible, and a Supabase access token expires in about an hour,
-so it was dead long before this was noticed. Real risk is low. The habit is the
-thing worth fixing.
+1. **Supabase Site URL** (root cause of Q4). The mothership-vtt Supabase project
+   still sends every confirmation email to `http://localhost:3000`. Supabase ->
+   mothership-vtt project -> Authentication -> URL Configuration -> Site URL =
+   `https://mothership.xerosumgames.com`, and put that plus
+   `https://mothership-vtt.vercel.app` in Redirect URLs. Dashboard only.
+2. **Delete one junk signup row** Puffer Fish created while testing. Supabase SQL
+   editor on the shared production project - statement in
+   `D:\Coding\VTTs\TheTable-comms	asks	odo.md`, scoped to
+   `secret-address@example.com`. Sessions may not delete production data.
 
-  (a) crop the URL bar out of the image and re-commit - stops it appearing in
-      any future checkout. RECOMMENDED, Comms can do it
-  (b) leave it - it is partial and long expired
-  (c) purge it from git history too - possible, but it rewrites shared history
-      across four worktrees for a dead partial token
+### ROUTED TO THE HUB (Puffer Fish) 2026-09-13 - build work from Xero's answers and his test rerun
 
-Note for the future either way: screenshots for the workbook should have the URL
-bar cropped when a token can appear in it, and that now belongs in the
-smoke-test skill.
+From answers: Q6 keep the VTT skin on the generator module (no work); Q7 put the
+two logo PNGs in the title bar as a masthead, black in light mode, white in dark;
+Q8 drop the mockup change (no work); and **make LIGHT the default mode** (today
+`app/layout.tsx` defaults to dark).
 
-### Q6. The generator module now wears the VTT's skin, not its own (added 2026-09-12, Puffer Fish)
+From Xero's rerun of the Mothership auth tab (results in
+`D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx`):
 
-The Mothership generator's life-path module now runs inside the VTT's centre
-panel. Its stylesheet is scoped to the mount, which means its colour variables
-resolve against this app - so it renders in Terminal amber-on-black (or Zine
-paper in light mode) rather than the generator's own cream page.
+- Step 3: the code half of the Q4 fix - `components/Auth.tsx:37` signUp passes no
+  `emailRedirectTo`. Still not done.
+- Step 5 Pass, but "there needs to be a log or a 'current roll' area so the outcome
+  is super clear". No roll log exists in the app (grep finds none).
+- Step 6 Pass, but "it reloads as was, but I haven't seen the dice roll" - the last
+  roll result is not shown after reload.
+- Step 9 marked Pass with the note "still no visible export button". *Checked by
+  Comms: the button EXISTS and is deployed* - `app/page.tsx:708-720`, a text button
+  "Export" in the left rail next to the Dark/Light toggle, live at de03c1f. So this
+  is DISCOVERABILITY, not a missing feature: he cannot find it.
+- Step 10 Incomplete: "there needs to be a 'new character' or random or similar as
+  I am just importing the same file". *Checked by Comms: "New character" and
+  "Random character" buttons also EXIST* (`app/page.tsx:643-661`), beside Import.
+  Same finding as step 9 - three account buttons he could not see.
 
-*Verified by Puffer Fish 2026-09-12:* all six steps render, nothing overflows
-the pane, and text contrast is fine in both modes.
+The pattern matters more than any one item: every control Xero said was missing is
+already built. The account and export controls are not visible to a first-time
+user. Treat it as one layout problem, not four features.
 
-  (a) keep it wearing the VTT's identity - it reads as part of the app rather
-      than a foreign page embedded in it. RECOMMENDED
-  (b) restore the generator's own cream look inside the panel, so it is visibly
-      the generator
+## ANSWERED
 
-Not urgent and nothing is blocked either way. Owning lane: Puffer Fish.
+*(dated log, newest first)*
 
-### Q7. Two logo files are committed and unused (added 2026-09-12, Puffer Fish)
+### 2026-09-13 - Q5, Q6, Q7, Q8 -> a, a, a, b (plus LIGHT MODE DEFAULT)
 
-`D:\Coding\VTTs\mothership-vtt\public\mothershiplogoblack.png`
-`D:\Coding\VTTs\mothership-vtt\public\mothershiplogowhite.png`
+- **Q5 (a)** crop the access token out of the screenshot. DONE by Comms: the
+  browser URL bar (top 43px) removed from the image in the workbook and the file
+  re-committed. Checked visually - the token is gone. Older copies remain in git
+  history; Xero chose not to purge (option c).
+- **Q6 (a)** keep the generator module wearing the VTT's identity - "looks good".
+- **Q7 (a)** use the two logo PNGs as a title-bar masthead, one per mode.
+- **Q8 (b)** drop the relayed mockup change; the frame is locked.
+- **New instruction with it: make LIGHT mode the default.**
 
-Xero dropped them in; they are now committed and referenced by nothing.
+Routed to Puffer Fish 2026-09-13.
 
-*Verified by Puffer Fish 2026-09-12:* `mothershiplogowhite.png` is
-BYTE-IDENTICAL to `app\icon.png` (md5 824e7ffe5d19) - it is already the browser
-tab icon, just duplicated under a second name. `mothershiplogoblack.png` is a
-different file and is used nowhere.
-
-  (a) put the logo in the title bar as a masthead, black on Zine and white on
-      Terminal - the two files look made for exactly that. RECOMMENDED
-  (b) leave them for later
-  (c) delete the white duplicate at least, since app\icon.png already holds it
-
-*Re-verified by Comms 2026-09-12: md5 of `mothershiplogowhite.png` and
-`app\icon.png` are both 824e7ffe5d19, identical; `mothershiplogoblack.png` is
-a0d37fe14098 and different; a grep for `mothershiplogo` across the app's tsx/ts/
-css returns nothing, so neither is referenced. Claim holds in full.*
-
-Owning lane: Puffer Fish.
-
-### Q8. A mockup change was relayed - is it still wanted? (added 2026-09-12, Puffer Fish)
-
-Table | HP relayed a request from Xero: remove the "Three pane / Stacked"
-control, and rename "Terminal / Zine" to "Light / Dark".
-
-*Verified by Puffer Fish 2026-09-12 before acting:* those two controls exist
-only in the frame MOCKUP
-(https://claude.ai/code/artifact/38901e35-5114-4719-80a9-eb2b2f160da3, also at
-http://localhost:3013/vtt-frame.html). They are not in the app. HP's grep hits
-were code comments. The app's own control already reads Dark / Light, at the
-foot of the left rail.
-
-  (a) apply both changes to the mockup anyway
-  (b) drop it - the frame is now built and locked, so the mockup has served its
-      purpose. RECOMMENDED
-  (c) he meant something in the app, in which case say what
-
-*Re-verified by Comms 2026-09-12: "Three pane" and "Stacked" appear NOWHERE in
-the app. "Terminal" and "Zine" appear only in three code COMMENTS
-(app/layout.tsx:13, components/Frame.tsx:6, scripts/test-frame.ts:5). The app's
-real control is at app/page.tsx:704-710 and its buttons already read "Dark" and
-"Light" inside a group labelled "Colour mode". Puffer Fish's correction of HP is
-right: there is nothing in the app to rename.*
-
-Owning lane: Puffer Fish.
-
-### STILL OWED BY XERO, no decision needed - just the doing
-
-1. **Supabase Site URL.** Per Q4: the mothership-vtt project's Site URL is still
-   `http://localhost:3000`, so every confirmation email points at a dead
-   machine. Dashboard -> Authentication -> URL Configuration -> Site URL =
-   `https://mothership.xerosumgames.com`, with that and
-   `https://mothership-vtt.vercel.app` both in Redirect URLs. The code half
-   (passing emailRedirectTo) is Puffer Fish's and is not done yet either.
-2. **The junk signup row.** Full statement in
-   `D:\Coding\VTTs\TheTable-comms	asks	odo.md`; one delete against
-   `public.launch_signups` where the email is `secret-address@example.com`.
-3. **Q5**, above - the token screenshot.
-
-### ROUTED TO THE HUB, not awaiting Xero - two findings from the same run
-
-**1. No export control on the character sheet.** Step 9 Fail, his note: "no
-export button visible". The sheet is specified to export a `.mothership.json`;
-there is no way to get one out. This also made step 10 (import) untestable -
-he had no file to import - so the whole export/import path is unverified, not
-just the export half.
-
-**2. Dark/light toggle wanted.** Step 4 Pass, his note: "should be a dark/light
-button". The sheet works; he wants the control. A feature request, not a defect.
-
-### NOT a product defect - a Comms error, already fixed
-
-Step 5 came back Fail with "uncertain how to roll something". That was a badly
-written step, not a bug: it said "Roll something on the sheet" without naming a
-control, and Comms could not see past the auth wall to name one. Rewritten
-2026-09-12 with a self-rescue clause, and the lesson is in the
-`smoke-test-workbook` skill. Step 6 was blocked by it.
-
-### 17. Two things owed by Xero, carried over from the Puffer Fish handoff (added 2026-09-12, Comms)
+### 2026-09-12 - Q1 Mothership auth test and Q2 Wix DNS -> BOTH DONE (history kept for the record)
 
 Both recorded in tasks/HANDOFF-puffer-fish-2026-09-12.md and neither is blocking.
 
@@ -367,10 +305,6 @@ Property not to break if anyone later tidies the writer: syncing an
 already-correct file must produce a BYTE-IDENTICAL result. The first version
 used a 2-space JSON indent where the consumers use one, turning a one-name edit
 into 1005 changed lines.
-
-## ANSWERED
-
-*(dated log, newest first)*
 
 ### 2026-09-12 - Q4: what failed at step 3 of the Mothership test? -> (b) THE CONFIRMATION LINK IS BROKEN
 
