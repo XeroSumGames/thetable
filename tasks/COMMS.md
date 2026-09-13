@@ -140,6 +140,74 @@ Note for the future either way: screenshots for the workbook should have the URL
 bar cropped when a token can appear in it, and that now belongs in the
 smoke-test skill.
 
+### Q6. The generator module now wears the VTT's skin, not its own (added 2026-09-12, Puffer Fish)
+
+The Mothership generator's life-path module now runs inside the VTT's centre
+panel. Its stylesheet is scoped to the mount, which means its colour variables
+resolve against this app - so it renders in Terminal amber-on-black (or Zine
+paper in light mode) rather than the generator's own cream page.
+
+*Verified by Puffer Fish 2026-09-12:* all six steps render, nothing overflows
+the pane, and text contrast is fine in both modes.
+
+  (a) keep it wearing the VTT's identity - it reads as part of the app rather
+      than a foreign page embedded in it. RECOMMENDED
+  (b) restore the generator's own cream look inside the panel, so it is visibly
+      the generator
+
+Not urgent and nothing is blocked either way. Owning lane: Puffer Fish.
+
+### Q7. Two logo files are committed and unused (added 2026-09-12, Puffer Fish)
+
+`D:\Coding\VTTs\mothership-vtt\public\mothershiplogoblack.png`
+`D:\Coding\VTTs\mothership-vtt\public\mothershiplogowhite.png`
+
+Xero dropped them in; they are now committed and referenced by nothing.
+
+*Verified by Puffer Fish 2026-09-12:* `mothershiplogowhite.png` is
+BYTE-IDENTICAL to `app\icon.png` (md5 824e7ffe5d19) - it is already the browser
+tab icon, just duplicated under a second name. `mothershiplogoblack.png` is a
+different file and is used nowhere.
+
+  (a) put the logo in the title bar as a masthead, black on Zine and white on
+      Terminal - the two files look made for exactly that. RECOMMENDED
+  (b) leave them for later
+  (c) delete the white duplicate at least, since app\icon.png already holds it
+
+Owning lane: Puffer Fish.
+
+### Q8. A mockup change was relayed - is it still wanted? (added 2026-09-12, Puffer Fish)
+
+Table | HP relayed a request from Xero: remove the "Three pane / Stacked"
+control, and rename "Terminal / Zine" to "Light / Dark".
+
+*Verified by Puffer Fish 2026-09-12 before acting:* those two controls exist
+only in the frame MOCKUP
+(https://claude.ai/code/artifact/38901e35-5114-4719-80a9-eb2b2f160da3, also at
+http://localhost:3013/vtt-frame.html). They are not in the app. HP's grep hits
+were code comments. The app's own control already reads Dark / Light, at the
+foot of the left rail.
+
+  (a) apply both changes to the mockup anyway
+  (b) drop it - the frame is now built and locked, so the mockup has served its
+      purpose. RECOMMENDED
+  (c) he meant something in the app, in which case say what
+
+Owning lane: Puffer Fish.
+
+### STILL OWED BY XERO, no decision needed - just the doing
+
+1. **Supabase Site URL.** Per Q4: the mothership-vtt project's Site URL is still
+   `http://localhost:3000`, so every confirmation email points at a dead
+   machine. Dashboard -> Authentication -> URL Configuration -> Site URL =
+   `https://mothership.xerosumgames.com`, with that and
+   `https://mothership-vtt.vercel.app` both in Redirect URLs. The code half
+   (passing emailRedirectTo) is Puffer Fish's and is not done yet either.
+2. **The junk signup row.** Full statement in
+   `D:\Coding\VTTs\TheTable-comms	asks	odo.md`; one delete against
+   `public.launch_signups` where the email is `secret-address@example.com`.
+3. **Q5**, above - the token screenshot.
+
 ### ROUTED TO THE HUB, not awaiting Xero - two findings from the same run
 
 **1. No export control on the character sheet.** Step 9 Fail, his note: "no
