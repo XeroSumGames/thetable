@@ -134,6 +134,88 @@ arrive, not already true. Natural hook: the one-login decision (decisions.md,
 TheTable's own hub recorder (`components/Recorder.tsx`) likely wants the same rule -
 hub to confirm scope.
 
+### Q13. Ypsilon 14 as a playable module: who can see it? (added 2026-09-13, Comms)
+
+**Xero's instruction, 2026-09-13:** add The Haunting of Ypsilon 14 as a playable
+module - "this will be a big part of what we're doing going forward" - modelled on
+TheTapestry's modules. Build routed to Puffer Fish. One decision is his first.
+
+**The clash with an existing decision.** decisions.md, 2026-09-13 (Q9/Q10), in his own
+words as recorded: "Published TKG maps are never bundled into the app; the Warden
+uploads their own." A playable Ypsilon 14 module means transcribing Tuesday Knight
+Games' published adventure - its map, room text, NPCs and the Monster - into app
+data. The Mothership VTT has public signup.
+
+*Verified by Comms at source:* the PDF (`E:\Documents\My RPG's\Mothership\Adventures\Mothership - Adventure - The Haunting of Ypsilon 14.pdf`) is a
+two-page landscape pamphlet, catalogue MRPG-S01, "Copyright (c) 2019 Tuesday Knight
+Games, LLC", written by D G Chapman, and a purchased copy stamped with a buyer name
+and order number on every page. A search of the Player Survival Guide and Warden's
+Operations Manual found only TKG copyright lines and no third-party or
+redistribution licence. Comms is not giving legal advice - only reporting what the
+books do and do not say.
+
+  (a) PRIVATE to his own campaigns - the module exists in the app but only Xero (and
+      the tables he runs) can use it, like TheTapestry's "Private" module
+      visibility. RECOMMENDED: it gets him the playable module now and stays
+      consistent with his no-bundling rule. The module SYSTEM is built to publish
+      more widely later.
+  (b) available to every Warden on the site - needs permission from Tuesday Knight
+      Games first, and reverses the 2026-09-13 no-bundling decision
+  (c) the app ships the module STRUCTURE empty, and each Warden types in or uploads
+      their own copy of the adventure
+
+**What is in the adventure** (read from the rendered pages - the PDF holds no
+extractable text, so the hub must transcribe from images, not parse text):
+
+- 10 locations on a flowchart map: Docking Bay 2 (START), Workspace, Quarters (10
+  bunks, each with its own find), Mess, Washrooms, Mine Entrance, Mine Tunnel,
+  Mine Depths, Mine Antechamber, Docking Bay 1. Airlocks between some; the mine
+  rooms are marked no-oxygen; rooms with a vent icon connect to each other.
+- 11 NPCs, including Dr Ethan Giovanni with a stat line, and Prince the cat.
+- The Monster: COMBAT 70%, SPEED 50%, INSTINCT 35%, HITS 3(40), Claws 2d10/2d10,
+  Devour 4d10, special abilities, water vulnerability, retreats to the pod.
+- The Yellow Goo: a Body Save rule, healing, then melting 1d10 Health per 10 minutes.
+- 3 audio cassettes with transcripts. The AUDIO FILES themselves are not in this PDF
+  ("Audio files and printer-friendly version at mothershiprpg.com").
+- Warden rules that are natural app features: an NPC disappears every 10 minutes of
+  real time (d10 on an NPC chart); the Monster moves when the crew enters a room
+  (d10 matching the location number); a keypad code; a self-destruct sequence.
+- GAP: the "NPC CHART [SEE INSERT]" is referenced but is not in this PDF.
+
+**Model to follow:** TheTapestry `D:\Coding\VTTs\TheTapestry\tasks\spec-modules.md` - a module is a named,
+versioned snapshot of campaign content (NPCs, pins, scenes, handouts, tokens) that
+a campaign is created from, with Private / Unlisted / Listed visibility. Its GM Kit
+v1 prior art paused over image URLs pointing at a source campaign's bucket, which
+the Mothership map storage should avoid repeating.
+
+Owning lane: Puffer Fish. Comms: put Q13 to Xero.
+
+### Q11 and Q12 - two tests for Xero, written 2026-09-13 (from Puffer Fish)
+
+Both are TESTS, not decisions. Tabs in `D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`:
+
+- **Q11 "Q11 Shared game 2026-09-13"** - ten steps. Two accounts in two windows:
+  create a campaign, join by code, see each other's rolls live, Warden reads the
+  player's sheet, Roll hidden never reaches the player, Record button Thriver-only.
+- **Q12 "Q12 Maps 2026-09-13"** - eleven steps, same campaign: upload, Show players,
+  fog, draw and reveal a zone, player reads the player note but never the
+  Warden-only note, tokens on both screens, the optional grid (Q10 b), player leaves.
+
+*How these arrived:* the hub filed both as spawned tasks addressed to a session
+that is not this one, so neither reached Comms or the repo. Xero relayed that they
+existed. Comms rebuilt both from the hub's architecture notes on main (0251f5c,
+0ac6a57) and the shipped code at mothership-vtt 55cca6f.
+
+*Verified by Comms before asking:* production deploy Ready; live bundle carries
+Show players, Draw zone, Place token, Place my token and the Campaign UI;
+`join_campaign` seats the character open on the sheet (useCampaign.ts:207-219);
+map uploads accept PNG, JPEG, WebP up to 15 MB (MapView.tsx:273, 379); the Record
+button is `thriver && <RecorderButton />` at page.tsx:702 and no longer imported by
+Auth.tsx. *NOT verifiable by Comms:* whether either of Xero's accounts is seeded as
+a Thriver (done by hand, not in the repo) - Q11 step 9 asks him to report it. The
+live sign-in card would not render in the browser pane this session, so the
+Record-button removal there is checked in code only.
+
 ### TEST RESULT 2026-09-13 - Mothership rerun: ALL NINE STEPS PASS
 
 Tab "Mothership rerun 2026-09-13" in
