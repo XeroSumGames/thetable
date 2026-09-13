@@ -2,6 +2,23 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## A missing anchor makes an edit silently do nothing (2026-09-13, Comms)
+
+Comms edits COMMS.md with small scripts that insert text before a heading. One edit
+replaced a section by slicing up to the next heading and took the ANSWERED header
+with it. Every later insert anchored on that header then matched nothing, so Xero's
+Q9/Q10 answer was never written - while the same commit removed the questions from
+OPEN. The only record left was a commit message. Puffer Fish caught it from the
+diff: 56 lines out, 0 in.
+
+- **Assert the anchor exists before replacing.** `str.replace` on a missing string
+  returns the input unchanged and raises nothing.
+- **Assert the result, not just the attempt** - check the new entry is in the file
+  before committing. And make the assertion precise: a check that counts a heading
+  will also count that heading quoted inside the text you just wrote.
+- **Read the diff stat of your own commit.** A commit that should add an answer and
+  shows only deletions is wrong on its face.
+
 ## Instrumentation that looks like it works (2026-09-12, Puffer Fish)
 
 From porting the session recorder into the hub and the Mothership VTT. Both
