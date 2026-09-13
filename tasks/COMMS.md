@@ -139,7 +139,20 @@ Owning lane: Puffer Fish.
 
 ### Q10. Maps: rooms and zones as the books do it, or a grid? (added 2026-09-13, Puffer Fish)
 
-*Verified at source by Puffer Fish 2026-09-13* (books at
+*CORRECTION: the map citations below were from the hub's research pass, NOT
+re-read by Puffer Fish - its own message says so. They are now verified at source
+by Comms 2026-09-13, text extracted from the PDFs:*
+- *PSG v1.2, PDF page 30: "Range, distance, and movement are tracked abstractly in
+  Range Bands. These are: Adjacent, Close Range, Long Range, Extreme Range." Holds.*
+- *WOM v1.2a, PDF page 18, section 18.1 DRAWING A MAP: "we just want a simple
+  flowchart" and "Each box can represent as large or small a space as you want."
+  Holds.*
+- *Gradient Descent v1.3, PDF page 6: "None of the maps are to a precise scale,
+  only a relative one." Holds.*
+- *NOT verified: that published maps come as separate player and Warden versions.
+  A text search of Gradient Descent found no such wording. Not load-bearing.*
+
+Original filing (books at
 `E:\Documents\My RPG's\Mothership\`): Mothership 1e has no grid and no measured
 movement. PSG p30 tracks distance "abstractly in Range Bands" - Adjacent, Close,
 Long, Extreme. WOM p18.1 calls a map "a simple flowchart" of boxes that can be "as
