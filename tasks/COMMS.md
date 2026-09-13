@@ -174,6 +174,11 @@ different file and is used nowhere.
   (b) leave them for later
   (c) delete the white duplicate at least, since app\icon.png already holds it
 
+*Re-verified by Comms 2026-09-12: md5 of `mothershiplogowhite.png` and
+`app\icon.png` are both 824e7ffe5d19, identical; `mothershiplogoblack.png` is
+a0d37fe14098 and different; a grep for `mothershiplogo` across the app's tsx/ts/
+css returns nothing, so neither is referenced. Claim holds in full.*
+
 Owning lane: Puffer Fish.
 
 ### Q8. A mockup change was relayed - is it still wanted? (added 2026-09-12, Puffer Fish)
@@ -192,6 +197,13 @@ foot of the left rail.
   (b) drop it - the frame is now built and locked, so the mockup has served its
       purpose. RECOMMENDED
   (c) he meant something in the app, in which case say what
+
+*Re-verified by Comms 2026-09-12: "Three pane" and "Stacked" appear NOWHERE in
+the app. "Terminal" and "Zine" appear only in three code COMMENTS
+(app/layout.tsx:13, components/Frame.tsx:6, scripts/test-frame.ts:5). The app's
+real control is at app/page.tsx:704-710 and its buttons already read "Dark" and
+"Light" inside a group labelled "Colour mode". Puffer Fish's correction of HP is
+right: there is nothing in the app to rename.*
 
 Owning lane: Puffer Fish.
 
