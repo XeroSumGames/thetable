@@ -139,7 +139,7 @@ Q8 drop the mockup change (no work); and **make LIGHT the default mode** (today
 `app/layout.tsx` defaults to dark).
 
 From Xero's test notes on the Mothership auth tab (in
-`D:\Coding\VTTs\TheTable-comms	asks\The Table Smoke Testing.xlsx`).
+`D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`).
 
 **CORRECTED 2026-09-13 - these are NOT from a rerun today.** Comms labelled them a
 rerun because the workbook arrived modified at session start. Puffer Fish showed
