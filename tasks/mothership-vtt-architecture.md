@@ -394,8 +394,33 @@ rest partly on search snippets.
      - The broadcast channel is unauthenticated. It carries no data, but anyone
        who knew a campaign id could trigger refetches.
      - No measurement or range-band ruler yet, and no pins other than zones.
-3. **NPC and creature roster** in the stat-line format, Wounds and AP per NPC.
-4. **Armor, DR, Anti-Armor and cover** in the damage path; group Stress.
+3. **NPC and creature roster** - BUILT 2026-09-13, pending Xero's test. It is
+   the Human Resources tab, where Mothership hires contractors.
+   mothership-vtt `sql/005-npcs.sql`, applied, Warden-only, with 11 checks
+   against live:
+   - The stat line is the books' own: Combat, Instinct (the PSG p40.1 catchall),
+     AP, DR, and Wounds W(H) as printed in Gradient Descent ("Wounds: 2(20)").
+     A contractor has no Health, so any Damage is a Wound, plus a Loyalty Save
+     of 2d10+10 and a Motivation (PSG p40.1).
+   - UI (`components/NpcRoster.tsx`): roster list with status; a card to edit
+     stats, roll Combat, Instinct or Loyalty to the table log (the Warden's Roll
+     hidden switch applies), and track Wounds and Health.
+   - The damage row applies cover and Anti-Armor. A stat line pasted from a
+     module fills the card (`parseStatLine`).
+4. **Armor, DR, Anti-Armor and cover** - the RULE is built and tested:
+   `resolveHit` in `lib/rules.ts`, 36 checks in `scripts/test-npc.ts`. It is
+   PSG p28.3 read literally:
+   - DR comes off first, and always applies.
+   - Damage below AP is ignored.
+   - Damage at or above AP destroys the armor, and only the excess gets through.
+   - Anti-Armor ignores and destroys armor.
+   - Cover is struck before worn armor.
+
+   NPC hits use it today. Still to do: wire it into the PLAYER sheet's Take
+   Damage, which ignores armor, and group Stress.
+   - Open reading to confirm with Xero if a table disagrees: "suffer any
+     remaining Damage" is taken as the Damage beyond the AP, so a hit equal to
+     AP destroys the armor for 0.
 5. **Bleeding** and the **Death Save timer**.
 6. **Rest, Health recovery, Shore Leave, medical treatments.**
 7. **Contractors** with Loyalty.
