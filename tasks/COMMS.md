@@ -164,8 +164,14 @@ the controls. What still stands:
   the log is in-memory only. Hub taking it.
 - Steps 9 and 10: unproven either way until a genuine rerun.
 
-**Next test ask:** after the hub's push, Comms verifies it live, then writes a NEW
-dated tab for a genuine rerun of steps 3 (signup email), 5, 6, 9 and 10.
+**Test ask WRITTEN 2026-09-13.** Hub pushed bdba267 (emailRedirectTo, light default,
+Q7 masthead). Verified live by Comms before asking: deploy Ready on production; served
+HTML carries the light-default script; a fresh browser opens data-mode=light with
+nothing stored; the live JS bundle contains signUp options emailRedirectTo =
+window.location.origin. Masthead not visible from the auth card - it is a test step.
+Tab "Mothership rerun 2026-09-13" in the canonical workbook, nine steps, step 3 (the
+real confirmation email) the one that matters. Step 6 flagged in the tab as the known
+unfixed roll-lost-on-reload issue so it is not re-reported as new.
 
 ### 2026-09-13 - Q5, Q6, Q7, Q8 -> a, a, a, b (plus LIGHT MODE DEFAULT)
 
