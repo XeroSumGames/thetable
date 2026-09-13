@@ -134,6 +134,32 @@ arrive, not already true. Natural hook: the one-login decision (decisions.md,
 TheTable's own hub recorder (`components/Recorder.tsx`) likely wants the same rule -
 hub to confirm scope.
 
+### Q11 and Q12 - two tests for Xero, written 2026-09-13 (from Puffer Fish)
+
+Both are TESTS, not decisions. Tabs in `D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`:
+
+- **Q11 "Q11 Shared game 2026-09-13"** - ten steps. Two accounts in two windows:
+  create a campaign, join by code, see each other's rolls live, Warden reads the
+  player's sheet, Roll hidden never reaches the player, Record button Thriver-only.
+- **Q12 "Q12 Maps 2026-09-13"** - eleven steps, same campaign: upload, Show players,
+  fog, draw and reveal a zone, player reads the player note but never the
+  Warden-only note, tokens on both screens, the optional grid (Q10 b), player leaves.
+
+*How these arrived:* the hub filed both as spawned tasks addressed to a session
+that is not this one, so neither reached Comms or the repo. Xero relayed that they
+existed. Comms rebuilt both from the hub's architecture notes on main (0251f5c,
+0ac6a57) and the shipped code at mothership-vtt 55cca6f.
+
+*Verified by Comms before asking:* production deploy Ready; live bundle carries
+Show players, Draw zone, Place token, Place my token and the Campaign UI;
+`join_campaign` seats the character open on the sheet (useCampaign.ts:207-219);
+map uploads accept PNG, JPEG, WebP up to 15 MB (MapView.tsx:273, 379); the Record
+button is `thriver && <RecorderButton />` at page.tsx:702 and no longer imported by
+Auth.tsx. *NOT verifiable by Comms:* whether either of Xero's accounts is seeded as
+a Thriver (done by hand, not in the repo) - Q11 step 9 asks him to report it. The
+live sign-in card would not render in the browser pane this session, so the
+Record-button removal there is checked in code only.
+
 ### TEST RESULT 2026-09-13 - Mothership rerun: ALL NINE STEPS PASS
 
 Tab "Mothership rerun 2026-09-13" in
