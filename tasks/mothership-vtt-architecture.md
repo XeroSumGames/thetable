@@ -329,9 +329,36 @@ rest partly on search snippets.
 
 ### Gaps between the app and a viable session, most blocking first
 
-1. **Live shared session** - Warden + players, realtime shared roll log, hidden
-   Warden rolls, Warden access to players' sheets. Requires the campaigns/members
-   join already called out in section 6; do NOT widen the owner-only RLS policy.
+1. **Live shared session** - BUILT 2026-09-13 (COMMS Q9 a), pending Xero's
+   two-account test. mothership-vtt `sql/002-campaigns.sql` and
+   `sql/003-seat-names-and-thrivers.sql`, both applied to dtcqtbrfghuxtogkarzy:
+   - `campaigns` (6-character invite code, readable by members only - Tapestry's
+     `USING (true)` code leak deliberately not copied), `campaign_members`
+     (role, seated character, seat name; only the seat is client-writable, by
+     column grant), and `rolls` (append-only).
+   - Hidden rolls are enforced by RLS, so they never reach a player's browser,
+     Realtime included. Only a Warden can write one.
+   - The Warden reads seated sheets through an ADDED select-only policy; the
+     owner-only policy is untouched. Leaving a campaign ends that access.
+   - `thrivers` + `is_thriver()`, no client grants, seeded by hand (not in the
+     repo). The Record button is Thriver-only; it is gone from the signed-out
+     card, and Ctrl+Shift+R still works there.
+   - Proof: `sql/test-002-campaigns.sql`, 22 access checks run against the live
+     project inside a transaction that always rolls back. `scripts/test-campaign.ts`
+     covers codes, log merging and seat names.
+   - UI: left rail Campaign tab (create, join, table list, hidden-roll toggle,
+     leave/delete), the Game log becomes the table log while a campaign is open,
+     the Warden opens a seated sheet read-only in the centre (a separate
+     component, so no autosave can point at someone else's row).
+   - Known limits: dice are rolled in the browser, so a determined player could
+     insert a fake roll (fix: roll inside an RPC). Member DELETE events reach
+     every subscriber as bare ids, because Realtime cannot filter deletes. The
+     Warden's copy of a sheet refreshes on demand, not live.
+   - Still on this project, not Tapestry's: the shapes mirror Tapestry's so the
+     one-login move is a copy into a `mothership` schema. The research for that
+     (collisions on `campaigns`/`characters`, every signup becoming a Tapestry
+     Survivor with a Thriver alert, `profiles` readable by all) is the risk list
+     for the Tapestry lane.
 2. **Shared map** - upload, free-placed tokens, Warden-controlled reveal, room
    notes and pins.
 3. **NPC and creature roster** in the stat-line format, Wounds and AP per NPC.
