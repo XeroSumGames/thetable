@@ -238,7 +238,7 @@ rolls checked against invariants rather than one lucky result.
    GM can read a player's sheet - do NOT widen the owner policy to get there.
 
 ### Known rough edges (deliberate, not forgotten)
-- Stress is unbounded, matching the book. The stress bar is drawn against a
+- ~~Stress is unbounded, matching the book.~~ **WRONG, corrected 2026-09-13:** PSG p20.1 caps Stress at 20, with the excess coming off the most relevant Stat or Save. The app now caps. The stress bar is drawn against a
   denominator of 20 because d20 is the Panic Check die, so 20 is the point
   where panic is certain - past that the bar just pins full.
 - Wounds/Health steppers are manual; the Wound table and Death Save (PSG p29)
@@ -257,3 +257,88 @@ Remaining before Tier 1 can start, in order:
 
 No dependency on Character Generators any more - Mothership generator shipped
 2026-09-11 and its JSON export is live, so the import target exists.
+
+## 8. What a viable session needs - research 2026-09-13
+
+Two research passes, run when Xero asked for maps (upload, share, mark up),
+tokens, combat, and what other VTTs offer. Source books are on this machine at
+`E:\Documents\My RPG's\Mothership\` (PSG v1.2, WOM v1.2a, Shipbreaker's
+Toolkit v1.2, Another Bug Hunt, Gradient Descent, Dead Planet maps, and asset
+packs including ready-made tokens and player/Warden map PNGs).
+
+### The finding that decides the map design: zones, not a grid
+
+- PSG p30: range is described "in human casual terms"; ranges "are tracked
+  abstractly in Range Bands" - Adjacent (<1m), Close (5-10m), Long (20-100m),
+  Extreme (>100m).
+- WOM p18.1: a map is "a simple flowchart" of numbered boxes, "each box can
+  represent as large or small a space as you want", joined by routes that can be
+  "hidden or secret, others locked or guarded".
+- Gradient Descent p6: "None of the maps are to a precise scale, only a relative
+  one."
+- The published map PNGs ship as player and Warden versions ("Hidden Areas
+  Shown / Not Shown").
+
+**So tokens are free-placed markers in rooms, with a Warden-controlled reveal.**
+No snap-to-grid, no measurement, no movement allowances. A range-band helper
+between two tokens is the most measurement the rules ask for.
+
+### Combat as written, and what the app lacks
+
+Rounds of ~10s; Warden describes, everyone declares, all resolve at once; no
+initiative (optional Speed-Check turn order, p26.1). Surprise is a Fear Save
+(p26.2). Move within Close and act, or run within Long (p27.1). Attack is a
+Combat Check; a miss worsens things and costs 1 Stress (p28.1). Armor: damage
+under AP is ignored, damage >= AP destroys the armor and carries through,
+Anti-Armor ignores it, DR applies first (p28.3). Cover AP 5 / 10 / DR5+AP20
+(p28, p44). Bleeding 1 DMG per round per point, ignores armor (p32.2). NPCs are
+Combat / Instinct / Wounds, every point of damage a Wound (PSG p40.1), stat line
+`C:75 Claw 4d10 DMG I:75 AP:30 W:2(20)` (ABH p6). Ship combat: Detection /
+Firing / Contact ranges, movement-attack-morale rounds, Megadamage 0-9 (SBT
+p34-35).
+
+**Implemented:** checks and saves, advantage, criticals, Panic, Wounds and Death
+tables, multi-Wound damage cascade, concealed Death Save.
+**Missing:** armor/AP/DR/Anti-Armor/cover in the damage path (armor is shown on
+the sheet but never passed to applyDamage), rounds and surprise, Bleeding over
+time, the 1d10-round Death Save timer for Lethal Injuries, NPC damage, all ship
+rules. **Fixed 2026-09-13:** Stress on failed Stat Checks (was Saves only) and
+the Stress cap of 20.
+
+### What other VTTs offer (survey, 2026-09-13)
+
+- **Foundry "MoSh" (community, free):** the most complete - automated checks,
+  saves, attacks, Wounds, AP/DR, ship and creature sheets; add-ons for a
+  generator, shore leave, a Stress heartbeat HUD, and a per-room map reveal. Needs
+  self-hosting; open bugs include Stress and ship megadamage.
+- **Roll20:** 0e only; no 1e sheet; TKG reportedly refused fan sheets.
+- **Fantasy Grounds:** free unofficial 1e ruleset, no book content, maintenance
+  unconfirmed.
+- **TKG's official Companion App VTT ($14.99):** map-maker, tokens, public rolls,
+  join codes; 2025 ENNIE for Best Digital Aid. No documented fog of war; reviewers
+  want to import purchased module maps.
+- **Owlbear / Alchemy / TaleSpire / Shard:** nothing Mothership-specific.
+
+Gaps no one serves well: per-room deck plans with Warden reveal in a browser;
+ship combat done properly; horror presentation built in (secret Stress, heartbeat,
+terminal handouts, countdowns); oxygen / time / jump travel and shore-leave
+tracking; desktop browser play with no hosting.
+
+Reddit and the TKG Discord were not readable; Fantasy Grounds and TKG app details
+rest partly on search snippets.
+
+### Gaps between the app and a viable session, most blocking first
+
+1. **Live shared session** - Warden + players, realtime shared roll log, hidden
+   Warden rolls, Warden access to players' sheets. Requires the campaigns/members
+   join already called out in section 6; do NOT widen the owner-only RLS policy.
+2. **Shared map** - upload, free-placed tokens, Warden-controlled reveal, room
+   notes and pins.
+3. **NPC and creature roster** in the stat-line format, Wounds and AP per NPC.
+4. **Armor, DR, Anti-Armor and cover** in the damage path; group Stress.
+5. **Bleeding** and the **Death Save timer**.
+6. **Rest, Health recovery, Shore Leave, medical treatments.**
+7. **Contractors** with Loyalty.
+8. **Ship Manifest and ship combat.**
+9. Credits and pay, travel and Jump time, advancement, house-rule toggles.
+
