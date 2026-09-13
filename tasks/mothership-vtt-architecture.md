@@ -359,8 +359,41 @@ rest partly on search snippets.
      (collisions on `campaigns`/`characters`, every signup becoming a Tapestry
      Survivor with a Thriver alert, `profiles` readable by all) is the risk list
      for the Tapestry lane.
-2. **Shared map** - upload, free-placed tokens, Warden-controlled reveal, room
-   notes and pins.
+2. **Shared map** - BUILT 2026-09-13 (COMMS Q10 b), pending Xero's test. It is
+   the Map tab, which replaced the "Blank 1" placeholder.
+   mothership-vtt `sql/004-maps.sql`, applied:
+   - `maps`: the Warden sees every map in the campaign. Players see only
+     `campaigns.current_map_id`, so a deck being prepared stays private until
+     "Show players".
+   - `map_zones`: players only ever receive revealed zones.
+   - `zone_secrets`: a separate Warden-only table, because RLS cannot hide a
+     single column.
+   - `map_tokens`: hidden tokens are Warden-only. A player may move a token for
+     a character they own, and a trigger stops them changing anything else.
+   - The private `maps` bucket serves a player the current map's image only.
+   - `campaign_id` on child rows is set by trigger from the parent, never taken
+     from the client.
+   - Per-map settings: `grid_on`/`grid_cols` (square cells, so the rows follow
+     the image's aspect ratio) and `fog_on`. Fog is off by default, so a map with
+     no zones is not black for players.
+   - Proof: `sql/test-004-maps.sql`, 34 checks against live including storage,
+     rolled back, and `scripts/test-map.ts`, 23 checks on geometry, snapping and
+     upload rules.
+   - UI (`components/MapView.tsx`, `components/useMap.ts`): upload, pick a map,
+     Show players, Draw zone, Place token, drag with grid snap, and Grid, Fog,
+     Reveal, Hide. Zone notes for players and a Warden-only note; players get
+     "Place my token" and click a revealed zone to read its note. Everything
+     around the image is a fixed height and the image is fitted, so the centre
+     never scrolls; frame tests assert it.
+   - Sync: token moves go out as row events. Everything else sends a data-free
+     broadcast ping and clients refetch through RLS, because hiding something
+     produces no row event for the player who loses sight of it.
+   - Known limits:
+     - The current map's image reaches players whole, with fog drawn in the
+       browser. Roll20 and Owlbear work the same way.
+     - The broadcast channel is unauthenticated. It carries no data, but anyone
+       who knew a campaign id could trigger refetches.
+     - No measurement or range-band ruler yet, and no pins other than zones.
 3. **NPC and creature roster** in the stat-line format, Wounds and AP per NPC.
 4. **Armor, DR, Anti-Armor and cover** in the damage path; group Stress.
 5. **Bleeding** and the **Death Save timer**.
