@@ -117,62 +117,6 @@ reads this file to find where the counter is.
 
 ## OPEN
 
-### Q9. What to build first, so the game can actually be played at a table (added 2026-09-13, Puffer Fish)
-
-Today the Mothership VTT is single-player: one person, their own characters, their
-own rolls. Xero asked for maps, tokens and combat. Research into the books and into
-Foundry, Roll20, Fantasy Grounds and TKG's own app is written up in
-`D:\Coding\VTTs\TheTable\tasks\mothership-vtt-architecture.md`, section 8.
-
-The finding that orders the work: maps, tokens, NPCs and a shared roll log are all
-SHARED state. None of them mean anything until a Warden and players are in the same
-campaign. That needs a campaigns/members table, which the architecture doc already
-says must come before a Warden can read a player's sheet.
-
-  (a) live shared session first - a Warden creates a campaign, players join it, one
-      shared roll log, hidden Warden rolls, and the Warden can see players' sheets.
-      Maps and NPCs are then built on top of it. RECOMMENDED
-  (b) maps first as a solo tool, made shared later - quicker to look at, but it has
-      to be reworked once the session layer exists
-
-Owning lane: Puffer Fish.
-
-### Q10. Maps: rooms and zones as the books do it, or a grid? (added 2026-09-13, Puffer Fish)
-
-*CORRECTION: the map citations below were from the hub's research pass, NOT
-re-read by Puffer Fish - its own message says so. They are now verified at source
-by Comms 2026-09-13, text extracted from the PDFs:*
-- *PSG v1.2, PDF page 30: "Range, distance, and movement are tracked abstractly in
-  Range Bands. These are: Adjacent, Close Range, Long Range, Extreme Range." Holds.*
-- *WOM v1.2a, PDF page 18, section 18.1 DRAWING A MAP: "we just want a simple
-  flowchart" and "Each box can represent as large or small a space as you want."
-  Holds.*
-- *Gradient Descent v1.3, PDF page 6: "None of the maps are to a precise scale,
-  only a relative one." Holds.*
-- *NOT verified: that published maps come as separate player and Warden versions.
-  A text search of Gradient Descent found no such wording. Not load-bearing.*
-
-Original filing (books at
-`E:\Documents\My RPG's\Mothership\`): Mothership 1e has no grid and no measured
-movement. PSG p30 tracks distance "abstractly in Range Bands" - Adjacent, Close,
-Long, Extreme. WOM p18.1 calls a map "a simple flowchart" of boxes that can be "as
-large or small a space as you want". Gradient Descent p6: "None of the maps are to
-a precise scale". The published maps come as player and Warden versions.
-
-Proposed map feature for (a): the Warden uploads a map image; tokens are placed
-freely anywhere on it; the Warden hides and reveals areas as players explore; room
-notes and pins, with a Warden-only layer; no snapping and no measuring.
-
-  (a) zones, as the books have it. RECOMMENDED
-  (b) zones, plus an optional grid for groups that want one
-  (c) grid first
-
-Note, not a question: published TKG maps would be uploaded by a Warden into their
-own campaign, not bundled into the app - distributing TKG's art is not ours to do.
-
-Owning lane: Puffer Fish.
-
-
 ### INSTRUCTION FROM XERO 2026-09-13 - the Record button (routed to the hub, no decision)
 
 "the RECORD button is only needed for now, when we start adding other players that
