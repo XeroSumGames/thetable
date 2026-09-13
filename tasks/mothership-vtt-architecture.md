@@ -416,8 +416,14 @@ rest partly on search snippets.
    - Anti-Armor ignores and destroys armor.
    - Cover is struck before worn armor.
 
-   NPC hits use it today. Still to do: wire it into the PLAYER sheet's Take
-   Damage, which ignores armor, and group Stress.
+   NPC hits use it, and since 2026-09-13 so does the PLAYER sheet's Take Damage:
+   - The damage row has an AA switch.
+   - AP, DR, Intact/Destroyed and cover for the next hit are in the player
+     panel's Inventory tab.
+   - The left rail reads "Gone" once armor is destroyed.
+   - `armorDr` and `armorDestroyed` are optional on CharacterData.
+
+   Still to do: group Stress.
    - Open reading to confirm with Xero if a table disagrees: "suffer any
      remaining Damage" is taken as the Damage beyond the AP, so a hit equal to
      AP destroys the armor for 0.
