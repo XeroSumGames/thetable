@@ -216,6 +216,84 @@ a Thriver (done by hand, not in the repo) - Q11 step 9 asks him to report it. Th
 live sign-in card would not render in the browser pane this session, so the
 Record-button removal there is checked in code only.
 
+### Q14, Q15 and Q16 - three more tests for Xero, filed 2026-09-13 (from Puffer Fish)
+
+All three are TESTS, not decisions, for Comms to build as tabs in
+`D:\Coding\VTTs\TheTable-comms\tasks\The Table Smoke Testing.xlsx`. They
+fit the same sitting as Q11 and Q12. Filed here, in the file, because the hub's
+messages about them reached a session that is not Comms (see lessons.md).
+Numbered after Comms' Q13. Background for each is in
+`D:\Coding\VTTs\TheTable\tasks\mothership-vtt-architecture.md`, section 8.
+
+**Q14 "Q14 Human Resources and armor"** (mothership-vtt f79b7a3 and 5a5f738,
+gaps 3 and 4). Two accounts: A is Warden of a campaign and B has joined.
+1. B: Human Resources tab. Expect: a note that the roster is the Warden's, with
+   no list and no names.
+2. A: Human Resources, pick Creature, press Add. Expect: it is listed with its
+   card beside it, and nothing in the centre scrolls.
+3. A: paste `Security Androids Combat: 60 SMG 2d10 DMG Instinct: 50 Wounds: 2(20)`
+   into "Paste a stat line" and press Fill. Expect: that name, Combat 60,
+   Instinct 50, Max Wounds 2, Health / Wound 20, Attacks "SMG 2d10 DMG".
+4. A: Roll beside Combat. Expect: the line is in the Table log and B sees it.
+5. A: switch Roll hidden on in the Campaign tab, then roll Instinct. Expect: A
+   sees it tagged HIDDEN; B never sees it.
+6. A: set AP 10 and DR 3, type 20, press Hit. Expect exactly: armor "Gone" and
+   the list shows 0/2 W · 13/20 H (PSG p28.3: DR takes 20 to 17, 17 breaks
+   AP 10, and 7 gets through).
+7. A: 5 more with the armor gone. Expect: 0/2 W · 8/20 H.
+8. A: add a Contractor. Expect: Loyalty is pre-rolled, Health reads "Any Damage
+   is a Wound", and any Hit adds one Wound.
+9. Reload. Expect: the roster is as it was left.
+10. Operators, right panel Inventory: set AP 7, DR 0, No cover.
+11. Take damage 5. Expect: Health unchanged; the log shows "Armor AP 7 stops it"
+    and "No damage".
+12. Take damage 12. Expect: Health down exactly 5, Inventory reads "Destroyed",
+    and the left panel shows Armor "Gone".
+13. Set it back to Intact, pick "Light cover (AP 10)", Take damage 15. Expect:
+    cover destroyed, the 5 left stopped by AP 7, Health unchanged, and cover back
+    to "No cover".
+14. Press AA by the damage box, Take damage 4. Expect: armor destroyed and Health
+    down 4.
+15. Reload. Expect: AP, DR and Destroyed are kept; cover and AA reset, which is
+    intended.
+
+**Q15 "Q15 Bleeding and Death Save"** (6fe263c, gap 5). One account. The Wound
+dice are random, so steps 2 and 6 may take a few hits.
+1. Inventory: AP 0.
+2. Damage type Bleeding; hit for more than current Health until the left panel
+   shows a red box "Bleeding N". Expect: "Bleeding +N" in the log.
+3. Press Next round. Expect: Health down exactly N. Set AP 7 and press it again.
+   Expect: still exactly N, because Bleeding ignores armor (p32.2).
+4. Press Bleeding +1. Expect: N goes up by one.
+5. Press Stopped. Expect: the box goes.
+6. Hit until it reads "Death Save · under the cup". Expect: no number anywhere,
+   and only "Check vitals".
+7. Press Check vitals. Expect: roll and Death Table result, also logged. On 01
+   or 02: "dying, N rounds", Next round counts down, at 0 you have died, and
+   Stabilised stops it.
+8. Throughout: nothing in the sheet or either sidebar scrolls. The left-panel log
+   shrinking while the box shows is intended.
+Known, not a bug: fire's 2d10 per round is applied by hand.
+
+**Q16 "Q16 Rest and Shore Leave"** (3f0d3bb, gap 6). One account.
+1. Press "Rest save" on the Saves heading. Expect: the log names the WORST Save.
+   A success drops Stress by the roll's last digit, never below Minimum; a
+   failure adds 1 (p20.2).
+2. With Next roll on Advantage, Rest save again. Expect: two dice in the log.
+3. Inventory, press "Shore Leave". Expect: a centre page with five port classes,
+   Stress, Can convert, Sanity and Credits, and no scrolling.
+4. C-Class, "Get a quote". Expect: 200-2,000cr, also logged; if unaffordable it
+   says so and will not take payment.
+5. With enough credits and Stress above Minimum, pay. Expect: credits drop by the
+   quote, a Sanity Save is logged, then one of:
+   - Success: "N Stress converted", share points among Saves (Close is disabled
+     until spent), Improve Saves, Stress at Minimum.
+   - Failure: Stress is Minimum + 1.
+   - Critical Failure: nothing changes, and a Panic Check is in the log.
+6. Back on the sheet, and after a reload: the new Saves and Stress are kept.
+Known, not bugs: no heal-on-rest (the PSG has no such rule); the medical
+treatments table is manual; switching port and back re-quotes, in the log.
+
 ### TEST RESULT 2026-09-13 - Mothership rerun: ALL NINE STEPS PASS
 
 Tab "Mothership rerun 2026-09-13" in

@@ -2,6 +2,32 @@
 
 Hard-won gotchas so the next lane does not relearn them. Newest first.
 
+## A "delivered" message can be delivered to the wrong session (2026-09-13, Puffer Fish)
+
+The hub sent five test asks to Comms with `SendMessage` to a peer named
+`thetable-comms-60`. Every send came back "success". None reached the Comms
+lane: the real Comms session is titled "Table | Comms", and the name-based
+roster listed no row with that title. `thetable-comms-60` was a different
+session whose working folder happened to be named after the Comms worktree.
+Comms only learned of two of the asks because Xero relayed them. The other
+three, and a renumbering note, went nowhere.
+
+Two rules were broken at once:
+- **The file is the transport.** This file already says it ("cross-session
+  messages fail silently"). "Success" from a send means a session received it,
+  not the right session.
+- **Numbering ahead of the owner.** The hub numbered Q13-Q15 without reading
+  COMMS.md first, while Comms had already used Q13. Read the counter in
+  COMMS.md at the moment of numbering, never from memory.
+
+**How to apply:**
+- File every ask into COMMS.md OPEN first, commit and push it, and only then
+  nudge.
+- To nudge, find the lane by its TITLE with `list_sessions` (`sessionId` plus
+  title, e.g. "Table | Comms") and use `send_message`. Never guess from a folder
+  name in `ListAgents`.
+- Treat a missing reply or a missing COMMS entry as not received.
+
 ## A missing anchor makes an edit silently do nothing (2026-09-13, Comms)
 
 Comms edits COMMS.md with small scripts that insert text before a heading. One edit
