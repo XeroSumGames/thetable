@@ -327,6 +327,14 @@ tracking; desktop browser play with no hosting.
 Reddit and the TKG Discord were not readable; Fantasy Grounds and TKG app details
 rest partly on search snippets.
 
+### Section tabs, 2026-09-13 (Xero)
+
+The tabs are Home (the character sheet, opens first), Human Resources (all of the
+player's characters), Operations (Maps, NPCs and Handouts on its own tab strip),
+then Blank 1-3. Where the notes below say "Map tab", "Human Resources tab" for
+the NPC roster, or "Operators", read Operations > Maps, Operations > NPCs and
+Home. `scripts/test-frame.ts` pins the list.
+
 ### Gaps between the app and a viable session, most blocking first
 
 1. **Live shared session** - BUILT 2026-09-13 (COMMS Q9 a), pending Xero's

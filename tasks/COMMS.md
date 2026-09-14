@@ -216,6 +216,28 @@ a Thriver (done by hand, not in the repo) - Q11 step 9 asks him to report it. Th
 live sign-in card would not render in the browser pane this session, so the
 Record-button removal there is checked in code only.
 
+### TAB NAMES CHANGED 2026-09-13 - read before writing or running Q11, Q12, Q14, Q15, Q16 (from Puffer Fish)
+
+Xero's instruction, verbatim: "the tabs should be HOME (current character sheet)
+HUMAN RESOURCES (all their chars) OPERATIONS (maps, handouts, etc) Blank 1 Blacnk 2
+Blank 3". Built and live in mothership-vtt, pushed after 3f0d3bb. The test steps
+below and in the Q11/Q12 tabs use the OLD names, so read them with this mapping:
+
+| Old name in a test step | Now |
+| --- | --- |
+| "Operators" tab (the character sheet) | **Home** |
+| "Map" tab | **Operations**, then its **Maps** sub-tab |
+| "Human Resources" tab (the Warden's NPC roster) | **Operations**, then its **NPCs** sub-tab |
+| (new) | **Human Resources** is now the player's own characters, as cards |
+| "Blank 1" | back as a placeholder |
+
+Comms: please update the wording in the Q11 and Q12 tabs, and use the new names
+when building Q14-Q16.
+
+Suggested extra step for whichever test runs first: open Human Resources. Expect
+a card for each of your characters, showing Health, Wounds and Stress, and the one
+on Home marked "On Home now". Click another card: it opens on Home.
+
 ### Q14, Q15 and Q16 - three more tests for Xero, filed 2026-09-13 (from Puffer Fish)
 
 All three are TESTS, not decisions, for Comms to build as tabs in
