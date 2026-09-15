@@ -188,6 +188,21 @@ layout-lock rules in `decisions.md`. If a future VTT does the same:
 - Borders drawn as `box-shadow: inset` rather than `border`, because border
   width differs per mode and a real border adds real height.
 
+## 4b. Approved per-app exceptions
+
+An exception is listed here only when Xero has approved it for that app. It
+does not carry over to other VTTs.
+
+| App | Exception | Approved |
+| --- | --- | --- |
+| TheTapestry (story table) | Keeps its 58px player-seats bottom bar below the frame; the frame fills what the title bar, strip AND bottom bar leave | Xero, 2026-09-14 |
+
+Also decided for TheTapestry on 2026-09-14, all inside the standard, not
+exceptions: the site menu stays in the left rail; the GM's NPC list stays in the
+right rail; map controls move into a 34px toolbar at the top of the centre view
+(part of the view, not the chrome). Recorded in TheTapestry's
+`tasks/decisions.md`.
+
 ## 5. Open, not yet decided
 
 - **Where the dice / roll controls live.** They are neither purely game-owned
