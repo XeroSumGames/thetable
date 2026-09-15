@@ -1,7 +1,7 @@
 # The VTT frame - the standard for every Xero Sum Games VTT
 
-**Status: DECIDED by Xero 2026-09-12. Applies to every VTT from here on, not
-just the two that exist.** A new VTT starts from this layout; it is not a
+**Status: DECIDED by Xero 2026-09-12; measurements settled 2026-09-14 (section
+1b). Applies to every VTT from here on, not just the two that exist.** A new VTT starts from this layout; it is not a
 per-project choice to make again.
 
 Reference implementations: **TheTableau** (the original) and **Mothership VTT**.
@@ -43,28 +43,47 @@ from the mockup's first version.
 caught it: "there should be tabs on all the VTTs like on thetableau."
 
 ```
-+--------------------------------------------------------------+
-| title bar        identity, context, status        46px        |
-+----------------+---------------------------------------------+
-| Home  (280px)  | Section  | Section  | Section  |   34px      |   <- section strip
-+----------------+----------+----------+----------+-------------+
-| left rail      | centre                    | right rail       |
-|  280px         |  flexible                 |  260px           |
-+----------------+---------------------------+------------------+
++----------------------------------------------------------------------+
+| title bar            identity, context, status                 45px  |
++----------------+-----------+-----------+-----------+-----------------+
+| first tab 280  | tab       | tab       | tab       | last tab 260    |  34px, grows
++----------------+-----------+-----------+-----------+-----------------+
+| left rail      | centre                            | right rail      |
+|  280px         |  flexible (1fr), no padding       |  260px          |
+|  28px tabs     |                                   |  28px tabs      |
++----------------+-----------------------------------+-----------------+
+                          fills the rest of the screen height
 ```
 
-- **The first section tab is the width of the LEFT RAIL** and takes the panel
-  background, so the strip lines up with the columns beneath it rather than
-  floating free of them. That is how TheTableau's TERMINAL tab reads.
-- **The remaining tabs share what is left**, equal width.
-- **The grid sizes itself against the chrome**, so the three panes fill exactly
-  what remains and the document never scrolls.
+### Measurements - DECIDED by Xero 2026-09-14
 
-**Compose the chrome height from named parts, do not hardcode a total.**
-TheTableau writes its bar's height in one file and `calc(100vh - 130px)` in
-another; those two can drift apart silently. Mothership uses
-`--titlebar-h` + `--navstrip-h` composed into `--chrome-h`, and the grid reads
-only the composed value.
+Settled by measuring TheTableau's live site against Mothership and choosing,
+item by item. These are the standard; both apps are brought to them.
+
+| Part | Standard |
+| --- | --- |
+| Left rail | **280px** wide, 14px padding (252px usable) |
+| Right rail | **260px** wide, 14px padding (232px usable) |
+| Dividers | **1px** gaps between the three columns |
+| Centre | the rest: screen width - 542px |
+| Title bar | **45px** tall, full width, 20px side padding |
+| Section strip (tab bar) | **34px** tall, and it **grows when a tab name wraps** |
+| Section tabs | **first tab 280px** over the left rail, **last tab 260px** over the right rail, the tabs between share the rest equally |
+| Rail tab strips | **28px** tall |
+| Centre padding | **none** on the centre itself; each view adds its own 14px, so a map can run edge to edge |
+| Frame height | the columns **fill exactly what the two bars leave**, no gap below |
+| Small screens | stacks to one column at `max-width: 820px` |
+
+At 1920x1080 that is: title bar 45, strip 34, columns 1001 tall; tabs
+280 / 345 / 345 / 345 / 345 / 260 for six tabs.
+
+**Why the frame is a column, not a calc.** TheTableau sizes its grid as
+`calc(100vh - 130px)` in one place and its bars in another. They drifted: live,
+its bars total 86px, so the frame stops 44px short of the bottom. The standard
+stacks title bar, strip and frame in one flex column of the screen's height,
+with the frame taking `flex: 1`. That also lets the strip grow when a name wraps
+without pushing the frame off the screen. Mothership implements this in
+`app/globals.css`, and `scripts/test-frame.ts` asserts every number above.
 
 **A section with no content yet renders a named "nothing here yet" panel**, not
 an empty column - an empty column reads as a broken page. Placeholder sections
@@ -83,21 +102,28 @@ TWO-pane (a 220px nav sidebar); its three-pane is bespoke to the table route and
 is NOT the pattern to copy.
 
 ```css
+.frameroot { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+.titlebar  { flex: none; height: 45px; }
+.navstrip  { flex: none; min-height: 34px; display: flex; }
+.navtab             { flex: 1 1 0; }       /* the tabs between the rails */
+.navtab:first-child { flex: 0 0 280px; }   /* over the left rail */
+.navtab:last-child  { flex: 0 0 260px; }   /* over the right rail */
 .frame {
+  flex: 1;                       /* fills what the bars leave */
+  min-height: 0;
   display: grid;
-  grid-template-columns: 280px minmax(340px, 1fr) 260px;
+  grid-template-columns: 280px 1fr 260px;
   gap: 1px;                      /* the gap IS the divider */
   background: var(--divider);    /* shows through the gap */
-  height: calc(100vh - <chrome>);
   overflow: hidden;              /* the document never scrolls */
 }
-.col { overflow-y: auto; }       /* each pane scrolls independently */
+.col { overflow-y: auto; padding: 14px; }  /* the centre column: padding 0 */
+.railtab { height: 28px; }
 ```
 
 - **Left 280px, right 260px, centre takes the slack.** Fixed rails, flexible
-  middle.
-- `280 + 340 + 260 + two 1px gaps = 882`, so all three panes fit a 1024px window
-  with no horizontal scroll. Do not let the centre's minimum push past that.
+  middle. **No minimum on the centre** (an earlier draft had `minmax(340px, 1fr)`;
+  TheTableau has none, and it was removed from Mothership as a deviation).
 - **The 1px gap over a divider-coloured background draws the pane lines.** No
   borders. This also keeps the rails from carrying layout-affecting borders,
   which matters on any app with more than one visual mode.

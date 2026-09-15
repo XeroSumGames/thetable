@@ -4,6 +4,35 @@ Durable calls that shape how this project is built or run. Newest first.
 Check here (and todo.md) before asking Xero anything - if it is answered here,
 it is decided.
 
+## 2026-09-14 - VTT frame measurements settled, item by item
+
+**What:** Xero compared TheTableau's live frame with Mothership's, measured at
+1920x1080 and 1280x800, and chose each measurement. These are the standard for
+every VTT, recorded in `tasks/vtt-frame-standard.md` section 1b.
+
+- **Rails:** left 280px and right 260px, with 1px dividers. Unchanged; both apps
+  already matched.
+- **Title bar:** 45px (Tableau's). Mothership came down from 46px.
+- **Section strip:** 34px, and it grows when a tab name wraps. Mothership's
+  height, with Tableau's growth. Tableau comes down from 41px.
+- **Section tabs:** the first over the left rail (280px), the last over the
+  right rail (260px), and the rest share what is between (Tableau's).
+  Mothership had equal-width tabs, because the hub wrongly believed a 280px
+  first tab was its own invention.
+- **Rail tab strips:** 28px (Mothership's). Tableau comes down from 40px.
+- **Centre padding:** none on the centre; each view adds its own 14px, so maps
+  run edge to edge (Mothership's). Tableau drops its 14px.
+- **Frame height:** the columns fill exactly what the bars leave (Mothership's).
+  Tableau's `calc(100vh - 130px)` leaves 44px empty at 1920x1080.
+
+**Status:** Mothership built and measured 2026-09-14, asserted by
+`mothership-vtt/scripts/test-frame.ts`. It is on the local dev server
+(http://localhost:3011), uncommitted, waiting for Xero to look before it goes
+live. It was pushed once and reverted (9c84583) on his instruction to preview
+first. TheTableau's four changes (strip,
+rail tabs, centre padding, frame height) belong to TheTableau's own lane, and
+are handed over as a brief rather than edited from here.
+
 ## 2026-09-13 - Mothership VTT build order: shared game first; maps are zones plus an optional grid
 
 **What (COMMS Q9 a, Q10 b, Xero's reply "Q9A Q10B"):**
