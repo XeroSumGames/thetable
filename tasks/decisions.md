@@ -26,10 +26,9 @@ every VTT, recorded in `tasks/vtt-frame-standard.md` section 1b.
   Tableau's `calc(100vh - 130px)` leaves 44px empty at 1920x1080.
 
 **Status:** Mothership built and measured 2026-09-14, asserted by
-`mothership-vtt/scripts/test-frame.ts`. It is on the local dev server
-(http://localhost:3011), uncommitted, waiting for Xero to look before it goes
-live. It was pushed once and reverted (9c84583) on his instruction to preview
-first. TheTableau's four changes (strip,
+`mothership-vtt/scripts/test-frame.ts`. Xero reviewed it on the dev server
+and approved it; live at 76a1488. (It was pushed once too early and reverted,
+9c84583, on his instruction to preview first.) TheTableau's four changes (strip,
 rail tabs, centre padding, frame height) belong to TheTableau's own lane, and
 are handed over as a brief rather than edited from here.
 
