@@ -28,9 +28,13 @@ every VTT, recorded in `tasks/vtt-frame-standard.md` section 1b.
 **Status:** Mothership built and measured 2026-09-14, asserted by
 `mothership-vtt/scripts/test-frame.ts`. Xero reviewed it on the dev server
 and approved it; live at 76a1488. (It was pushed once too early and reverted,
-9c84583, on his instruction to preview first.) TheTableau's four changes (strip,
-rail tabs, centre padding, frame height) belong to TheTableau's own lane, and
-are handed over as a brief rather than edited from here.
+9c84583, on his instruction to preview first.) TheTableau: built by its own lane from
+`tasks/brief-thetableau-frame-2026-09-14.md`. Two defects were found by the
+hub's independent measurement and fixed before Xero saw it (the title bar
+wrapped to 53px at 1280 wide, and one tab was wider). Xero approved it on the
+dev server; it went live at 960d5e49, verified by measurement on the live site
+2026-09-14. TheTapestry: one-frame mockup under way
+(`tasks/brief-thetapestry-frame-2026-09-14.md`).
 
 ## 2026-09-13 - Mothership VTT build order: shared game first; maps are zones plus an optional grid
 

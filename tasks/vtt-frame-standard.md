@@ -4,7 +4,13 @@
 1b). Applies to every VTT from here on, not just the two that exist.** A new VTT starts from this layout; it is not a
 per-project choice to make again.
 
-Reference implementations: **TheTableau** (the original) and **Mothership VTT**.
+Reference implementations, all built to section 1b and verified live by
+measurement on 2026-09-14: **Mothership VTT** (`D:\Coding\VTTs\mothership-vtt`,
+`app/globals.css` "THE HOUSE FRAME" + `components/Frame.tsx`, asserted by
+`scripts/test-frame.ts`) and **TheTableau** (`D:\Coding\VTTs\TheTableau`,
+`components/TerminalFrame.tsx` + `components/TerminalTitleBar.tsx`).
+TheTapestry is being mocked up to it next. **A new VTT copies one of these
+two; it does not re-derive the frame.**
 Mockup of the frame in both Mothership identities:
 https://claude.ai/code/artifact/38901e35-5114-4719-80a9-eb2b2f160da3
 
@@ -76,6 +82,29 @@ item by item. These are the standard; both apps are brought to them.
 
 At 1920x1080 that is: title bar 45, strip 34, columns 1001 tall; tabs
 280 / 345 / 345 / 345 / 345 / 260 for six tabs.
+
+### Building it - the details that broke on the way (2026-09-14)
+
+Each of these was a real defect found by measuring, not a style preference:
+
+- **The title bar is `height: 45px`, never `min-height`, with `overflow:
+  hidden`.** Its items never wrap: `white-space: nowrap`, and the long,
+  lower-priority items shrink with `min-width: 0` and `text-overflow: ellipsis`.
+  Identity (logo, site name, user) and game time stay whole. TheTableau's bar
+  grew to 53px at 1280 wide before this was done.
+- **Section tabs need `min-width: 0` and `overflow-wrap: anywhere`.** Without
+  them a flex item cannot shrink below its longest word, and one tab ends up
+  wider than the others. That happened to OPERATIONS in TheTableau.
+- **Mark the active tab with an inset `box-shadow`, not a border.** A border
+  adds height to that one tab and breaks the 34px strip.
+- **The strip grows; nothing else in the chrome may.** Check the frame still
+  ends exactly at the bottom of the screen at a width where a tab name wraps.
+- **Below 820px the page root must let go of the screen height** (`height:
+  auto; overflow: visible`, frame `flex: none`), or the stacked columns are
+  clipped rather than scrolled.
+- **Verify at 1920x1080, 1280x800 and a width where a name wraps**, and on the
+  live site after deploying, not only locally: the first live check of
+  TheTableau read the previous build.
 
 **Why the frame is a column, not a calc.** TheTableau sizes its grid as
 `calc(100vh - 130px)` in one place and its bars in another. They drifted: live,
