@@ -196,6 +196,7 @@ does not carry over to other VTTs.
 | App | Exception | Approved |
 | --- | --- | --- |
 | TheTapestry (story table) | Keeps its 58px player-seats bottom bar below the frame; the frame fills what the title bar, strip AND bottom bar leave | Xero, 2026-09-14 |
+| TheTapestry (story table) | The DASHBOARD tab (first strip tab, renamed from CAMPAIGN MAP) swaps BOTH rails, against section 1b's "the rails do not change with the section": left shows the full site menu, right shows the PINS panel, centre the world map. Every other story tab keeps the normal rails (Logs / Chat / Both / Map left, NPCs / Assets / Pins / GM Notes right) | Xero, 2026-09-14 |
 
 Also decided for TheTapestry on 2026-09-14, all inside the standard, not
 exceptions: the site menu stays in the left rail; the GM's NPC list stays in the
