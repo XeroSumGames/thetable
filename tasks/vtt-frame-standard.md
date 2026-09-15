@@ -195,14 +195,19 @@ does not carry over to other VTTs.
 
 | App | Exception | Approved |
 | --- | --- | --- |
-| TheTapestry (story table) | Keeps its 58px player-seats bottom bar below the frame; the frame fills what the title bar, strip AND bottom bar leave | Xero, 2026-09-14 |
 | TheTapestry (story table) | The DASHBOARD tab (first strip tab, renamed from CAMPAIGN MAP) swaps BOTH rails, against section 1b's "the rails do not change with the section": left shows the full site menu, right shows the PINS panel, centre the world map. Every other story tab keeps the normal rails (Logs / Chat / Both / Map left, NPCs / Assets / Pins / GM Notes right) | Xero, 2026-09-14 |
 
-Also decided for TheTapestry on 2026-09-14, all inside the standard, not
-exceptions: the site menu stays in the left rail; the GM's NPC list stays in the
-right rail; map controls move into a 34px toolbar at the top of the centre view
-(part of the view, not the chrome). Recorded in TheTapestry's
-`tasks/decisions.md`.
+Also decided for TheTapestry (final picks 2026-09-15, superseding 2026-09-14),
+all inside the standard, not exceptions: the site menu stays in the left rail;
+the player seats move into the title bar as avatars, each opening an in-page
+popover with the bar's MAP and POPOUT controls (so there is NO bottom bar and
+the frame fills to the screen's bottom); the GM's NPC list stays in the right
+rail; map controls stay on the map. DASHBOARD is the landing page. Recorded in
+TheTapestry's `tasks/decisions.md` (commit ee077918).
+
+A 2026-09-14 exception for a 58px bottom seats bar was approved and then
+WITHDRAWN on 2026-09-15 when the seats moved to the title bar. Do not reinstate
+it from older notes.
 
 ## 5. Open, not yet decided
 
