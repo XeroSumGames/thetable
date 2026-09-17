@@ -389,6 +389,28 @@ end, but every one of them nearly did.
   `lastIndexOf` on a media block once there are two of them. Match the rule you
   mean explicitly, or assert on the ORDER of the two (reset after rule), which
   is the property that actually matters.
+- **A re-measurement cannot establish a PAST state, so check `git log` before
+  retracting a finding.** TheTapestry's E2E lane re-measured a rail after a fix
+  had landed, found correct markup, and retracted the original report as a
+  guest-visibility artifact. The markup was correct because it had been FIXED in
+  between. The tell they discarded: the original report contained POSITIVE
+  observations - bare buttons, no roles, a measured 29px - which a strip that
+  never rendered could not have produced. Distrust an uninformative zero;
+  do not throw away the positive half with it. The check is the file's history,
+  not another measurement.
+- **An explicit `role="tab"` REPLACES the implicit `button` role.** So an
+  accessibility-tree query for a button finds nothing on a CORRECT tab strip,
+  while `querySelectorAll('button')` finds all of them. A conforming strip then
+  reads as an absent one, which cost that lane hours chasing the wrong cause.
+  Any assertion about a tab strip queries `role="tab"`.
+- **A negative assertion standing in for a positive signal cannot fail.**
+  `expect(body).not.toContainText('YOU ARE A GHOST')` as a stand-in for "we are
+  signed in" passes on any page that has not rendered yet - green on exactly the
+  broken run it existed to catch. The CSS-text form is the same shape: a helper
+  that returns "" for a missing selector makes `!test(rule(sel))` pass when the
+  rule has been deleted. Mothership's `scripts/test-frame.ts` now proves the
+  rule EXISTS before asserting what it lacks; renaming `.navstrip` used to pass
+  three absence checks and now fails them.
 - **Verify at a short screen, not only a narrow one.** 1280x700 is what found a
   right rail running 14px past its bottom in Mothership; 1920x1080 and 1280x800
   both looked clean.

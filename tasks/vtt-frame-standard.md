@@ -215,6 +215,9 @@ is NOT the pattern to copy.
   of bare buttons measures identically and is broken for screen readers;
   TheTapestry's pins panel shipped exactly that and is being brought to the
   house markup. Geometry checks cannot see this - read the markup.
+  **And query the strip by `role="tab"`, never `role="button"`**: an explicit
+  role replaces the implicit one, so an accessibility-tree query for a button
+  finds nothing on a CORRECT strip and it reads as missing.
   **The corollary, from TheTapestry 2026-09-16: having the component prevents
   drift only when it is the ONLY way to render the device.** Its port had the
   component, the 28px token AND a styling hook written for this very panel, and
