@@ -201,6 +201,13 @@ is NOT the pattern to copy.
   "best on desktop" banner on real phones rather than adapting further.
 - **A tab strip at the top of a rail is how you multiplex a fixed-width
   column.** Both properties do this. Reach for it before widening a rail.
+  **The device is the MARKUP as well as the 28px**: `role="tablist"` wrapping
+  `role="tab"` buttons that carry `aria-selected`, each with a real text label.
+  Mothership routes every strip - the section strip and all three rail strips -
+  through `components/Frame.tsx`, so it cannot drift per page. A hand-rolled row
+  of bare buttons measures identically and is broken for screen readers;
+  TheTapestry's pins panel shipped exactly that and is being brought to the
+  house markup. Geometry checks cannot see this - read the markup.
 - **Sections inside a rail may collapse**, persisted per user to localStorage
   (TheTableau uses the key `tableau.sidebarCollapsed`). The rails themselves do
   not collapse.
