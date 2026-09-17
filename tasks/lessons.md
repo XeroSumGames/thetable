@@ -356,6 +356,19 @@ end, but every one of them nearly did.
   `overflow: auto/scroll` and compare against that box. An assertion that goes
   red on correct behaviour is worse than no assertion: someone eventually
   deletes it rather than trusting it.
+- **`document.documentElement` can report zero scroll on a page that IS
+  scrolling.** TheTapestry's full-width routes render inside a wrapper with
+  `overflow: auto`, so that wrapper scrolls and the document never does: at
+  800x700 the document reported 0 while the wrapper was 350px over. It reads
+  wrong in both directions - "no page scroll" passes while something overflows,
+  and "the page scrolls" fails when it correctly does. It cost that team two
+  hours, including a committed fix for a bug that did not exist. Find the
+  element that would actually move (computed `overflow-y: auto|scroll` with
+  `scrollHeight > clientHeight`) and measure THAT. Mothership was checked after
+  this: its `.frameroot` is a direct child of `body`, so above 820px the
+  document truly cannot scroll and a zero there is true but says nothing, and
+  below 820px the root lets go of the height and the document IS the scroller
+  (766px at 800x700, rails back to `overflow: visible`, nothing clipped).
 - **Verify at a short screen, not only a narrow one.** 1280x700 is what found a
   right rail running 14px past its bottom in Mothership; 1920x1080 and 1280x800
   both looked clean.
