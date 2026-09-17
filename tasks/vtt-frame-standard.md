@@ -125,6 +125,15 @@ Each of these was a real defect found by measuring, not a style preference:
   the reference implementations do, so the two rules AGREE rather than race; do
   not fix it by adding a competing declaration inside the media block, which
   re-opens the moment someone adds another `--noright` variant.
+- **The general form, and it has bitten three times now: audit every
+  `.modifier .child` rule against its breakpoint reset.** Two rules of EQUAL
+  specificity are decided by SOURCE ORDER, and a media query still adds none of
+  its own, so a stacked reset written ABOVE the rule it resets loses silently.
+  Mothership's `.fcol-right .loadout` scroll box is the worked example: the
+  reset only took effect once it was moved BELOW the pinned rule, into its own
+  `@media (max-width: 820px)` block. Put each stacked reset directly after the
+  rule it resets, and check that the one-class resets at the top of the 820px
+  block are not quietly failing to reach a two-class rule.
 - **Also verify at a SHORT screen, not just a narrow one.** 1280x700 is the
   case that finds a rail 14px too tall; a wide-but-short window is the one real
   users actually have once a taskbar and a browser's chrome are taken off.
