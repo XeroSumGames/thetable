@@ -134,6 +134,13 @@ Each of these was a real defect found by measuring, not a style preference:
   `@media (max-width: 820px)` block. Put each stacked reset directly after the
   rule it resets, and check that the one-class resets at the top of the 820px
   block are not quietly failing to reach a two-class rule.
+  **The complete rule: a breakpoint reset must either OUTRANK its target or
+  COME AFTER it.** Specificity first, source order as the tiebreak; a reset in
+  its own media block placed directly after its rule satisfies both at once
+  rather than relying on either. Mothership's instance measured BENIGN - the
+  stacked rail has no height to squeeze the list against - so a cascade bug
+  whose symptom is currently zero is still a bug, and the next layout change is
+  what collects on it.
 - **Also verify at a SHORT screen, not just a narrow one.** 1280x700 is the
   case that finds a rail 14px too tall; a wide-but-short window is the one real
   users actually have once a taskbar and a browser's chrome are taken off.
