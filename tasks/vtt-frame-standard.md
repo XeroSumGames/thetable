@@ -114,6 +114,17 @@ Each of these was a real defect found by measuring, not a style preference:
   TheTapestry copied the frame, put its 1206px site menu in a 721px rail, and
   the whole column scrolled. Both reference implementations now enforce it, and
   `scripts/test-frame.ts` asserts it.
+- **A media query contributes NO specificity, so the 820px block loses to a
+  `--noright` override.** `.navstrip--noright .navtab:last-child` (two classes
+  plus a pseudo-class) beats `.navtab:last-child` inside
+  `@media (max-width: 820px)` (one class plus a pseudo-class), so the stacked
+  rule silently never reaches that tab. TheTapestry hit this on 2026-09-16: its
+  middle tabs carried `flex: 1 1 33%`, five of them claimed 165% of an 800px
+  strip, and the last tab - still `flex: 1 1 0` from the un-overridden rule -
+  collapsed to 20px with its label clipped. Keep every tab at `flex: 1 1 0` as
+  the reference implementations do, so the two rules AGREE rather than race; do
+  not fix it by adding a competing declaration inside the media block, which
+  re-opens the moment someone adds another `--noright` variant.
 - **Also verify at a SHORT screen, not just a narrow one.** 1280x700 is the
   case that finds a rail 14px too tall; a wide-but-short window is the one real
   users actually have once a taskbar and a browser's chrome are taken off.
