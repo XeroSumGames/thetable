@@ -105,6 +105,18 @@ Each of these was a real defect found by measuring, not a style preference:
 - **Verify at 1920x1080, 1280x800 and a width where a name wraps**, and on the
   live site after deploying, not only locally: the first live check of
   TheTableau read the previous build.
+- **A RAIL NEVER SCROLLS, and the frame enforces it.** The rails are
+  `overflow: hidden`; only the CENTRE scrolls (`overflow-y: auto`). Any rail
+  content that can outgrow the column owns its own scroll box
+  (`flex: 1 1 auto; min-height: 0; overflow-y: auto`) - Mothership's roster, its
+  log and its inventory all do. Until 2026-09-16 the rails were
+  `overflow-y: auto` and this rule was only a promise each page had to keep:
+  TheTapestry copied the frame, put its 1206px site menu in a 721px rail, and
+  the whole column scrolled. Both reference implementations now enforce it, and
+  `scripts/test-frame.ts` asserts it.
+- **Also verify at a SHORT screen, not just a narrow one.** 1280x700 is the
+  case that finds a rail 14px too tall; a wide-but-short window is the one real
+  users actually have once a taskbar and a browser's chrome are taken off.
 
 **Why the frame is a column, not a calc.** TheTableau sizes its grid as
 `calc(100vh - 130px)` in one place and its bars in another. They drifted: live,
@@ -146,7 +158,10 @@ is NOT the pattern to copy.
   background: var(--divider);    /* shows through the gap */
   overflow: hidden;              /* the document never scrolls */
 }
-.col { overflow-y: auto; padding: 14px; }  /* the centre column: padding 0 */
+.col        { overflow: hidden; padding: 14px; }  /* a RAIL never scrolls */
+.col-centre { overflow-y: auto; padding: 0; }    /* the centre is the scroller */
+/* anything in a rail that can grow taller than the column: */
+.rail-list  { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 .railtab { height: 28px; }
 ```
 
@@ -156,8 +171,8 @@ is NOT the pattern to copy.
 - **The 1px gap over a divider-coloured background draws the pane lines.** No
   borders. This also keeps the rails from carrying layout-affecting borders,
   which matters on any app with more than one visual mode.
-- **The frame is pinned and the panes scroll, not the page.** An app, not a
-  document.
+- **The frame is pinned and the CENTRE scrolls, not the page and not a rail.**
+  An app, not a document. See section 1b for why the rails are `hidden`.
 
 ## 3. Behaviour
 
