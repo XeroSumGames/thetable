@@ -369,6 +369,19 @@ end, but every one of them nearly did.
   document truly cannot scroll and a zero there is true but says nothing, and
   below 820px the root lets go of the height and the document IS the scroller
   (766px at 800x700, rails back to `overflow: visible`, nothing clipped).
+- **Geometry assertions are blind to dead controls.** TheTapestry's pins panel
+  renders its close button in the rail without gating it on the in-rail flag: it
+  hovers like a live control and does nothing. Every measurement passes. Measure
+  the pane, then CLICK what looks clickable. It was inert rather than
+  destructive only by which way that state was keyed - the other way would have
+  emptied a 260px rail with no way to restore it.
+- **Wait for a canvas or map to settle before measuring it.** Leaflet sizes
+  itself after mount, so a first-frame read returns pre-mount dimensions and
+  looks like a rendering defect; that nearly bought two fixes for a bug that did
+  not exist. Poll for tiles (or whatever the widget draws) before trusting a
+  width. A map's own container also clips its tiles BY DESIGN, so a clip counter
+  must ignore boxes that are meant to clip and count only content cut by a pane
+  that cannot scroll.
 - **Verify at a short screen, not only a narrow one.** 1280x700 is what found a
   right rail running 14px past its bottom in Mothership; 1920x1080 and 1280x800
   both looked clean.
