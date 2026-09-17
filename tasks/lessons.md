@@ -382,6 +382,13 @@ end, but every one of them nearly did.
   width. A map's own container also clips its tiles BY DESIGN, so a clip counter
   must ignore boxes that are meant to clip and count only content cut by a pane
   that cannot scroll.
+- **A CSS test helper that takes the FIRST match of a selector breaks the
+  moment that selector appears twice.** Mothership's `test-frame.ts` reads a
+  rule by `indexOf(selector + " {")`; adding a stacked reset for the same
+  selector made the pinned assertion read the reset and fail. Same shape for
+  `lastIndexOf` on a media block once there are two of them. Match the rule you
+  mean explicitly, or assert on the ORDER of the two (reset after rule), which
+  is the property that actually matters.
 - **Verify at a short screen, not only a narrow one.** 1280x700 is what found a
   right rail running 14px past its bottom in Mothership; 1920x1080 and 1280x800
   both looked clean.
