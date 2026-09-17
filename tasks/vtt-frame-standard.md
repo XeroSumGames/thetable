@@ -215,6 +215,19 @@ is NOT the pattern to copy.
   of bare buttons measures identically and is broken for screen readers;
   TheTapestry's pins panel shipped exactly that and is being brought to the
   house markup. Geometry checks cannot see this - read the markup.
+  **The corollary, from TheTapestry 2026-09-16: having the component prevents
+  drift only when it is the ONLY way to render the device.** Its port had the
+  component, the 28px token AND a styling hook written for this very panel, and
+  the panel hand-rolled three bare buttons anyway, because a second rendering
+  path survived. A component plus a surviving hand-rolled path is a coin flip on
+  which one a call site picks, and the hand-rolled one wins whenever it was
+  there first - which it always was. Mothership is safe because nothing else
+  renders a strip, not because the component exists; `scripts/test-frame.ts`
+  asserts that single path.
+  **Where a second path must exist during a migration** - TheTapestry's inline
+  pins panel has to stay byte-identical because the onboarding tour targets its
+  elements by selector - **write the expiry condition down.** A temporary
+  duplicate with no expiry note is a permanent one nobody has noticed yet.
 - **Sections inside a rail may collapse**, persisted per user to localStorage
   (TheTableau uses the key `tableau.sidebarCollapsed`). The rails themselves do
   not collapse.
