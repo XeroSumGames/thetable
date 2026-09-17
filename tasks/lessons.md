@@ -330,3 +330,25 @@ end, but every one of them nearly did.
   the internal state object (e.g. `S`) - a probe that read state directly failed
   on its own terms, not the code's. To exercise an upload, attach a real File via
   DataTransfer and dispatch a genuine change event, then read the resulting DOM.
+
+## Proving a guard test actually fires (2026-09-16, Puffer Fish hub + TheTapestry)
+
+- **An injected overflow probe can collapse and read like a passing test.** A
+  rail is `display: flex; flex-direction: column`, so a bare 3000px probe div
+  with default `flex-shrink` collapses to nothing and the detector reports
+  overflow 0. TheTapestry's E2E lane hit this while proving the no-rail-scroll
+  rule. Pin the probe with `flex: none` and an explicit `min-height` and it
+  reports honestly (scrollHeight 3186 against clientHeight 721). The dangerous
+  direction is the other one: read a collapsed probe as "the guard works" and
+  you have a green test protecting nothing.
+- **Mutate the source to prove the check fails.** Mothership's three rail-rule
+  checks in `scripts/test-frame.ts` were each proved by flipping the CSS
+  declaration they assert and confirming a FAIL, then restoring. A check nobody
+  has seen fail is not yet a check.
+- **"Nothing scrolls" passes a clipped pane happily.** Once a rail is
+  `overflow: hidden` it clips where it used to scroll, so measure BOTH: pane
+  scrollHeight minus clientHeight, AND how many children fall past the pane's
+  bottom edge.
+- **Verify at a short screen, not only a narrow one.** 1280x700 is what found a
+  right rail running 14px past its bottom in Mothership; 1920x1080 and 1280x800
+  both looked clean.
