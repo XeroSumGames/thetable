@@ -349,6 +349,13 @@ end, but every one of them nearly did.
   `overflow: hidden` it clips where it used to scroll, so measure BOTH: pane
   scrollHeight minus clientHeight, AND how many children fall past the pane's
   bottom edge.
+- **Measure a child against its nearest SCROLLING ancestor, not against the
+  column.** A clip counter that compares every descendant to the rail's bottom
+  edge reports a healthy inner scroll box as a clip - on exactly the rails the
+  rule requires to have one. Walk up to the nearest ancestor with
+  `overflow: auto/scroll` and compare against that box. An assertion that goes
+  red on correct behaviour is worse than no assertion: someone eventually
+  deletes it rather than trusting it.
 - **Verify at a short screen, not only a narrow one.** 1280x700 is what found a
   right rail running 14px past its bottom in Mothership; 1920x1080 and 1280x800
   both looked clean.
